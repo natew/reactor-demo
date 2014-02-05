@@ -1,0 +1,39 @@
+.clearfix, header, div, section {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: white;
+  font-size: 1.4rem;
+}
+
+.container {
+  background: white;
+  width: 900px;
+  padding: 0 20px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#theater {
+  margin-top: 75px;
+  padding: 20px 0;
+  line-height: 2rem;
+  position: relative;
+}
+
+.row {
+  margin: 1em 0;
+}

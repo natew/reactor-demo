@@ -1,0 +1,100 @@
+$nav-pad: 8px;
+
+header {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 5px;
+  padding-bottom: $nav-pad + 26px;
+  border-bottom: 1px solid #cccccc;
+  font-size: 1.2rem;
+  background: white;
+  a {
+    color: #666666;
+    text-decoration: none;
+    &:hover {
+      color: blue;
+    }
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+#logo {
+  margin: 0 0 0 10px;
+  font-size: 2.2rem;
+  display: inline-block;
+  width: 120px;
+  padding: 5px;
+  vertical-align: top;
+  a {
+    color: black;
+  }
+}
+
+#search-form {
+  display: inline-block;
+  position: fixed;
+  top: 8px;
+  left: 130px;
+  right: 250px;
+}
+
+#search-field {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #cccccc;
+  font-size: 1.4rem;
+  border-radius: 2px;
+  &:focus {
+    border-color: blue;
+    outline: none;
+  }
+}
+
+#nav {
+  position: absolute;
+  bottom: 0;
+  left: 6px;
+  padding: $nav-pad;
+  font-size: 1.4rem;
+}
+
+#nav-list {
+  display: inline-block;
+  li {
+    display: inline-block;
+  }
+  a {
+    padding: 6px;
+  }
+}
+
+#callout {
+  position: absolute;
+  top: 6px;
+  right: 12px;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+  padding: $nav-pad;
+}
+
+#user-nav {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: inline-block;
+  li {
+    display: inline-block;
+  }
+  a {
+    padding: 10px;
+  }
+}
