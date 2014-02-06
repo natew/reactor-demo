@@ -1,32 +1,12 @@
 var Item = {
   images: [
     {
-      thumb: "",
-      full: ""
+      full: 'card.jpg',
+      thumb: 'card-thumb.jpg'
     },
     {
-      thumb: "",
-      full: ""
-    },
-    {
-      thumb: "",
-      full: ""
-    },
-    {
-      thumb: "",
-      full: ""
-    },
-    {
-      thumb: "",
-      full: ""
-    },
-    {
-      thumb: "",
-      full: ""
-    },
-    {
-      thumb: "",
-      full: ""
+      full: 'box.jpg',
+      thumb: 'box-thumb.jpg'
     }
   ]
 };

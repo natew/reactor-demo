@@ -17,7 +17,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div>
-        <h2>Test</h2>
+        <h2>Home Page</h2>
         <Stage item={this.state.Item} />
         <Form />
       </div>

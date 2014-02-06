@@ -3,20 +3,18 @@ var Images = require('./Images.jsx');
 
 var Stage = React.createClass({
   render: function() {
-    if (!this.props.product) return <div></div>;
-    var product = this.props.product;
+    if (!this.props.item) return <div></div>;
+    var item = this.props.item;
 
     return (
       <section id="stage">
         <div id="title">
           <h1>
-            <a className="name" href="#">{product.title}</a>
+            <a className="name" href="#">{item.title}</a>
           </h1>
-
-          <span className="rating five-stars">10 reviews</span>
         </div>
 
-        <Images product={product} />
+        <Images item={item} />
       </section>
     );
   }

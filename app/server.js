@@ -12,9 +12,9 @@ app.get('/api/:endpoint', function(req, res) {
   res.json(endpoint);
 });
 
-// app.get('/:file', function(req, res) {
-//   res.sendfile('./app/assets/' + req.params.file);
-// });
+app.get('/images/:file', function(req, res) {
+  res.sendfile('./app/assets/images/' + req.params.file);
+});
 
 // app.get('/js/:file', function(req, res) {
 //   res.sendfile('./build/js/' + req.params.file);

@@ -18,7 +18,7 @@ var controller = createController({
           <script src="/js/app.js"></script>
         </head>
         <body>
-          <h1>Some common markup</h1>
+          <h1>Reactor</h1>
           {this.state.page}
         </body>
       </html>

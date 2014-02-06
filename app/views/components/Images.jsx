@@ -5,6 +5,8 @@ module.exports = React.createClass({
     return { activeImage: 0 };
   },
 
+  imagePath: '/images/',
+
   changeImage: function(i, e) {
     e.preventDefault();
     this.setState({ activeImage: i });
@@ -14,24 +16,24 @@ module.exports = React.createClass({
     return (
       <li>
         <a href="#" onMouseEnter={this.changeImage.bind(this, i)}>
-          <img src={image.path} />
+          <img src={this.imagePath + image.thumb} />
         </a>
       </li>
     );
   },
 
   render: function() {
-    if (!this.props.product) return <div></div>;
+    if (!this.props.item) return <div></div>;
 
-    var product = this.props.product,
-        shownStyle = product.shownStyle,
-        images = product.images[shownStyle];
+    var item = this.props.item,
+        images = item.images,
+        fullImage = images[this.state.activeImage].full;
 
     var createThumb = this.createThumb.bind(this);
 
     return (
       <section id="imagery">
-        <img className="actor" src={images[this.state.activeImage].link} />
+        <img src={this.imagePath + fullImage} />
 
         <ul className="thumbs">
           {images.map(createThumb)}
