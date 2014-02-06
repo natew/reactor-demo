@@ -11,7 +11,7 @@ require('matchdep').filterDev('gulp-*').forEach(function(module) {
 var paths = {
   js: 'app/views/**/*.js',
   jsx: ['app/**/*.jsx', 'app/views/**/*.jsx'],
-  css: 'app/views/**/*.sass',
+  css: 'app/views/**/*.scss',
   build: 'build/modules'
 };
 
@@ -54,6 +54,7 @@ gulp.task('styles', function() {
     .pipe(flatten())
     .pipe(sass({outputStyle: prod ? 'compressed' : 'expanded'}))
     .pipe(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7"))
+    .pipe(concat('app.css'))
     .pipe(gulp.dest('build/css'))
     .pipe(livereload(server));
     // .pipe(notify({ message: 'styles task complete' }));

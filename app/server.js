@@ -17,7 +17,7 @@ app.get('/images/:file', function(req, res) {
 });
 
 app.get('/css/:file', function(req, res) {
-  res.sendfile('./public/css/' + req.params.file);
+  res.sendfile('./build/css/' + req.params.file);
 });
 
 function createBundler() {

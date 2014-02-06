@@ -10,7 +10,6 @@ module.exports = React.createClass({
         </head>
         <body>
           {this.props.page}
-          <script src="/js/vendor.js"></script>
           <script src="/js/app.js"></script>
         </body>
       </html>
