@@ -16,10 +16,6 @@ app.get('/images/:file', function(req, res) {
   res.sendfile('./app/assets/images/' + req.params.file);
 });
 
-// app.get('/js/:file', function(req, res) {
-//   res.sendfile('./build/js/' + req.params.file);
-// });
-
 app.get('/css/:file', function(req, res) {
   res.sendfile('./public/css/' + req.params.file);
 });
