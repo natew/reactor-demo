@@ -22,7 +22,17 @@ And go to [localhost:3111](localhost:3111).
 
 # TODO
 
-- Include stylesheets
 - gulp-browserify: how to expose require globally in bundle
-- More than one page example
+- Remove jQuery, insert small ajax lib
+- Build out the "M" in MVC
+  - [Dealing with async code in react](https://caurea.org/2014/02/04/dealing-with-asynchronous-code-in-react-components.html)
+  - [Computation](https://github.com/wereHamster/computation) async data fetching integration with React
+  - [Avers.js](https://github.com/wereHamster/avers) attempts to be a better M for React
+  - [Cortex](https://github.com/mquan/cortex) Another js model solution
+- Explore better (communication between components)[http://facebook.github.io/react/docs/multiple-components.html#dynamic-children]
+  - [Telegraph](https://gist.github.com/julik/8492257) allows sending Backbone events up a tree of components
+- Explore including a standards widgets library as a good example
+  - [react-treeview](https://github.com/chenglou/react-treeview)
+  - [react-bootstrap](https://github.com/stevoland/react-bootstrap) boostrap widgets ported
+  - [react-topcoat](https://github.com/plaxdan/react-topcoat) topcoat widgets ported
 - ...
