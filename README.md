@@ -1,23 +1,20 @@
-==Installation==
+# Reactor
 
-Uses
+Reactor is an experimental app using React and some awesome new node libraries to enable it to render any page completely on the server side, and then hand itself over in entirety to the client, to have the client continue running it from there.
 
+## Learn more
+
+- Get familiar with [React](http://facebook.github.io/react/), ([NodeConf EU](https://www.youtube.com/watch?v=x7cQ3mrcKaY)).
+- [Browserify](http://browserify.org/) to allow us to use require() on the server and client.
 - [Gulp](https://github.com/gulpjs/gulp) to watch and build assets.
-- [React](http://facebook.github.io/react/) for views.
-- react-app-middleware and react-app-controller make it isomorphic.
-- Express to serve it all.
+- [react-app-middleware](https://github.com/andreypopp/react-app-middleware) and [react-app-controller](https://github.com/andreypopp/react-app-controller) to help stitch the client/server rendering together.
 
-To get started, first install a recent version of Node and npm.
-
-Then install:
+# Installation
 
     npm install
-    bower install
 
 And start it:
 
     npm start
 
 And go to [localhost:3111](localhost:3111).
-
-See the package.json for more info on `npm start`.
