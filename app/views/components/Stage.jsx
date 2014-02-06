@@ -1,5 +1,5 @@
 var React  = require('react');
-var Images = require('./Images.jsx');
+var Images = require('./Images');
 
 var Stage = React.createClass({
   render: function() {

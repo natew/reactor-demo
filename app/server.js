@@ -25,7 +25,7 @@ app.get('/css/:file', function(req, res) {
 });
 
 function createBundler() {
-  return browserify()
+  return browserify({ extensions:['.jsx'] })
     .require('./app/client.jsx', {expose: './app'})
     .transform(reactify);
 }

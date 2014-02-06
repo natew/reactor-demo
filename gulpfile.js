@@ -37,7 +37,7 @@ gulp.task('scripts', ['compile-js', 'compile-jsx'], function() {
     .pipe(browserify({
       insertGlobals: false,
       debug: !prod,
-      require: paths.build + '/client.js',
+      // require: paths.build + '/client.js',
       expose: './app'
     }))
     .pipe(concat('app.js'))

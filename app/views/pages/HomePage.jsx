@@ -1,6 +1,6 @@
 var React  = require('react');
-var Stage  = require('../components/Stage.jsx');
-var Form   = require('../components/Form.jsx');
+var Stage  = require('../components/Stage');
+var Form   = require('../components/Form');
 var $      = require('jquery');
 
 module.exports = React.createClass({
