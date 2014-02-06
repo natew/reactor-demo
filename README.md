@@ -19,3 +19,10 @@ And start it:
     npm start
 
 And go to [localhost:3111](localhost:3111).
+
+# TODO
+
+- Include stylesheets
+- gulp-browserify: how to expose require globally in bundle
+- More than one page example
+- ...
