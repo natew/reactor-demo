@@ -1,6 +1,6 @@
-# Reactor
-
 Reactor is an experimental app using React and some awesome new node libraries to enable it to render any page completely on the server side, and then hand itself over in entirety to the client, to have the client continue running it from there.
+
+The goal is to have it be a best-practice skeleton for people starting out creating full-featured React apps.
 
 ## Learn more
 
@@ -26,7 +26,7 @@ And go to [localhost:3111](localhost:3111).
 - Remove jQuery, insert small ajax lib
 - Build out the "M" in MVC
   - [Dealing with async code in react](https://caurea.org/2014/02/04/dealing-with-asynchronous-code-in-react-components.html)
-  - [Computation](https://github.com/wereHamster/computation) async data fetching integration with React
+  - [Computation](https://github.com/wereHamster/computation) async data fetching integration with React - (authors writeup)[https://caurea.org/2014/02/04/dealing-with-asynchronous-code-in-react-components.html]
   - [Avers.js](https://github.com/wereHamster/avers) attempts to be a better M for React
   - [Cortex](https://github.com/mquan/cortex) Another js model solution
 - Explore better (communication between components)[http://facebook.github.io/react/docs/multiple-components.html#dynamic-children]
