@@ -28,7 +28,6 @@ gulp.task('compile-jsx', function() {
   return gulp.src(paths.jsx)
     .pipe(plumber())
     .pipe(react({ addPragma: true }))
-    .pipe(flatten())
     .pipe(gulp.dest(paths.build))
 });
 

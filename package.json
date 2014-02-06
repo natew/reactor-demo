@@ -12,7 +12,7 @@
     "node": "~0.10.7"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon -w app app/server.js",
     "watch": "gulp",
     "first-run": "npm install && bower install"
   },
@@ -47,6 +47,8 @@
     "gulp-flatten": "0.0.2",
     "tiny-lr": "0.0.5",
     "reactify": "~0.7.0",
-    "matchdep": "~0.3.0"
+    "matchdep": "~0.3.0",
+    "nodemon": "~1.0.14",
+    "jquery": "~2.1.0"
   }
 }

@@ -1,6 +1,7 @@
 var React  = require('react');
-var Stage  = require('./Stage');
-var Form   = require('./Form');
+var Stage  = require('../components/Stage.jsx');
+var Form   = require('../components/Form.jsx');
+var $      = require('jquery');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -16,6 +17,7 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div>
+        <h2>Test</h2>
         <Stage item={this.state.Item} />
         <Form />
       </div>

@@ -1,6 +1,6 @@
 var React             = require('react');
 var createController  = require('react-app-controller');
-var HomePage          = require('./HomePage');
+var HomePage          = require('./views/pages/HomePage.jsx');
 
 var controller = createController({
 
