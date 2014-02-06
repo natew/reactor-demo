@@ -1,28 +1,20 @@
 var React             = require('react');
 var createController  = require('react-app-controller');
+var Layout            = require('./views/layouts/Application')
 var HomePage          = require('./views/pages/HomePage');
+var OtherPage         = require('./views/pages/OtherPage');
 
 var controller = createController({
 
   // provide route table, route syntax is similar to express
   routes: {
     '/': HomePage,
-    '/about': HomePage,
+    '/other': OtherPage,
     '/user/:username': HomePage
   },
 
   render: function() {
-    return (
-      <html>
-        <head>
-          <script src="/js/app.js"></script>
-        </head>
-        <body>
-          <h1>Reactor</h1>
-          {this.state.page}
-        </body>
-      </html>
-    );
+    return <Layout page={this.state.page} />;
   },
 
   onClick: function(e) {

@@ -20,6 +20,8 @@ module.exports = React.createClass({
         <h2>Home Page</h2>
         <Stage item={this.state.Item} />
         <Form />
+
+        <a href="/other">Go to other page</a>
       </div>
     );
   }
