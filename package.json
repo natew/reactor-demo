@@ -12,14 +12,14 @@
     "node": "~0.10.7"
   },
   "scripts": {
-    "start": "nodemon -w app app/server.js",
+    "start": "nodemon -w app app/server.js & gulp",
     "watch": "gulp",
     "first-run": "npm install && bower install"
   },
   "dependencies": {
     "brunch": "1.7",
     "bower": "1.2",
-    "react-app-middleware": "~0.4.0",
+    "react-app-middleware": "git://github.com/natew/react-app-middleware.git#layouts-and-alternate-root-nodes",
     "express": "~3.4.7",
     "react": "~0.8.0",
     "react-app-controller": "~0.5.0",

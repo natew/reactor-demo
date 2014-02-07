@@ -1,6 +1,5 @@
 var React             = require('react');
 var createController  = require('react-app-controller');
-var Layout            = require('./views/layouts/Application')
 var HomePage          = require('./views/pages/HomePage');
 var OtherPage         = require('./views/pages/OtherPage');
 
@@ -14,7 +13,7 @@ var controller = createController({
   },
 
   render: function() {
-    return <Layout page={this.state.page} />;
+    return this.state.page;
   },
 
   onClick: function(e) {

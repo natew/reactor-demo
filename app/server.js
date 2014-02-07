@@ -3,9 +3,16 @@ var browserify  = require('browserify');
 var reactify    = require('reactify');
 var servePage   = require('react-app-middleware');
 var serveJS     = require('connect-browserify');
+var fs          = require('fs');
 
 var app = express();
-var opts = { debug: true, watch: true };
+var layout = fs.readFileSync('./app/assets/index.html', 'utf8');
+var opts = {
+  debug: true,
+  watch: true,
+  root: '#root',
+  layout: layout
+};
 
 app.get('/api/:endpoint', function(req, res) {
   var endpoint = require('../api/'+ req.params.endpoint);
