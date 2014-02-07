@@ -22,6 +22,7 @@ And go to [localhost:3111](localhost:3111).
 
 # TODO
 
+- Slim down client js bundle big time
 - gulp-browserify: how to expose require globally in bundle
 - Remove jQuery, insert small ajax lib
 - Build out the "M" in MVC
