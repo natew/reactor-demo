@@ -9,19 +9,17 @@ var ReactAsync = require('react-async');
 var HomePage   = require('./views/pages/HomePage');
 var OtherPage  = require('./views/pages/OtherPage');
 
-var Pages       = Router.Pages;
-var Page        = Router.Page;
-
-ReactMount.allowFullPageRender = true;
+var Locations       = Router.Locations;
+var Location        = Router.Location;
 
 var App = React.createClass({
 
   render: function() {
     return (
-      <Pages ref="router" onClick={this.onClick} path={this.props.path}>
-        <Page path="/" handler={HomePage} />
-        <Page path="/other" handler={OtherPage} />
-      </Pages>
+      <Locations ref="router" onClick={this.onClick} path={this.props.path}>
+        <Location path="/" handler={HomePage} />
+        <Location path="/other" handler={OtherPage} />
+      </Locations>
     );
   },
 
