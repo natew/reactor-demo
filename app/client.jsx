@@ -12,8 +12,6 @@ var OtherPage  = require('./views/pages/OtherPage');
 var Locations  = Router.Locations;
 var Location   = Router.Location;
 
-// ReactMount.allowFullPageRender = true;
-
 var App = React.createClass({
 
   render: function() {
