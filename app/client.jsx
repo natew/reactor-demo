@@ -9,17 +9,21 @@ var ReactAsync = require('react-async');
 var HomePage   = require('./views/pages/HomePage');
 var OtherPage  = require('./views/pages/OtherPage');
 
-var Locations       = Router.Locations;
-var Location        = Router.Location;
+var Locations  = Router.Locations;
+var Location   = Router.Location;
+
+// ReactMount.allowFullPageRender = true;
 
 var App = React.createClass({
 
   render: function() {
     return (
-      <Locations ref="router" onClick={this.onClick} path={this.props.path}>
-        <Location path="/" handler={HomePage} />
-        <Location path="/other" handler={OtherPage} />
-      </Locations>
+      <div id="react-root">
+        <Locations ref="router" onClick={this.onClick} path={this.props.path}>
+          <Location path="/" handler={HomePage} />
+          <Location path="/other" handler={OtherPage} />
+        </Locations>
+      </div>
     );
   },
 
@@ -34,6 +38,7 @@ module.exports = App;
 
 if (typeof window !== 'undefined') {
   window.onload = function() {
-    ReactAsync.renderComponent(App(), document.body);
+    var root = document.getElementById('react-root');
+    ReactAsync.renderComponent(App(), root);
   }
 }
