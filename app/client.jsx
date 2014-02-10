@@ -18,15 +18,10 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <html>
-        <head>
-          <script src="/js/bundle.js"></script>
-        </head>
-        <Pages ref="router" onClick={this.onClick} path={this.props.path}>
-          <Page path="/" handler={HomePage} />
-          <Page path="/other" handler={OtherPage} />
-        </Pages>
-      </html>
+      <Pages ref="router" onClick={this.onClick} path={this.props.path}>
+        <Page path="/" handler={HomePage} />
+        <Page path="/other" handler={OtherPage} />
+      </Pages>
     );
   },
 
@@ -41,6 +36,6 @@ module.exports = App;
 
 if (typeof window !== 'undefined') {
   window.onload = function() {
-    ReactAsync.renderComponent(App(), document);
+    ReactAsync.renderComponent(App(), document.body);
   }
 }
