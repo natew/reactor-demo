@@ -2,7 +2,7 @@ Reactor is an experimental app using React and some awesome new node libraries t
 
 The goal is to have it be a nice skeleton for people starting out creating full-featured React apps.
 
-Most credit goes to [andreypopp](https://github.com/andreypopp) and his great work on [react-async](https://github.com/andreypopp/react-async-middleware) and [react-async-middleware](https://github.com/andreypopp/react-async-middleware), as shown in the [react-quickstart repo](https://github.com/andreypopp/react-quickstart).
+Most credit goes to [andreypopp](https://github.com/andreypopp) and his great work on [react-async](https://github.com/andreypopp/react-async) and [react-async-middleware](https://github.com/andreypopp/react-async-middleware), as shown in the [react-quickstart repo](https://github.com/andreypopp/react-quickstart).
 
 ## Learn more
 
