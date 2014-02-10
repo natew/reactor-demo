@@ -28,8 +28,8 @@ app.get('/css/:file', function(req, res) {
 });
 
 function createBundler() {
-  return browserify({ extensions:['.jsx'] })
-    .require('./app/client.jsx', {expose: './app'})
+  return browserify({ extensions:['.jsx'], debug: true, watch: true })
+    .require(__dirname + '/client.jsx', {expose: './app'})
     .transform(reactify);
 }
 

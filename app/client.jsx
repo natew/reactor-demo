@@ -1,7 +1,10 @@
-var React             = require('react');
-var createController  = require('react-app-controller');
-var HomePage          = require('./views/pages/HomePage');
-var OtherPage         = require('./views/pages/OtherPage');
+var React            = require('react');
+var ReactMount       = require('react/lib/ReactMount');
+var createController = require('react-app-controller');
+var HomePage         = require('./views/pages/HomePage');
+var OtherPage        = require('./views/pages/OtherPage');
+
+ReactMount.allowFullPageRender = true;
 
 var controller = createController({
 

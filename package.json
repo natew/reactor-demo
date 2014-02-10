@@ -24,7 +24,9 @@
     "react": "~0.8.0",
     "react-app-controller": "~0.5.0",
     "connect-browserify": "~1.0.0",
-    "browserify": "~3.14.0"
+    "browserify": "~3.14.0",
+    "requ": "~0.0.1",
+    "react-async": "~0.2.0"
   },
   "devDependencies": {
     "mocha": "0.14.0",
