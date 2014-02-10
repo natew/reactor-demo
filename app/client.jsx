@@ -16,12 +16,10 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <div id="react-root">
-        <Locations ref="router" onClick={this.onClick} path={this.props.path}>
-          <Location path="/" handler={HomePage} />
-          <Location path="/other" handler={OtherPage} />
-        </Locations>
-      </div>
+      <Locations ref="router" onClick={this.onClick} path={this.props.path}>
+        <Location path="/" handler={HomePage} />
+        <Location path="/other" handler={OtherPage} />
+      </Locations>
     );
   },
 
@@ -36,7 +34,6 @@ module.exports = App;
 
 if (typeof window !== 'undefined') {
   window.onload = function() {
-    var root = document.getElementById('react-root');
-    ReactAsync.renderComponent(App(), root);
+    ReactAsync.renderComponent(App(), document.body);
   }
 }

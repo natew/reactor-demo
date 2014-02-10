@@ -14,7 +14,9 @@
 
     <script src="{{bundleUri}}"></script>
   </head>
-  <body>
-    {{{body}}}
-  </body>
+  <!--
+    Note: (Bugfix)
+    React doesn't play nice with whitespace between <body></body>
+  -->
+  <body>{{{body}}}</body>
 </html>
