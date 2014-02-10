@@ -20,7 +20,7 @@ var App = React.createClass({
     return (
       <html>
         <head>
-          <script src="/js/bundle.js" />
+          <script src="/js/bundle.js"></script>
         </head>
         <Pages ref="router" onClick={this.onClick} path={this.props.path}>
           <Page path="/" handler={HomePage} />

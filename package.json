@@ -36,7 +36,8 @@
     "node-jsx": "~0.2.1",
     "node-dev": "~2.1.6",
     "requ": "~0.0.1",
-    "superagent": "~0.16.0"
+    "superagent": "~0.16.0",
+    "express-compose": "0.0.2"
   },
   "devDependencies": {
     "bower": "1.2",

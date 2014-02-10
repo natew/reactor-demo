@@ -14,7 +14,6 @@ module.exports = ReactAsync.createClass({
     superagent
       .get('http://localhost:3111/api/item')
       .end(function(err, res) {
-        console.log('got async', res.body)
         cb(err, res ? res.body : null);
       });
   },
@@ -23,7 +22,7 @@ module.exports = ReactAsync.createClass({
     return (
       <div>
         <h2>Home Page</h2>
-        <Stage item={this.state.Item} />
+        <Stage item={this.state.item} />
         <Form />
 
         <a href="/other">Go to other page</a>

@@ -1,4 +1,4 @@
-var Item = {
+exports.item = {
   images: [
     {
       full: 'card.jpg',
@@ -10,5 +10,3 @@ var Item = {
     }
   ]
 };
-
-exports.Item = Item;
