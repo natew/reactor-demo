@@ -2,17 +2,14 @@ var React      = require('react');
 var ReactAsync = require('react-async');
 var Stage      = require('../components/Stage');
 var Form       = require('../components/Form');
-// var http   = require('requ');
+var superagent = require('superagent');
 
 module.exports = ReactAsync.createClass({
+
   getInitialStateAsync: function(cb) {
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-      var data = JSON.parse(xhr.responseText);
-      cb(null, data);
-    };
-    xhr.open('get', '/api/item', true);
-    xhr.send();
+    superagent.get('/api/item', function(err, res) {
+      cb(err, res ? res.body : null);
+    });
   },
 
   render: function() {

@@ -11,24 +11,32 @@
   "engines": {
     "node": "~0.10.7"
   },
+  "main": "./app/server.js",
+  "browser": "./app/client.js",
+  "browserify": {
+    "transform": ["reactify"]
+  },
   "scripts": {
-    "start": "nodemon -w app app/server.js & gulp",
+    "start": "node-dev --no-deps app/server.js",
     "watch": "gulp",
-    "first-run": "npm install && bower install"
+    "first-run": "npm install && npm install -g node-inspector && bower install"
   },
   "dependencies": {
-    "brunch": "1.7",
-    "bower": "1.2",
-    "react-app-middleware": "git://github.com/natew/react-app-middleware.git#layouts-and-alternate-root-nodes",
-    "express": "~3.4.7",
-    "react": "~0.8.0",
-    "react-app-controller": "~0.5.0",
-    "connect-browserify": "~1.0.0",
+    "envify": "~0.2.0",
     "browserify": "~3.14.0",
-    "requ": "~0.0.1",
-    "react-async": "~0.2.0"
+    "connect-browserify": "~1.0.0",
+    "reactify": "~0.7.0",
+    "react": "~0.8.0",
+    "react-async": "~0.2.0",
+    "react-async-middleware": "~0.1.1",
+    "react-router-component": "~0.2.1",
+    "express": "~3.4.7",
+    "node-jsx": "~0.2.1",
+    "node-dev": "~2.1.6",
+    "requ": "~0.0.1"
   },
   "devDependencies": {
+    "bower": "1.2",
     "mocha": "0.14.0",
     "expect.js": "0.1.2",
     "gulp": "~3.5.1",
