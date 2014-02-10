@@ -14,7 +14,9 @@
   "main": "./app/server.js",
   "browser": "./app/client.js",
   "browserify": {
-    "transform": ["reactify"]
+    "transform": [
+      "reactify"
+    ]
   },
   "scripts": {
     "start": "node-dev --no-deps app/server.js",
@@ -33,7 +35,8 @@
     "express": "~3.4.7",
     "node-jsx": "~0.2.1",
     "node-dev": "~2.1.6",
-    "requ": "~0.0.1"
+    "requ": "~0.0.1",
+    "superagent": "~0.16.0"
   },
   "devDependencies": {
     "bower": "1.2",

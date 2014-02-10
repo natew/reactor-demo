@@ -1,4 +1,8 @@
-var React = require('react');
+/**
+ * @jsx React.DOM
+ */
+
+ var React = require('react');
 
 module.exports = React.createClass({
   getInitialState: function() {

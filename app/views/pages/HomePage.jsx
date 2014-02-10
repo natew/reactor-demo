@@ -1,3 +1,7 @@
+/**
+ * @jsx React.DOM
+ */
+
 var React      = require('react');
 var ReactAsync = require('react-async');
 var Stage      = require('../components/Stage');
@@ -16,7 +20,7 @@ module.exports = ReactAsync.createClass({
     return (
       <div>
         <h2>Home Page</h2>
-        <Stage item={this.state.data.Item} />
+        <Stage item={this.state.Item} />
         <Form />
 
         <a href="/other">Go to other page</a>

@@ -30,21 +30,16 @@ var App = React.createClass({
   },
 
   onClick: function(e) {
-    if (e.target.tagName === 'A' && e.target.attributes.href) {
-      e.preventDefault();
-      this.refs.router.navigate(e.target.attributes.href.value);
-    }
-  },
-
-  // // application started
-  // componentDidMount: function() {
-  //   window.addEventListener('click', this.onClick);
-  // },
-
-  // // application will shutdown
-  // componentWillUnmount: function() {
-  //   window.removeEventListener('click', this.onClick);
-  // }
+    if (e.target.tagName !== 'A' || !e.target.attributes.href) return;
+    e.preventDefault();
+    this.refs.router.navigate(e.target.attributes.href.value);
+  }
 });
 
 module.exports = App;
+
+if (typeof window !== 'undefined') {
+  window.onload = function() {
+    ReactAsync.renderComponent(App(), document);
+  }
+}
