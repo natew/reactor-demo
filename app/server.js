@@ -1,8 +1,11 @@
 var express         = require('express');
-var browserify      = require('browserify');
+var browserify      = require('connect-browserify');
 var nodejsx         = require('node-jsx').install({ extension: '.jsx' });
 var ReactMiddleware = require('react-async-middleware');
 var App             = require('./client');
+
+var port = 3111,
+    domain = 'http://localhost:' + port;
 
 express()
   .get('/api/:endpoint', function(req, res) {
@@ -15,9 +18,11 @@ express()
   .get('/css/:file', function(req, res) {
     res.sendfile('./build/css/' + req.params.file);
   })
-  .get('/js/bundle.js', function() {
-    browserify({ extension: ['.jsx'] })
-      .require('./client', { debug: true, watch: true });
-  })
+  .use('/js/bundle.js', browserify.serve({
+    entry: './app/client.jsx',
+    extensions: ['.jsx'],
+    debug: true,
+    watch: true
+  }))
   .use(ReactMiddleware(App))
-  .listen(3111);
+  .listen(port);

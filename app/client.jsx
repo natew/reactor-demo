@@ -5,6 +5,7 @@
 var React      = require('react');
 var ReactMount = require('react/lib/ReactMount');
 var Router     = require('react-router-component');
+var ReactAsync = require('react-async');
 var HomePage   = require('./views/pages/HomePage');
 var OtherPage  = require('./views/pages/OtherPage');
 

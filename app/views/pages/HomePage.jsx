@@ -11,9 +11,12 @@ var superagent = require('superagent');
 module.exports = ReactAsync.createClass({
 
   getInitialStateAsync: function(cb) {
-    superagent.get('/api/item', function(err, res) {
-      cb(err, res ? res.body : null);
-    });
+    superagent
+      .get('http://localhost:3111/api/item')
+      .end(function(err, res) {
+        console.log('got async', res.body)
+        cb(err, res ? res.body : null);
+      });
   },
 
   render: function() {
