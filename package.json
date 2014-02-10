@@ -30,7 +30,7 @@
     "reactify": "~0.7.0",
     "react": "~0.8.0",
     "react-async": "~0.3.0",
-    "react-async-middleware": "~0.1.1",
+    "react-async-middleware": "git://github.com/natew/react-async-middleware.git#passthrough",
     "react-router-component": "~0.2.1",
     "express": "~3.4.7",
     "node-jsx": "~0.2.1",
