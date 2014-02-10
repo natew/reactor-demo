@@ -1,6 +1,8 @@
 Reactor is an experimental app using React and some awesome new node libraries to enable it to render any page completely on the server side, and then hand itself over in entirety to the client, to have the client continue running it from there.
 
-The goal is to have it be a best-practice skeleton for people starting out creating full-featured React apps.
+The goal is to have it be a nice skeleton for people starting out creating full-featured React apps.
+
+Most credit goes to [andreypopp](https://github.com/andreypopp) and his great work on [react-async](https://github.com/andreypopp/react-async-middleware) and [react-async-middleware](https://github.com/andreypopp/react-async-middleware), as shown in the [react-quickstart repo](https://github.com/andreypopp/react-quickstart).
 
 ## Learn more
 
@@ -8,7 +10,6 @@ The goal is to have it be a best-practice skeleton for people starting out creat
 - Some reading on isomorphic apps: [blog post](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/), [tutorial app](https://github.com/spikebrehm/isomorphic-tutorial), [scaling by nodejitsu](https://blog.nodejitsu.com/scaling-isomorphic-javascript-code/)
 - [Browserify](http://browserify.org/) to allow us to use require() on the server and client.
 - [Gulp](https://github.com/gulpjs/gulp) to watch and build assets.
-- [react-app-middleware](https://github.com/andreypopp/react-app-middleware) and [react-app-controller](https://github.com/andreypopp/react-app-controller) to help stitch the client/server rendering together.
 
 # Installation
 
