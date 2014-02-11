@@ -13,7 +13,7 @@ Most credit goes to [andreypopp](https://github.com/andreypopp) and his great wo
 
 # Installation
 
-    npm install
+    npm run first-run
 
 And start it:
 

@@ -9,6 +9,8 @@ var ReactAsync = require('react-async');
 var HomePage   = require('./views/pages/HomePage');
 var OtherPage  = require('./views/pages/OtherPage');
 
+ReactMount.allowFullPageRender = true;
+
 var Locations  = Router.Locations;
 var Location   = Router.Location;
 
@@ -34,6 +36,6 @@ module.exports = App;
 
 if (typeof window !== 'undefined') {
   window.onload = function() {
-    ReactAsync.renderComponent(App(), document.body);
+    ReactAsync.renderComponent(App(), document.documentElement.parentNode);
   }
 }
