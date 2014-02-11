@@ -19,9 +19,9 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <HTMLLayout>
+      <HTMLLayout path={this.props.path}>
         <Locations ref="router" onClick={this.onClick} path={this.props.path}>
-          <Location path="/" handler={HomePage} />
+          <Location path="/" title="Home Page" handler={HomePage} />
           <Location path="/other" handler={OtherPage} />
         </Locations>
       </HTMLLayout>

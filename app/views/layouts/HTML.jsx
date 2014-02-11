@@ -3,19 +3,31 @@
  */
 
 var React = require('react');
+var es5   = require('es5-shim');
 
 module.exports = React.createClass({
 
-  render: function() {
-    // var children = this.props.children;
-    // if (!Array.isArray(children)) children = [children];
+  getInitialState: function() {
+    return { title: '' };
+  },
 
+  componentDidMount: function() {
+    var pages = this.props.children.props.children;
+    var activePage = pages.filter(this.findActiveChild)[0];
+    this.setState({ title: activePage.title });
+  },
+
+  findActiveChild: function(child) {
+    return child.path === this.props.children.state.path;
+  },
+
+  render: function() {
     return (
       <html>
         <head>
           <meta charset="utf-8" />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-          <title>{this.props.title}</title>
+          <title>{this.state.title}</title>
           <meta name="description" content="" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
 

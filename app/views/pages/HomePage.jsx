@@ -15,14 +15,15 @@ module.exports = ReactAsync.createClass({
     superagent
       .get('http://localhost:3111/api/item')
       .end(function(err, res) {
+        console.log('got data', res.body);
         cb(err, res ? res.body : null);
-      });
+      }.bind(this));
   },
 
   render: function() {
     return (
       <BodyLayout>
-        <h2>Home Page</h2>
+        <h2>Item Page</h2>
         <Stage item={this.state.item} />
         <Form />
 
