@@ -33,7 +33,7 @@ module.exports = React.createClass({
         images = item.images,
         fullImage = images[this.state.activeImage].full;
 
-    var createThumb = this.createThumb.bind(this);
+    var createThumb = this.createThumb;
 
     return (
       <section id="imagery">
