@@ -14,10 +14,6 @@ module.exports = React.createClass({
             <a href="/">Reactor</a>
           </h1>
 
-          <form id="search-form">
-            <input id="search-field" type="text" />
-          </form>
-
           <nav id="nav">
             <ul id="nav-list">
               <li><a href="/">Home</a></li>
@@ -26,7 +22,9 @@ module.exports = React.createClass({
             </ul>
           </nav>
 
-          <h2 id="callout">React example app</h2>
+          <form id="search-form">
+            <input id="search-field" type="text" />
+          </form>
 
           <ul id="user-nav" className="secondary">
             <li><a href="">Login</a></li>
