@@ -4,9 +4,11 @@
 
 var React      = require('react');
 var ReactAsync = require('react-async');
+var superagent = require('superagent');
+
 var Stage      = require('../components/Stage');
 var Form       = require('../components/Form');
-var superagent = require('superagent');
+var Layout     = require('../layouts/Main');
 
 module.exports = ReactAsync.createClass({
 
@@ -20,13 +22,13 @@ module.exports = ReactAsync.createClass({
 
   render: function() {
     return (
-      <div>
+      <Layout>
         <h2>Home Page</h2>
         <Stage item={this.state.item} />
         <Form />
 
         <a href="/other">Go to other page</a>
-      </div>
+      </Layout>
     );
   }
 });

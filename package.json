@@ -63,6 +63,7 @@
     "reactify": "~0.7.0",
     "matchdep": "~0.3.0",
     "nodemon": "~1.0.14",
-    "gulp-bower": "0.0.2"
+    "gulp-bower": "0.0.2",
+    "gulp-clean": "~0.2.4"
   }
 }

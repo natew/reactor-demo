@@ -3,11 +3,12 @@
  */
 
 var React  = require('react');
+var Layout = require('../layouts/Main');
 
 module.exports = React.createClass({
   render: function() {
     return (
-      <div>
+      <Layout>
         <h2>Other Page</h2>
         <p>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -19,7 +20,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
 
         <a href="/">Go to home page</a>
-      </div>
+      </Layout>
     );
   }
 });

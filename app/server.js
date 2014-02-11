@@ -7,7 +7,6 @@ var App        = require('./client');
 
 var bundleUri  = '/js/bundle.js';
 var port       = 3111;
-var uri        = { hostname: 'localhost', port: port };
 var app        = express();
 
 app.engine('html', cons.hogan)
@@ -17,8 +16,9 @@ app.set('views', __dirname + '/views');
 function layout(req, res) {
   if (req.url == bundleUri) return;
   res.render('index', {
-    body: res.body,
-    bundleUri: bundleUri
+    uri: { hostname: 'localhost', port: port },
+    bundleUri: bundleUri,
+    body: res.body
   });
 }
 
