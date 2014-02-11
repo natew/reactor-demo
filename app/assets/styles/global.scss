@@ -15,21 +15,16 @@ html {
 }
 
 body {
-  background: white;
+  background: #fff;
   font-size: 1.4rem;
 }
 
-.container {
-  background: white;
+#theater {
   max-width: 900px;
-  padding: 58px 0 0;
   margin: 0 auto;
   overflow: hidden;
-}
-
-#theater {
   margin: 0;
-  padding: 20px;
+  padding: 78px 20px 0;
   line-height: 2rem;
   position: relative;
 }

@@ -19,7 +19,7 @@
     ]
   },
   "scripts": {
-    "start": "node-dev --no-deps app/server.js & gulp",
+    "start": "node-dev --no-deps app/server.js",
     "watch": "gulp",
     "first-run": "npm install && npm install -g node-inspector && bower install"
   },
