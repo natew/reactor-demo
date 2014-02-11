@@ -5,22 +5,13 @@ var cons       = require('consolidate');
 var middleware = require('react-async-middleware');
 var App        = require('./client');
 
-var bundleUri  = '/js/bundle.js';
-var port       = 3111;
-var app        = express();
+var bundle = '/js/bundle.js';
+var port   = 3111;
+var app    = express();
 
 app.engine('html', cons.hogan)
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
-
-function layout(req, res) {
-  if (req.url == bundleUri) return;
-  res.render('index', {
-    uri: { hostname: 'localhost', port: port },
-    bundleUri: bundleUri,
-    body: res.body
-  });
-}
 
 app.get('/api/:endpoint', function(req, res) {
     var endpoint = require('../api/'+ req.params.endpoint);
@@ -33,12 +24,15 @@ app.get('/api/:endpoint', function(req, res) {
     res.sendfile('./build/css/' + req.params.file);
   })
 
-app.use(bundleUri, browserify.serve({
+app.use(bundle, browserify.serve({
     entry: './app/client.jsx',
     extensions: ['.jsx'],
     debug: true,
     watch: true
   }))
   .use(middleware(App))
-  .use(layout)
+  .use(function(req, res) {
+    if (req.url == bundle) return;
+    res.render('index', { body: res.body });
+  })
   .listen(port);

@@ -23,9 +23,9 @@ module.exports = React.createClass({
 
           <nav id="nav">
             <ul id="nav-list">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Other</a></li>
-              <li><a href="#">About</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/other">Other</a></li>
+              <li><a href="">About</a></li>
             </ul>
           </nav>
 
