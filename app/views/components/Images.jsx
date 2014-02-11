@@ -33,14 +33,12 @@ module.exports = React.createClass({
         images = item.images,
         fullImage = images[this.state.activeImage].full;
 
-    var createThumb = this.createThumb;
-
     return (
       <section id="imagery">
         <img src={this.imagePath + fullImage} />
 
         <ul className="thumbs">
-          {images.map(createThumb)}
+          {images.map(this.createThumb)}
         </ul>
       </section>
     );
