@@ -1,4 +1,4 @@
-Reactor is an experimental isomorphic app using React, eventually with Meteor. The goal is to have it be a nice skeleton for people starting out creating full-featured React apps.
+Reactor is an experimental isomorphic app using React. The goal is to have it be a nice skeleton for people starting out creating full-featured React apps.
 
 ## Learn more
 
@@ -19,7 +19,7 @@ And go to [localhost:3111](localhost:3111).
 
 ## Todo
 
-- Add meteor as the model
+- Add model (meteor?)
 - Explore including a standards widgets library as a good example
   - [react-treeview](https://github.com/chenglou/react-treeview)
   - [react-bootstrap](https://github.com/stevoland/react-bootstrap) boostrap widgets ported
