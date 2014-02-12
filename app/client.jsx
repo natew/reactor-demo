@@ -23,7 +23,9 @@ var App = React.createClass({
   },
 
   render: function() {
-    return this.transferPropsTo(this.locations[this.state.path]());
+    return this.transferPropsTo(this.locations[this.state.path]({
+      onClick: this._onClick
+    }));
   }
 
 });

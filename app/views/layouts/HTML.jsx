@@ -21,7 +21,7 @@ module.exports = React.createClass({
           <script src="/js/bundle.js"></script>
         </head>
 
-        <body onClick={this.props._onClick}>
+        <body onClick={this.props.onClick}>
           <div id="body">
             <header>
               <h1 id="logo">

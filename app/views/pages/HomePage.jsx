@@ -9,7 +9,6 @@ var Stage      = require('../components/Stage');
 var Form       = require('../components/Form');
 var HTMLLayout = require('../layouts/HTML');
 var UrlMixin   = require('../../mixins/Url');
-// var es5        = require('es5-shim');
 
 module.exports = ReactAsync.createClass({
 
@@ -17,7 +16,7 @@ module.exports = ReactAsync.createClass({
 
   getInitialStateAsync: function(cb) {
     superagent
-      .get('http://localhost:3111/api/item')
+      .get(this._root() + '/api/item')
       .end(function(err, res) {
         cb(err, res ? res.body : null);
       }.bind(this));
