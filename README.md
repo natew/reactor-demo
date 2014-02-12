@@ -13,8 +13,8 @@ And go to [localhost:3111](localhost:3111).
 ## What this solves
 
 - Full page rendered from server or client
-- React can properly render <title> (and eventually <meta> tags) using page data
-- Server passes url/port to client js
+- React can properly render `<title>` (and eventually `<meta>` tags) using page data
+- Server passes all data to client js on first render
 - HTML5 pushState to seamlessly navigate between pages
 
 ## Learn more
