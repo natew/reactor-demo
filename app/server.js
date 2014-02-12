@@ -30,7 +30,10 @@ app.use(bundle, browserify.serve({
     debug: true,
     watch: true
   }))
-  .use(middleware(App, { props: url }))
+  .use(middleware(App, {
+    props: url,
+    sendResponse: false
+  }))
   .use(function(req, res) {
     if (req.url == bundle) return;
     res.render('index', { body: res.body });
