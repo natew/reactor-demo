@@ -6,6 +6,9 @@ var React  = require('react');
 var BodyLayout = require('../layouts/Body');
 
 module.exports = React.createClass({
+
+  title: 'Other Page',
+
   render: function() {
     return (
       <BodyLayout>

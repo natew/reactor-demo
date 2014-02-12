@@ -5,67 +5,19 @@
 var React      = require('react');
 var ReactMount = require('react/lib/ReactMount');
 var Routes     = require('./routes');
-var es5       = require('es5-shim');
-var invariant = require('react/lib/invariant');
-var pattern   = require('url-pattern');
+var Router     = require('./mixins/Router');
+var es5        = require('es5-shim');
 
 var App = React.createClass({
 
-  mixins: [Routes],
+  mixins: [Router, Routes],
 
   getInitialState: function() {
-    return {
-      path: this.props.path || window.location.pathname,
-      title: ''
-    };
+    return { path: this.getPath(), title: this.getTitle() };
   },
 
-  navigate: function(path, cb) {
-    window.history.pushState({}, '', path);
-    this.setState({ path: window.location.pathname }, cb);
-  },
-
-  componentDidMount: function() {
-    window.addEventListener('popstate', this.onPopState);
-  },
-
-  componentWillUnmount: function() {
-    window.removeEventListener('popstate', this.onPopState);
-  },
-
-  onPopState: function(e) {
-    var path = window.location.pathname;
-
-    if (this.state.path !== path) {
-      this.setState({path: path});
-    }
-  },
-
-  getActivePage: function() {
-    var match, page, notFound;
-
-    this.locations.forEach(function(loc) {
-      if (loc.path) {
-        loc.pattern = loc.pattern || pattern(loc.path);
-        if (!page) {
-          match = loc.pattern.match(this.state.path);
-          if (match) page = loc;
-        }
-      }
-
-      if (!notFound && loc.path === null)
-        notFound = loc;
-    }.bind(this));
-
-    return page ? page.handler(match) :
-            notFound ? notFound.handler(match) :
-            [];
-  },
-
-  onClick: function(e) {
-    if (e.target.tagName !== 'A' || !e.target.attributes.href) return;
-    e.preventDefault();
-    this.navigate(e.target.attributes.href.value);
+  getTitle: function() {
+    return this.matchedPage().handler.originalSpec.title;
   },
 
   render: function() {
@@ -83,15 +35,15 @@ var App = React.createClass({
           <script src="/js/bundle.js"></script>
         </head>
 
-        <body ref="body" onClick={this.onClick} path={this.state.path}>
-          {this.getActivePage()}
+        <body onClick={this.onClickLink}>
+          {this.activePage()}
         </body>
       </html>
     );
   }
 });
 
-// ReactMount.allowFullPageRender = true;
+ReactMount.allowFullPageRender = true;
 module.exports = App;
 
 if (typeof window !== 'undefined') {

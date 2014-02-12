@@ -8,12 +8,11 @@ var superagent = require('superagent');
 var Stage      = require('../components/Stage');
 var Form       = require('../components/Form');
 var BodyLayout = require('../layouts/Body');
-var UrlMixin   = require('../mixins/Url');
-var State      = require('../mixins/State');
+var UrlMixin   = require('../../mixins/Url');
 
 module.exports = ReactAsync.createClass({
 
-  mixins: [UrlMixin, State],
+  mixins: [UrlMixin],
 
   title: 'Home Page',
 
