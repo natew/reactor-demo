@@ -9,7 +9,7 @@ var bundle = '/js/bundle.js';
 var url    = { host: 'localhost', port: 3111 };
 var app    = express();
 
-app.engine('html', cons.hogan)
+app.engine('html', cons.hogan);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 

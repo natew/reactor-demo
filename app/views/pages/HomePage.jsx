@@ -23,6 +23,7 @@ module.exports = ReactAsync.createClass({
   },
 
   render: function() {
+    console.log('ran')
     return (
       <BodyLayout>
         <h2>Item Page</h2>

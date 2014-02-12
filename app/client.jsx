@@ -28,10 +28,11 @@ var App = React.createClass({
 
   render: function() {
     return (
-      <HTMLLayout path={this.props.path}>
+      <HTMLLayout>
         <Locations ref="router" onClick={this.onClick} path={this.props.path}>
           {this.locations.map(this.mapLocation)}
         </Locations>
+        {this.props.path}
       </HTMLLayout>
     );
   },

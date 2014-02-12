@@ -12,9 +12,9 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    var pages = this.props.children.props.children;
-    var activePage = pages.filter(this.findActiveChild)[0];
-    this.setState({ title: activePage.title });
+    // var pages = this.props.children.props.children;
+    // var activePage = pages.filter(this.findActiveChild)[0];
+    // this.setState({ title: activePage.title });
   },
 
   findActiveChild: function(child) {
