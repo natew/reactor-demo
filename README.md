@@ -10,6 +10,13 @@ And start it:
 
 And go to [localhost:3111](localhost:3111).
 
+## What this solves
+
+- Full page rendered from server or client
+- React can properly render <title> (and eventually <meta> tags) using page data
+- Server passes url/port to client js
+- HTML5 pushState to seamlessly navigate between pages
+
 ## Learn more
 
 - Get familiar with [React](http://facebook.github.io/react/) (([NodeConf EU React Intro](https://www.youtube.com/watch?v=x7cQ3mrcKaY), [React + Meteor talk](https://www.youtube.com/watch?v=Lqcs6hPOcFw#t=3001)))

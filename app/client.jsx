@@ -21,10 +21,9 @@ var App = ReactAsync.createClass({
     '/other': OtherPage
   },
 
-  _rootUrl: function() {
-    // var port = this.props.port ? ':' + this.props.port : '';
-    // return 'http://' + this.props.host + port;
-    return 'http://localhost:3111';
+  rootUrl: function() {
+    var port = this.props.port ? ':' + this.props.port : '';
+    return 'http://' + this.props.host + port;
   },
 
   getInitialStateAsync: function(cb) {
@@ -42,7 +41,7 @@ var App = ReactAsync.createClass({
     }
     else {
       superagent
-        .get(this._rootUrl() + controller.dataSource)
+        .get(this.rootUrl() + controller.dataSource)
         .end(function(err, res) {
           var data = res ? res.body : null;
           cb(err, {
