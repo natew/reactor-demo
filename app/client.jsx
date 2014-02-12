@@ -3,29 +3,56 @@
  */
 
 var React      = require('react');
+var ReactAsync = require('react-async');
 var ReactMount = require('react/lib/ReactMount');
 var Router     = require('./mixins/Router');
 var es5        = require('es5-shim');
 var HomePage   = require('./views/pages/HomePage');
 var OtherPage  = require('./views/pages/OtherPage');
+var HTMLLayout = require('./views/layouts/HTML');
+var UrlMixin   = require('./mixins/Url');
+var superagent = require('superagent');
 
-var App = React.createClass({
+var App = ReactAsync.createClass({
 
-  mixins: [Router],
+  mixins: [Router, UrlMixin],
 
   routes: {
     '/':      HomePage,
     '/other': OtherPage
   },
 
-  getInitialState: function() {
-    return { path: this.props.path || window.location.pathname };
+  getInitialStateAsync: function(cb) {
+    var controller = this.routes[this.props.path];
+
+    if (!controller.dataSource) {
+      cb(null, {
+        path: this.props.path || window.location.pathname,
+        title: controller.title
+      });
+    }
+    else {
+      superagent
+        .get(this._root() + controller.dataSource)
+        .end(function(err, res) {
+          var data = res ? res.body : null;
+          cb(err, {
+            path: this.props.path || window.location.pathname,
+            data: data,
+            title: data.item.title || controller.title
+          });
+        }.bind(this));
+    }
   },
 
   render: function() {
-    return this.transferPropsTo(this.routes[this.state.path]({
-      onClick: this._onClick
-    }));
+    var component = this.routes[this.state.path].component;
+
+    return this.transferPropsTo(
+      <HTMLLayout title={this.state.title} onClick={this._onClick}>
+        {component({ data: this.state.data })}
+      </HTMLLayout>
+    );
   }
 
 });

@@ -29,7 +29,7 @@
     "connect-browserify": "~1.0.0",
     "reactify": "~0.7.0",
     "react": "~0.8.0",
-    "react-async": "~0.3.0",
+    "react-async": "~0.3.3",
     "react-async-middleware": "git://github.com/natew/react-async-middleware.git#master",
     "react-router-component": "git://github.com/natew/react-router-component.git#master",
     "express": "~3.4.7",

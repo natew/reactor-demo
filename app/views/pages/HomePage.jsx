@@ -3,33 +3,31 @@
  */
 
 var React      = require('react');
-var ReactAsync = require('react-async');
-var superagent = require('superagent');
 var Stage      = require('../components/Stage');
 var Form       = require('../components/Form');
-var HTMLLayout = require('../layouts/HTML');
-var UrlMixin   = require('../../mixins/Url');
 
-module.exports = ReactAsync.createClass({
+module.exports = (function() {
+  var Controller = {
 
-  mixins: [UrlMixin],
+    dataSource: '/api/item',
 
-  getInitialStateAsync: function(cb) {
-    superagent
-      .get(this._root() + '/api/item')
-      .end(function(err, res) {
-        cb(err, res ? res.body : null);
-      }.bind(this));
-  },
+    component: React.createClass({
 
-  render: function() {
-    return this.transferPropsTo(
-      <HTMLLayout title={this.state.item.title}>
-        <Stage item={this.state.item} />
-        <Form />
+      getInitialState: function() {
+        return { item: this.props.data.item };
+      },
 
-        <a href="/other">Go to other page</a>
-      </HTMLLayout>
-    );
-  }
-});
+      render: function() {
+        return (
+          <div>
+            <Stage item={this.state.item} />
+            <Form />
+            <a href="/other">Go to other page</a>
+          </div>
+        );
+      }
+    })
+  };
+
+  return Controller;
+})();
