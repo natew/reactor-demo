@@ -6,7 +6,7 @@ Reactor is an experimental isomorphic app using React. The goal is to have it be
 
 And start it:
 
-    npm start
+    npm start & gulp
 
 And go to [localhost:3111](localhost:3111).
 
