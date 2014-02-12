@@ -1,9 +1,12 @@
 var pattern = require('url-pattern');
 
 module.exports = {
-  _navigate: function(path, cb) {
+
+  _navigate: function(path) {
     window.history.pushState({}, '', path);
-    this.setState({ path: window.location.pathname }, cb);
+    this.getDataForRoute(path, function(err, data) {
+      this.setState({ path: path });
+    }.bind(this));
   },
 
   _onClick: function(e) {
@@ -27,4 +30,5 @@ module.exports = {
   componentWillUnmount: function() {
     window.removeEventListener('popstate', this._onPopState);
   }
+
 };

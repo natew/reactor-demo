@@ -5,25 +5,34 @@
 var React      = require('react');
 var ReactAsync = require('react-async');
 var ReactMount = require('react/lib/ReactMount');
-var Router     = require('./mixins/Router');
+var Navigator  = require('./mixins/Navigator');
 var es5        = require('es5-shim');
 var HomePage   = require('./views/pages/HomePage');
 var OtherPage  = require('./views/pages/OtherPage');
 var HTMLLayout = require('./views/layouts/HTML');
-var UrlMixin   = require('./mixins/Url');
 var superagent = require('superagent');
 
 var App = ReactAsync.createClass({
 
-  mixins: [Router, UrlMixin],
+  mixins: [Navigator],
 
   routes: {
     '/':      HomePage,
     '/other': OtherPage
   },
 
+  _rootUrl: function() {
+    // var port = this.props.port ? ':' + this.props.port : '';
+    // return 'http://' + this.props.host + port;
+    return 'http://localhost:3111';
+  },
+
   getInitialStateAsync: function(cb) {
-    var controller = this.routes[this.props.path];
+    this.getDataForRoute(this.props.path, cb);
+  },
+
+  getDataForRoute: function(path, cb) {
+    var controller = this.routes[path];
 
     if (!controller.dataSource) {
       cb(null, {
@@ -33,7 +42,7 @@ var App = ReactAsync.createClass({
     }
     else {
       superagent
-        .get(this._root() + controller.dataSource)
+        .get(this._rootUrl() + controller.dataSource)
         .end(function(err, res) {
           var data = res ? res.body : null;
           cb(err, {
@@ -48,7 +57,7 @@ var App = ReactAsync.createClass({
   render: function() {
     var component = this.routes[this.state.path].component;
 
-    return this.transferPropsTo(
+    return (
       <HTMLLayout title={this.state.title} onClick={this._onClick}>
         {component({ data: this.state.data })}
       </HTMLLayout>
@@ -62,6 +71,6 @@ module.exports = App;
 
 if (typeof window !== 'undefined') {
   window.onload = function() {
-    React.renderComponent(App(), document);
+    ReactAsync.renderComponent(App(), document);
   }
 }
