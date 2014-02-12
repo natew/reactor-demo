@@ -1,12 +1,5 @@
 Reactor is an experimental isomorphic app using React. The goal is to have it be a nice skeleton for people starting out creating full-featured React apps.
 
-## Learn more
-
-- Get familiar with [React](http://facebook.github.io/react/) (([NodeConf EU React Intro](https://www.youtube.com/watch?v=x7cQ3mrcKaY), [React + Meteor talk](https://www.youtube.com/watch?v=Lqcs6hPOcFw#t=3001)))
-- Some reading on isomorphic apps: [blog post](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/), [tutorial app](https://github.com/spikebrehm/isomorphic-tutorial), [scaling by nodejitsu](https://blog.nodejitsu.com/scaling-isomorphic-javascript-code/)
-- [Browserify](http://browserify.org/) to allow us to use require() on the server and client.
-- [Gulp](https://github.com/gulpjs/gulp) to watch and build assets.
-
 ## Installation
 
     npm run first-run
@@ -16,6 +9,13 @@ And start it:
     npm start
 
 And go to [localhost:3111](localhost:3111).
+
+## Learn more
+
+- Get familiar with [React](http://facebook.github.io/react/) (([NodeConf EU React Intro](https://www.youtube.com/watch?v=x7cQ3mrcKaY), [React + Meteor talk](https://www.youtube.com/watch?v=Lqcs6hPOcFw#t=3001)))
+- Some reading on isomorphic apps: [blog post](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/), [tutorial app](https://github.com/spikebrehm/isomorphic-tutorial), [scaling by nodejitsu](https://blog.nodejitsu.com/scaling-isomorphic-javascript-code/)
+- [Browserify](http://browserify.org/) to allow us to use require() on the server and client.
+- [Gulp](https://github.com/gulpjs/gulp) to watch and build assets.
 
 ## Todo
 
