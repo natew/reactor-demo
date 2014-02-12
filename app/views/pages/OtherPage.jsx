@@ -3,15 +3,19 @@
  */
 
 var React  = require('react');
-var BodyLayout = require('../layouts/Body');
+var HTMLLayout = require('../layouts/HTML');
+var Routes     = require('../../routes');
+var Router     = require('../../mixins/Router');
 
 module.exports = React.createClass({
 
-  title: 'Other Page',
+  getInitialState: function() {
+    return { title: 'Other Page' };
+  },
 
   render: function() {
-    return (
-      <BodyLayout>
+    return this.transferPropsTo(
+      <HTMLLayout title={this.state.title}>
         <h2>Other Page</h2>
         <p>
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -23,7 +27,7 @@ proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
 
         <a href="/">Go to home page</a>
-      </BodyLayout>
+      </HTMLLayout>
     );
   }
 });

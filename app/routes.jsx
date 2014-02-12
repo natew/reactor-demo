@@ -3,16 +3,9 @@ var OtherPage = require('./views/pages/OtherPage');
 
 module.exports = {
 
-  locations: [
-    {
-      path: '/',
-      handler: HomePage
-    },
+  locations: {
+    '/':      HomePage,
+    '/other': OtherPage
+  },
 
-    {
-      path: '/other',
-      handler: OtherPage
-    }
-  ]
-
-}
+};

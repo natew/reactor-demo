@@ -23,6 +23,9 @@ app.get('/api/:endpoint', function(req, res) {
   .get('/css/:file', function(req, res) {
     res.sendfile('./build/css/' + req.params.file);
   })
+  .get('/favicon.ico', function(req, res) {
+    res.send('');
+  })
 
 app.use(bundle, browserify.serve({
     entry: './app/client.jsx',
