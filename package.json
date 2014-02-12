@@ -39,7 +39,8 @@
     "express-compose": "0.0.2",
     "hogan.js": "~2.0.0",
     "consolidate": "~0.10.0",
-    "es5-shim": "~2.3.0"
+    "es5-shim": "~2.3.0",
+    "url-pattern": "~0.3.1"
   },
   "devDependencies": {
     "bower": "1.2",
