@@ -13,7 +13,7 @@ var App = React.createClass({
 
   mixins: [Router],
 
-  locations: {
+  routes: {
     '/':      HomePage,
     '/other': OtherPage
   },
@@ -23,7 +23,7 @@ var App = React.createClass({
   },
 
   render: function() {
-    return this.transferPropsTo(this.locations[this.state.path]({
+    return this.transferPropsTo(this.routes[this.state.path]({
       onClick: this._onClick
     }));
   }

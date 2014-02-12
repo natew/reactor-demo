@@ -4,8 +4,6 @@
 
 var React  = require('react');
 var HTMLLayout = require('../layouts/HTML');
-var Routes     = require('../../routes');
-var Router     = require('../../mixins/Router');
 
 module.exports = React.createClass({
 
