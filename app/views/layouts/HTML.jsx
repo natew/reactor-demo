@@ -8,13 +8,7 @@ var es5   = require('es5-shim');
 module.exports = React.createClass({
 
   getInitialState: function() {
-    return { title: '' };
-  },
-
-  componentDidMount: function() {
-    // var pages = this.props.children.props.children;
-    // var activePage = pages.filter(this.findActiveChild)[0];
-    // this.setState({ title: activePage.title });
+    return { title: 'title' };
   },
 
   findActiveChild: function(child) {
@@ -25,7 +19,7 @@ module.exports = React.createClass({
     return (
       <html>
         <head>
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
           <title>{this.state.title}</title>
           <meta name="description" content="" />
