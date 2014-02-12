@@ -8,14 +8,16 @@ var superagent = require('superagent');
 var Stage      = require('../components/Stage');
 var Form       = require('../components/Form');
 var BodyLayout = require('../layouts/Body');
+var UrlMixin   = require('../mixins/Url');
 
 module.exports = ReactAsync.createClass({
+
+  mixins: [UrlMixin],
 
   getInitialStateAsync: function(cb) {
     superagent
       .get('http://localhost:3111/api/item')
       .end(function(err, res) {
-        console.log('got data', res.body);
         cb(err, res ? res.body : null);
       }.bind(this));
   },

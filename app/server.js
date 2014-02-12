@@ -6,7 +6,7 @@ var middleware = require('react-async-middleware');
 var App        = require('./client');
 
 var bundle = '/js/bundle.js';
-var port   = 3111;
+var url    = { host: 'localhost', port: 3111 };
 var app    = express();
 
 app.engine('html', cons.hogan)
@@ -30,9 +30,9 @@ app.use(bundle, browserify.serve({
     debug: true,
     watch: true
   }))
-  .use(middleware(App))
+  .use(middleware(App, { props: url }))
   .use(function(req, res) {
     if (req.url == bundle) return;
     res.render('index', { body: res.body });
   })
-  .listen(port);
+  .listen(url.port);
