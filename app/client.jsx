@@ -10,7 +10,7 @@ var es5        = require('es5-shim');
 var HomePage   = require('./views/pages/HomePage');
 var OtherPage  = require('./views/pages/OtherPage');
 var HTMLLayout = require('./views/layouts/HTML');
-var superagent = require('superagent');
+var http       = require('superagent');
 
 var App = ReactAsync.createClass({
 
@@ -19,11 +19,6 @@ var App = ReactAsync.createClass({
   routes: {
     '/':      HomePage,
     '/other': OtherPage
-  },
-
-  rootUrl: function() {
-    var port = this.props.port ? ':' + this.props.port : '';
-    return 'http://' + this.props.host + port;
   },
 
   getInitialStateAsync: function(cb) {
@@ -35,17 +30,17 @@ var App = ReactAsync.createClass({
 
     if (!controller.dataSource) {
       cb(null, {
-        path: this.props.path || window.location.pathname,
+        path: this._path(),
         title: controller.title
       });
     }
     else {
-      superagent
-        .get(this.rootUrl() + controller.dataSource)
+      http
+        .get(this._rootUrl() + controller.dataSource)
         .end(function(err, res) {
           var data = res ? res.body : null;
           cb(err, {
-            path: this.props.path || window.location.pathname,
+            path: this._path(),
             data: data,
             title: data.item.title || controller.title
           });
