@@ -1,7 +1,7 @@
 {
   "author": "Nate Wienert",
-  "name": "react-iso-baseline",
-  "description": "A React Isomorphic App + Gulp",
+  "name": "reactor",
+  "description": "A React Isomorphic App",
   "version": "0.0.1",
   "homepage": "",
   "repository": {
@@ -66,6 +66,7 @@
     "matchdep": "~0.3.0",
     "nodemon": "~1.0.14",
     "gulp-bower": "0.0.2",
-    "gulp-clean": "~0.2.4"
+    "gulp-clean": "~0.2.4",
+    "gulp-nodemon": "~0.1.2"
   }
 }

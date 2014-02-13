@@ -3,21 +3,31 @@ var gulpif = require('gulp-if');
 var lr     = require('tiny-lr');
 var server = lr();
 
+// Require all gulp- packages
 require('matchdep').filterDev('gulp-*').forEach(function(module) {
   var name = module.substr(5);
   if (name != 'if') global[name] = require(module);
 });
 
+// Environment
+var prod = util.env.production;
+var consoleEnv = prod ? 'Production' : 'Development';
+util.log('ENV: ', util.colors.blue(consoleEnv));
+
+
+// Utils
+var error = function(err) {
+  util.log(chalk.red.bold(err));
+  return this;
+}
+
+// Places things are
 var paths = {
   js: 'app/views/**/*.js',
   jsx: ['app/**/*.jsx', 'app/views/**/*.jsx'],
   styles: ['bower_components/**/*.css', 'app/assets/styles/*.scss'],
   build: 'build/modules'
 };
-
-var prod = util.env.production;
-var consoleEnv = prod ? 'Production' : 'Development';
-util.log('ENV: ', util.colors.blue(consoleEnv));
 
 gulp.task('compile-js', function() {
   return gulp.src(paths.js)
@@ -28,6 +38,7 @@ gulp.task('compile-jsx', function() {
   return gulp.src(paths.jsx)
     .pipe(plumber())
     .pipe(react({ addPragma: true }))
+      .on('error', error)
     .pipe(gulp.dest(paths.build))
 });
 
@@ -39,7 +50,7 @@ gulp.task('scripts', ['compile-js', 'compile-jsx'], function() {
       debug: !prod,
       // require: paths.build + '/client.js',
       expose: './app'
-    }))
+    })).on('error', error)
     .pipe(concat('app.js'))
     .pipe(gulpif(prod, uglify({
       mangle: { except: ['require', 'export', '$super'] } })))
@@ -64,13 +75,13 @@ gulp.task('compile-sass', function() {
     .pipe(plumber())
     .pipe(flatten())
     .pipe(sass({outputStyle: prod ? 'compressed' : 'expanded'}))
+      .on('error', error)
     .pipe(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7"))
     .pipe(gulp.dest('build/css/2_app'));
 });
 
 gulp.task('styles', ['clean-styles', 'compile-bower', 'compile-sass'], function() {
   return gulp.src('build/css/**/*.css')
-    // .pipe(flatten())
     .pipe(concat('app.css'))
     .pipe(gulp.dest('build/css'))
     .pipe(livereload(server));
@@ -85,7 +96,19 @@ gulp.task('lr-server', function(cb) {
   server.listen(35729, cb);
 });
 
-gulp.task('default', ['lr-server', 'scripts', 'styles', 'watch']);
+// gulp.task('server', function () {
+//   nodemon({
+//     script: 'app/server.js'
+//   }).on('error', error);
+// });
+
+gulp.task('default', [
+  // 'server',
+  'lr-server',
+  'scripts',
+  'styles',
+  'watch'
+]);
 
 // .pipe(jshint('.jshintrc'))
 // .pipe(jshint.reporter('default'))

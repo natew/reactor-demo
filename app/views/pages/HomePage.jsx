@@ -6,28 +6,33 @@ var React      = require('react');
 var Stage      = require('../components/Stage');
 var Form       = require('../components/Form');
 
-module.exports = (function() {
-  var Controller = {
+var Controller = {
 
-    dataSource: '/api/item',
+  data: '/api/item',
 
-    component: React.createClass({
+  title: function(data) {
+    // var p = data.results[0];
+    // return p.brandName + ' ' + p.productName;
+    return data.title;
+  },
 
-      getInitialState: function() {
-        return { item: this.props.data.item };
-      },
+  component: React.createClass({
 
-      render: function() {
-        return (
-          <div>
-            <Stage item={this.state.item} />
-            <Form />
-            <a href="/other">Go to other page</a>
-          </div>
-        );
-      }
-    })
-  };
+    getInitialState: function() {
+      return { item: this.props.data.item };
+    },
 
-  return Controller;
-})();
+    render: function() {
+      return (
+        <div>
+          <Stage item={this.state.item} />
+          <Form />
+          <a href="/other">Go to other page</a>
+        </div>
+      );
+    }
+  })
+
+};
+
+module.exports = Controller;
