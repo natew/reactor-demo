@@ -2,11 +2,11 @@
  * @jsx React.DOM
  */
 
-var React      = require('react');
-var Stage      = require('../components/Stage');
-var Form       = require('../components/Form');
+var React = require('react');
+var Stage = require('../components/Stage');
+var Form  = require('../components/Form');
 
-var Controller = {
+var Page = {
 
   data: '/api/item',
 
@@ -33,4 +33,4 @@ var Controller = {
 
 };
 
-module.exports = Controller;
+module.exports = Page;

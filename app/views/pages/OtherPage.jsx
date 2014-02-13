@@ -2,16 +2,16 @@
  * @jsx React.DOM
  */
 
-var React  = require('react');
+var React = require('react');
 
-var Controller = {
+var Page = {
 
   title: 'Other Page',
 
   component: React.createClass({
 
     getInitialState: function() {
-      return { title: Controller.title };
+      return { title: Page.title };
     },
 
     render: function() {
@@ -35,4 +35,4 @@ var Controller = {
 
 };
 
-module.exports = Controller;
+module.exports = Page;
