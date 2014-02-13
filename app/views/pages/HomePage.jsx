@@ -11,9 +11,7 @@ var Controller = {
   data: '/api/item',
 
   title: function(data) {
-    // var p = data.results[0];
-    // return p.brandName + ' ' + p.productName;
-    return data.title;
+    return data.item.title;
   },
 
   component: React.createClass({

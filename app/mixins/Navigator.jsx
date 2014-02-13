@@ -10,17 +10,16 @@ module.exports = {
     window.removeEventListener('popstate', this._onPopState);
   },
 
-  _navigate: function(path) {
-    window.history.pushState({}, '', path);
-    this.getDataForRoute(path, function(err, data) {
-      this.setState({ path: path });
-    }.bind(this));
-  },
-
-  _onClick: function(e) {
+  navigatorOnClick: function(e) {
     if (e.target.tagName !== 'A' || !e.target.attributes.href) return;
     e.preventDefault();
     this._navigate(e.target.attributes.href.value);
+  },
+
+  _navigate: function(path) {
+    window.history.pushState({}, '', path);
+    typeof this.onNavigate === 'function' ?
+      this.onNavigate(path) : null;
   },
 
   _onPopState: function(e) {

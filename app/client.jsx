@@ -20,6 +20,8 @@ var App = ReactAsync.createClass({
     '/other': OtherPage
   },
 
+  isNavigating: false,
+
   path: function() {
     return this.props.path || window.location.pathname;
   },
@@ -31,14 +33,27 @@ var App = ReactAsync.createClass({
   getDataForRoute: function(path, cb) {
     var page = this.routes[path];
     var props = { path: path };
-    this.getPageData(page, props, cb);
+    this.pageControllerGetData(page, props, cb);
+  },
+
+  shouldComponentUpdate: function() {
+    return !this.isNavigating;
+  },
+
+  onNavigate: function(path) {
+    this.isNavigating = true;
+    this.setState({ data: null, title: null });
+    this.getDataForRoute(path, function(err, data) {
+      this.isNavigating = false;
+      this.setState(data);
+    }.bind(this));
   },
 
   render: function() {
     var component = this.routes[this.state.path].component;
 
     return (
-      <HTMLLayout title={this.state.title} onClick={this._onClick}>
+      <HTMLLayout title={this.state.title} onClick={this.navigatorOnClick}>
         {component({ data: this.state.data })}
       </HTMLLayout>
     );

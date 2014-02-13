@@ -2,8 +2,16 @@ var http = require('superagent');
 
 module.exports = {
 
-  getPageData: function(page, defaultProps, cb) {
-    console.log('props', defaultProps);
+  // Expects a page to be an object with two properties
+  //   data: {string | object}
+  //      - string to pass a relative url to fetch data from
+  //      - object to pass data directly
+  //
+  //   title: { string | function }
+  //      - string will be rendered to <title> tag
+  //      - function will be called with data, then rendred to <title>
+
+  pageControllerGetData: function(page, defaultProps, cb) {
     var props = defaultProps || {};
     var hasDataUrl = page.data && typeof page.data === 'string';
 
@@ -12,7 +20,6 @@ module.exports = {
       return isTitleFunc ? page.title(data) : page.title;
     }
 
-    console.log(hasDataUrl)
     if (!hasDataUrl) {
       props.title = setTitle(page.data);
       cb(null, props);
@@ -23,7 +30,6 @@ module.exports = {
         .end(function(err, res) {
           props.data = res ? res.body : {};
           props.title = setTitle(props.data);
-          console.log(props);
           cb(err, props);
         }.bind(this));
     }
