@@ -16,6 +16,10 @@ module.exports = {
     this._navigate(e.target.attributes.href.value);
   },
 
+  navigatorGetPath: function() {
+    return this.props.path || window.location.pathname;
+  },
+
   _navigate: function(path) {
     window.history.pushState({}, '', path);
     typeof this.onNavigate === 'function' ?

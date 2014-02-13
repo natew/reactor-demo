@@ -22,12 +22,8 @@ var App = ReactAsync.createClass({
 
   isNavigating: false,
 
-  path: function() {
-    return this.props.path || window.location.pathname;
-  },
-
   getInitialStateAsync: function(cb) {
-    this.getDataForRoute(this.path(), cb);
+    this.getDataForRoute(this.navigatorGetPath(), cb);
   },
 
   getDataForRoute: function(path, cb) {
