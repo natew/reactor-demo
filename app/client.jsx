@@ -11,6 +11,8 @@ var Navigator      = require('./mixins/Navigator');
 var PageController = require('./mixins/PageController');
 var HTMLLayout     = require('./views/layouts/HTML');
 
+ReactMount.allowFullPageRender = true;
+
 var App = ReactAsync.createClass({
 
   mixins: [Routes, Router, Navigator, PageController],
@@ -19,14 +21,12 @@ var App = ReactAsync.createClass({
 
   // Only called from server
   getInitialStateAsync: function(cb) {
-    console.log('get state')
     this.getDataForRoute(this.props.path, cb);
   },
 
   getDataForRoute: function(path, cb) {
-    console.log('get data for route')
-    this.activePage = this.routerGetPage(path);
-    this.pageControllerGetData(this.activePage, { path: path }, cb);
+    var page = this.routerGetPage(path);
+    this.pageControllerGetData(page, { path: path }, cb);
   },
 
   shouldComponentUpdate: function() {
@@ -43,9 +43,7 @@ var App = ReactAsync.createClass({
   },
 
   render: function() {
-    console.log('render');
-    // if (!this.activePage) return <html></html>;
-    var component = this.activePage.component;
+    var component = this.routerGetPage(this.state.path).component;
 
     return (
       <HTMLLayout title={this.state.title} onClick={this.navigatorOnClick}>
@@ -56,7 +54,6 @@ var App = ReactAsync.createClass({
 
 });
 
-ReactMount.allowFullPageRender = true;
 module.exports = App;
 
 if (typeof window !== 'undefined') {

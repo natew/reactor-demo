@@ -13,8 +13,8 @@ module.exports = {
   //      - string will be rendered to <title> tag
   //      - function will be called with data, then rendred to <title>
 
-  pageControllerGetData: function(page, defaultProps, cb) {
-    var props = defaultProps || {};
+  pageControllerGetData: function(page, state, cb) {
+    var state = state || {};
     var hasDataUrl = page.data && typeof page.data === 'string';
 
     function setTitle(data) {
@@ -23,16 +23,16 @@ module.exports = {
     }
 
     if (!hasDataUrl) {
-      props.title = setTitle(page.data);
-      cb(null, props);
+      state.title = setTitle(page.data);
+      cb(null, state);
     }
     else {
       http
         .get(this._getRootUrl() + page.data)
         .end(function(err, res) {
-          props.data = res ? res.body : {};
-          props.title = setTitle(props.data);
-          cb(err, props);
+          state.data = res ? res.body : {};
+          state.title = setTitle(state.data);
+          cb(err, state);
         }.bind(this));
     }
   },

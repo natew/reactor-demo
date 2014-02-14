@@ -31,7 +31,7 @@ module.exports = React.createClass({
               <nav id="nav">
                 <ul id="nav-list">
                   <li><a href="/">Home</a></li>
-                  <li><a href="/users/nate">Nate</a></li>
+                  <li><a href="/user/nate">Nate</a></li>
                 </ul>
               </nav>
 
