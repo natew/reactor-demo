@@ -16,7 +16,8 @@ var App = ReactAsync.createClass({
   mixins: [Navigator],
 
   getInitialStateAsync: function(cb) {
-    PageController.setState(this.props, cb);
+    var page = Router.getPage(this.props.path);
+    PageController.setState(page, this.props, cb);
   },
 
   onNavigate: function(path) {
