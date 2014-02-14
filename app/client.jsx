@@ -16,21 +16,19 @@ var App = ReactAsync.createClass({
   mixins: [Navigator],
 
   getInitialStateAsync: function(cb) {
-    var page = Router.getPage(this.props.path);
+    var page = Router.getRoute(this.props.path).page;
     PageController.setState(page, this.props, cb);
   },
 
   onNavigate: function(path) {
     this.props.path = path;
-    this.componentDidMount();
+    this.componentDidMount(); // to react-async
   },
 
   render: function() {
-    var component = Router.getPage(this.state.path).component;
-
     return (
       <HTMLLayout title={this.state.title} onClick={this.navigatorOnClick}>
-        {component({ data: this.state.data })}
+        {Router.renderPage(this.state)}
       </HTMLLayout>
     );
   }

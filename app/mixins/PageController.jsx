@@ -31,6 +31,7 @@ module.exports = {
     );
 
     this.state = state || {};
+    this.state.data = null;
     this.page = page;
 
     var hasDataUrl = page.data && typeof page.data == 'string';

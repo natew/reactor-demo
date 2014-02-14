@@ -17,7 +17,7 @@ var Page = {
     render: function() {
       return (
         <div>
-          <h2>{this.state.title}</h2>
+          <h2>Hello, {this.props.params.username}</h2>
           <p>
   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
