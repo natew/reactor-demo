@@ -4,7 +4,7 @@
   This controller takes a path {string}, uses your router to find
   a page, then fetches it's data and updates your state
 
-  Expects props to be an object containing "host" and "path" keys
+  Exptects page to have a title attribute
 
   Pages are objects with two properties:
     - data {string | object}
@@ -17,6 +17,7 @@
 */
 
 var http = require('superagent');
+var invariant = require('react/lib/invariant');
 
 module.exports = {
 
@@ -24,8 +25,14 @@ module.exports = {
   state: null,
 
   setState: function(page, state, cb) {
+    invariant(page && page.title,
+      'PageController.setState(page...): Expects a page object with a title attribute. ' +
+      'Title attribute can be a string to set, or a function which will receive page data.'
+    );
+
     this.state = state || {};
-    this.page = page || null;
+    this.page = page;
+
     var hasDataUrl = page.data && typeof page.data == 'string';
     hasDataUrl ? this.setStateAsync(cb) : this.setStateSync(cb);
   },
@@ -51,8 +58,11 @@ module.exports = {
   },
 
   getRootUrl: function() {
+    try {      var protocol = (this.state.protocol || window.location.protocol) + '//' }
+    catch(e) { var protocol = 'http://' };
     var port = this.state.port ? ':' + this.state.port : '';
-    return 'http://' + (this.state.host || window.location.host) + port;
+    var host = this.state.host || window.location.host;
+    return protocol + host + port;
   },
 
 }
