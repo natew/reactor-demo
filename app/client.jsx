@@ -11,33 +11,16 @@ var Navigator      = require('./mixins/Navigator');
 var PageController = require('./mixins/PageController');
 var HTMLLayout     = require('./views/layouts/HTML');
 
-ReactMount.allowFullPageRender = true;
-
 var App = ReactAsync.createClass({
 
   mixins: [Routes, Router, Navigator, PageController],
 
-  isNavigating: false,
-
-  // Only called from server
   getInitialStateAsync: function(cb) {
-    this.getDataForRoute(this.props.path, cb);
-  },
-
-  getDataForRoute: function(path, cb) {
-    var page = this.routerGetPage(path);
-    this.pageControllerGetData(page, { path: path }, cb);
-  },
-
-  shouldComponentUpdate: function() {
-    return !this.isNavigating;
+    this.pageControllerGetData(this.props.path, cb);
   },
 
   onNavigate: function(path) {
-    this.isNavigating = true;
-    this.setState({ path: path, data: null, title: null });
-    this.getDataForRoute(path, function(err, data) {
-      this.isNavigating = false;
+    this.pageControllerGetData(path, function(err, data) {
       this.setState(data);
     }.bind(this));
   },
@@ -54,6 +37,7 @@ var App = ReactAsync.createClass({
 
 });
 
+ReactMount.allowFullPageRender = true;
 module.exports = App;
 
 if (typeof window !== 'undefined') {

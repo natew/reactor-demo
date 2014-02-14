@@ -13,8 +13,9 @@ module.exports = {
   //      - string will be rendered to <title> tag
   //      - function will be called with data, then rendred to <title>
 
-  pageControllerGetData: function(page, state, cb) {
-    var state = state || {};
+  pageControllerGetData: function(path, cb) {
+    var page = this.routerGetPage(path);
+    var state = { path: path };
     var hasDataUrl = page.data && typeof page.data === 'string';
 
     function setTitle(data) {
