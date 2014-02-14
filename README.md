@@ -16,6 +16,7 @@ And go to [localhost:3111](localhost:3111).
 - React can properly render `<title>` (and eventually `<meta>` tags) using page data
 - Server passes all data to client js on first render
 - HTML5 pushState to seamlessly navigate between pages
+- Router, with initial 404 support
 
 ## Learn more
 

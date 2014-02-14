@@ -6,7 +6,7 @@ var React = require('react');
 
 var Page = {
 
-  title: 'Other Page',
+  title: 'User Page',
 
   component: React.createClass({
 

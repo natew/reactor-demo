@@ -2,6 +2,8 @@ var http = require('superagent');
 
 module.exports = {
 
+  activePage: null,
+
   // Expects a page to be an object with two properties
   //   data: {string | object}
   //      - string to pass a relative url to fetch data from
