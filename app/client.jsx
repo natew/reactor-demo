@@ -13,10 +13,10 @@ var HTMLLayout     = require('./views/layouts/HTML');
 
 var App = ReactAsync.createClass({
 
-  mixins: [Router, Navigator, PageController],
+  mixins: [Navigator],
 
   getInitialStateAsync: function(cb) {
-    this.pageControllerGetData(this.props.path, cb);
+    PageController.setState(this.props, cb);
   },
 
   onNavigate: function(path) {
@@ -25,7 +25,7 @@ var App = ReactAsync.createClass({
   },
 
   render: function() {
-    var component = this.routerGetPage(this.state.path).component;
+    var component = Router.getPage(this.state.path).component;
 
     return (
       <HTMLLayout title={this.state.title} onClick={this.navigatorOnClick}>

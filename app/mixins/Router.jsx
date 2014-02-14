@@ -3,7 +3,7 @@ var pattern = require('url-pattern');
 
 module.exports = {
 
-  routerGetPage: function(path) {
+  getPage: function(path) {
     var i, len = routes.locations.length;
 
     for (i = 0; i < len; i++) {

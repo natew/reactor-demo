@@ -15,13 +15,14 @@
 */
 
 var http = require('superagent');
+var Router = require('./Router');
 
 module.exports = {
 
-  pageControllerGetData: function(path, cb) {
+  setState: function(props, cb) {
     // Must implement routerGetPage in class to return the page object
-    var page = this.routerGetPage(path);
-    var state = { path: path };
+    var page = Router.getPage(props.path);
+    var state = { path: props.path };
     var hasDataUrl = page.data && typeof page.data === 'string';
 
     function setTitle(data) {
@@ -35,7 +36,7 @@ module.exports = {
     }
     else {
       http
-        .get(this._getRootUrl() + page.data)
+        .get(this.getRootUrl(props) + page.data)
         .end(function(err, res) {
           state.data = res ? res.body : {};
           state.title = setTitle(state.data);
@@ -44,9 +45,9 @@ module.exports = {
     }
   },
 
-  _getRootUrl: function() {
-    var port = this.props.port ? ':' + this.props.port : '';
-    return 'http://' + (this.props.host || window.location.host) + port;
+  getRootUrl: function(props) {
+    var port = props.port ? ':' + props.port : '';
+    return 'http://' + (props.host || window.location.host) + port;
   },
 
 }
