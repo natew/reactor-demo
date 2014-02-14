@@ -1,17 +1,25 @@
+
+/*
+
+  This controller takes a path {string}, uses your router to find
+  a page, then fetches it's data and updates your state
+
+  Pages are objects with two properties:
+    - data {string | object}
+      - string to pass a relative url to fetch data from
+      - object to pass data directly
+    - title { string | function }
+       - string will be rendered to <title> tag
+       - function will be called with data, then rendred to <title>
+
+*/
+
 var http = require('superagent');
 
 module.exports = {
 
-  // Expects a page to be an object with two properties
-  //   data: {string | object}
-  //      - string to pass a relative url to fetch data from
-  //      - object to pass data directly
-  //
-  //   title: { string | function }
-  //      - string will be rendered to <title> tag
-  //      - function will be called with data, then rendred to <title>
-
   pageControllerGetData: function(path, cb) {
+    // Must implement routerGetPage in class to return the page object
     var page = this.routerGetPage(path);
     var state = { path: path };
     var hasDataUrl = page.data && typeof page.data === 'string';
