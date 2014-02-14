@@ -18,7 +18,7 @@ module.exports = React.createClass({
 
   createThumb: function(image, i) {
     return (
-      <li>
+      <li key={i}>
         <a href="#" onMouseEnter={this.changeImage.bind(this, i)}>
           <img src={this.imagePath + image.thumb} />
         </a>
