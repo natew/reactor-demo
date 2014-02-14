@@ -20,9 +20,8 @@ var App = ReactAsync.createClass({
   },
 
   onNavigate: function(path) {
-    this.pageControllerGetData(path, function(err, data) {
-      this.setState(data);
-    }.bind(this));
+    this.props.path = path;
+    this.componentDidMount();
   },
 
   render: function() {
