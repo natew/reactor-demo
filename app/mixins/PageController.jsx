@@ -45,7 +45,7 @@ module.exports = {
 
   setStateAsync: function(cb) {
     http
-      .get(this.getRootUrl() + this.page.data)
+      .get(this.getRootUrl() + this.page.data + this.params())
       .end(function(err, res) {
         this.state.data = res ? res.body : {};
         this.setTitle(this.state.data);
@@ -56,6 +56,10 @@ module.exports = {
   setTitle: function(data) {
     var isTitleFunc = typeof this.page.title == 'function';
     this.state.title = isTitleFunc ? this.page.title(data) : this.page.title;
+  },
+
+  params: function() {
+    return '';
   },
 
   getRootUrl: function() {

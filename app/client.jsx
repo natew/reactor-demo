@@ -28,7 +28,7 @@ var App = ReactAsync.createClass({
   render: function() {
     return (
       <HTMLLayout title={this.state.title} onClick={this.navigatorOnClick}>
-        {Router.renderPage(this.state)}
+        {Router.renderPage(this.state.path, this.state.data)}
       </HTMLLayout>
     );
   }

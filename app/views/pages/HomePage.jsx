@@ -3,29 +3,35 @@
  */
 
 var React = require('react');
-var Stage = require('../components/Stage');
-var Form  = require('../components/Form');
 
 var Page = {
 
-  data: '/api/item',
+  data: '/api/users',
 
-  title: function(data) {
-    return data.item.title;
-  },
+  title: 'Reactor Home',
 
   component: React.createClass({
 
     getInitialState: function() {
-      return { item: this.props.data.item };
+      return { users: this.props.data.users };
+    },
+
+    renderUser: function(user, i) {
+      return (
+        <li key={i}>
+          <a href={"/user/" + user.id}>{user.name}</a>
+        </li>
+      );
     },
 
     render: function() {
       return (
         <div>
-          <Stage item={this.state.item} />
-          <Form />
-          <a href="/other">Go to other page</a>
+          <h1>Home</h1>
+          <h2>Users</h2>
+          <ul id="users">
+            {this.state.users.map(this.renderUser)}
+          </ul>
         </div>
       );
     }

@@ -3,31 +3,28 @@
  */
 
 var React = require('react');
+var UserImages = require('../components/UserImages');
 
 var Page = {
 
-  title: 'User Page',
+  data: '/api/user',
+
+  title: function(data) {
+    return data.name;
+  },
 
   component: React.createClass({
 
     getInitialState: function() {
-      return { title: Page.title };
+      return { user: this.props.data.users[this.props.params.username] };
     },
 
     render: function() {
       return (
         <div>
-          <h2>Hello, {this.props.params.username}</h2>
-          <p>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-
-          <a href="/">Go to home page</a>
+          <h2>{this.state.user.name}</h2>
+          <p>{this.state.user.bio}</p>
+          <UserImages images={this.state.user.pictures} />
         </div>
       );
     }

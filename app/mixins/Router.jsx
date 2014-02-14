@@ -19,9 +19,9 @@ module.exports = {
     return routes.notFound;
   },
 
-  renderPage: function(state) {
-    var route = this.getRoute(state.path);
-    return route.page.component({ data: state.data, params: route.match });
+  renderPage: function(path, data) {
+    var route = this.getRoute(path);
+    return route.page.component({ data: data, params: route.match });
   }
 
 };

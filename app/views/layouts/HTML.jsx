@@ -31,7 +31,6 @@ module.exports = React.createClass({
               <nav id="nav">
                 <ul id="nav-list">
                   <li><a href="/">Home</a></li>
-                  <li><a href="/user/nate">Nate</a></li>
                 </ul>
               </nav>
 
@@ -40,8 +39,7 @@ module.exports = React.createClass({
               </form>
 
               <ul id="user-nav" className="secondary">
-                <li><a href="/">Login</a></li>
-                <li><a href="/">Signup</a></li>
+                <li><a href="http://github.com/natew/reactor">Github</a></li>
               </ul>
             </header>
 

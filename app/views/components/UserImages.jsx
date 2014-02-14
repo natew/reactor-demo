@@ -2,9 +2,10 @@
  * @jsx React.DOM
  */
 
- var React = require('react');
+var React = require('react');
 
 module.exports = React.createClass({
+
   getInitialState: function() {
     return { activeImage: 0 };
   },
@@ -27,10 +28,9 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    if (!this.props.item) return <div></div>;
+    if (!this.props.images) return <div></div>;
 
-    var item = this.props.item,
-        images = item.images,
+    var images = this.props.images,
         fullImage = images[this.state.activeImage].full;
 
     return (
@@ -43,4 +43,5 @@ module.exports = React.createClass({
       </section>
     );
   }
+
 });
