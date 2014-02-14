@@ -1,19 +1,20 @@
+var routes  = require('../routes');
 var pattern = require('url-pattern');
 
 module.exports = {
 
   routerGetPage: function(path) {
-    var i, len = this.routes.length;
+    var i, len = routes.locations.length;
 
     for (i = 0; i < len; i++) {
-      var route = this.routes[i];
+      var route = routes.locations[i];
       route.pattern = route.pattern || pattern(route.path);
       if (route.pattern.match(path) !== null)
         return route.page;
     }
 
     // return notfound pge
-    return this.notFound;
+    return routes.notFound;
   }
 
 };

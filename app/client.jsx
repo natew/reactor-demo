@@ -6,7 +6,6 @@ var React          = require('react');
 var ReactAsync     = require('react-async');
 var ReactMount     = require('react/lib/ReactMount');
 var ReactBatching  = require('react-raf-batching').inject();
-var Routes         = require('./mixins/Routes');
 var Router         = require('./mixins/Router');
 var Navigator      = require('./mixins/Navigator');
 var PageController = require('./mixins/PageController');
@@ -14,7 +13,7 @@ var HTMLLayout     = require('./views/layouts/HTML');
 
 var App = ReactAsync.createClass({
 
-  mixins: [Routes, Router, Navigator, PageController],
+  mixins: [Router, Navigator, PageController],
 
   getInitialStateAsync: function(cb) {
     this.pageControllerGetData(this.props.path, cb);
