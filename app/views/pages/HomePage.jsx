@@ -12,10 +12,6 @@ var Page = {
 
   component: React.createClass({
 
-    getInitialState: function() {
-      return { users: this.props.data.users };
-    },
-
     renderUser: function(user, i) {
       return (
         <li key={i}>
@@ -30,7 +26,7 @@ var Page = {
           <h1>Home</h1>
           <h2>Users</h2>
           <ul id="users">
-            {this.state.users.map(this.renderUser)}
+            {this.props.data.users.map(this.renderUser)}
           </ul>
         </div>
       );

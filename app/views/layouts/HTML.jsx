@@ -25,12 +25,12 @@ module.exports = React.createClass({
           <div id="body">
             <header>
               <h1 id="logo">
-                <a href="/">Reactor</a>
+                <a href="/">reactor</a>
               </h1>
 
               <nav id="nav">
                 <ul id="nav-list">
-                  <li><a href="/">Home</a></li>
+                  <li><a href="/">home</a></li>
                 </ul>
               </nav>
 
@@ -39,7 +39,7 @@ module.exports = React.createClass({
               </form>
 
               <ul id="user-nav" className="secondary">
-                <li><a href="http://github.com/natew/reactor">Github</a></li>
+                <li><a href="http://github.com/natew/reactor">github</a></li>
               </ul>
             </header>
 

@@ -27,6 +27,8 @@ module.exports = {
 
     if (this.state.path !== path) {
       this.setState({path: path});
+      typeof this.onNavigate === 'function' ?
+        this.onNavigate(path) : null;
     }
   }
 
