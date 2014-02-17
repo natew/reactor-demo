@@ -10,13 +10,14 @@ And start it:
 
 And go to [localhost:3111](localhost:3111).
 
-## What this solves
+## What it does
 
 - Full page rendered from server or client
-- React can properly render `<title>` (and eventually `<meta>` tags) using page data
-- Server passes all data to client js on first render
-- HTML5 pushState to seamlessly navigate between pages
-- Router, with initial 404 support
+- React renders `<title>` (and eventually `<meta>` tags) using data
+- Server passes state to client on first load
+- HTML5 pushState navigation
+- Simple router
+- Gulp builds assets
 
 ## Learn more
 
@@ -27,8 +28,9 @@ And go to [localhost:3111](localhost:3111).
 
 ## Todo
 
-- Add model (meteor?)
-- Explore including a standards widgets library as a good example
+- Add model as example
+- Form example
+- Widgets library?
   - [react-treeview](https://github.com/chenglou/react-treeview)
   - [react-bootstrap](https://github.com/stevoland/react-bootstrap) boostrap widgets ported
   - [react-topcoat](https://github.com/plaxdan/react-topcoat) topcoat widgets ported
