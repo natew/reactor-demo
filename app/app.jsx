@@ -38,7 +38,7 @@ var App = ReactAsync.createClass({
   },
 
   setStateFromPage: function(page, cb) {
-    if (!page.path) cb();
+    if (!page.path) cb(null, page.data || {});
 
     superagent
       .get(this.rootUrl + page.path) // + this.url.params
