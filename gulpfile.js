@@ -96,10 +96,8 @@ gulp.task('lr-server', function(cb) {
   server.listen(35729, cb);
 });
 
-// gulp.task('server', function () {
-//   nodemon({
-//     script: 'app/server.js'
-//   }).on('error', error);
+// gulp.task('dev', ['browserify','jsxcompile','watch'], function(){
+//   nodemon({script:'index.js', options: '--harmony-generators --debug'});
 // });
 
 gulp.task('default', [

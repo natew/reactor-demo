@@ -8,7 +8,7 @@ var Page = {
 
   title: '404 Page',
 
-  component: React.createClass({
+  view: React.createClass({
 
     render: function() {
       return (

@@ -7,13 +7,13 @@ var UserImages = require('../components/UserImages');
 
 var Page = {
 
-  data: '/api/user',
+  path: '/api/user',
 
-  title: function(data) {
+  getTitle: function(data) {
     return data.name;
   },
 
-  component: React.createClass({
+  view: React.createClass({
 
     getInitialState: function() {
       return { user: this.props.data.users[this.props.params.username] };

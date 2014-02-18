@@ -3,10 +3,8 @@ var browserify = require('connect-browserify');
 var nodejsx    = require('node-jsx').install({ extension: '.jsx' });
 var cons       = require('consolidate');
 var middleware = require('react-async-middleware');
-var App        = require('./client');
+var App        = require('./app');
 
-var bundle = '/js/bundle.js';
-var url    = { host: 'localhost', port: 3111 };
 var app    = express();
 
 app.engine('html', cons.hogan);
@@ -27,18 +25,25 @@ app.get('/api/:endpoint', function(req, res) {
     res.send('');
   })
 
+var port = 3111;
+var host = 'localhost'
+var bundle = '/js/bundle.js';
+
 app.use(bundle, browserify.serve({
-    entry: './app/client.jsx',
+    entry: './app/app.jsx',
     extensions: ['.jsx'],
     debug: true,
     watch: true
   }))
   .use(middleware(App, {
-    props: url,
+    // pass params to app.js component
+    props: { host: host, port: port },
     sendResponse: false
   }))
   .use(function(req, res) {
-    if (req.url == bundle) return;
-    res.render('index', { body: res.body });
+    // if not serving js render with layout
+    if (req.url !== bundle) {
+      res.render('index', { body: res.body });
+    }
   })
-  .listen(url.port);
+  .listen(port);

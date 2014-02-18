@@ -6,11 +6,11 @@ var React = require('react');
 
 var Page = {
 
-  data: '/api/users',
+  path: '/api/users',
 
   title: 'Reactor Home',
 
-  component: React.createClass({
+  view: React.createClass({
 
     renderUser: function(user, i) {
       return (
@@ -21,6 +21,7 @@ var Page = {
     },
 
     render: function() {
+      console.log(this.props)
       return (
         <div>
           <h1>Home</h1>
