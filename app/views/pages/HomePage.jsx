@@ -15,7 +15,7 @@ var Page = {
     renderUser: function(user, i) {
       return (
         <li key={i}>
-          <a href={"/user/" + user.get('id').getValue()}>{user.get('name').getValue()}</a>
+          <a href={"/user/" + user.val('id')}>{user.val('name')}</a>
         </li>
       );
     },
