@@ -2,19 +2,17 @@
  * @jsx React.DOM
  */
 
-var React = require('react');
+var React      = require('react');
 var UserImages = require('../components/UserImages');
-var Router = require('./lib/Router');
+var PageData   = require('../mixins/PageData');
 var superagent = require('superagent');
 
 Page = {
 
+  mixins: [PageData],
+
   title: function(data) {
     return data.name;
-  },
-
-  getInitialState: function() {
-    return { user: null };
   },
 
   getInitialPageState: function(matches, cb) {
@@ -28,9 +26,6 @@ Page = {
   },
 
   render: function() {
-    // Set up page data structure
-    var pageData = new Cortex(this.state.data, this.updatePageData);
-
     return (
       <div>
         <h2>{this.state.user.val('name')}</h2>

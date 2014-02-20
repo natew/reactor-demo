@@ -8,7 +8,7 @@ var ReactMount  = require('react/lib/ReactMount');
 var Batch       = require('react-raf-batching').inject();
 var Router      = require('./lib/Router');
 var routes      = require('./routes');
-var Navigator   = require('./mixins/Navigator');
+var Navigator   = require('./views/mixins/Navigator');
 var HTMLLayout  = require('./views/layouts/HTML');
 var Cortex      = require('./lib/cortex/cortex');
 
@@ -45,11 +45,6 @@ var App = ReactAsync.createClass({
   onNavigate: function(path) {
     this.setCurrentPage(path);
     this.setStateFromPage();
-  },
-
-  updatePageData: function() {
-    Router.currentPage.setProps({ data: this.pageCortex });
-    // TODO: send updated data to model
   },
 
   render: function() {
