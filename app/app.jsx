@@ -10,28 +10,41 @@ var Router      = require('./lib/Router');
 var routes      = require('./routes');
 var Navigator   = require('./mixins/Navigator');
 var HTMLLayout  = require('./views/layouts/HTML');
-var superagent  = require('superagent');
 var Cortex      = require('./lib/cortex/cortex');
+
+Router.setRoutes(routes);
 
 var App = ReactAsync.createClass({
 
   mixins: [Navigator],
 
   componentWillMount: function() {
-    Router.setRoutes(routes);
+    this.setCurrentPage(this.props.path);
   },
 
   getInitialStateAsync: function(cb) {
-    var route = Router.getRoute(this.props.path);
+    this.setStateFromPage();
+  },
 
-    this.setStateFromRoute(route, function(err, data) {
-      // Return initial state
+  setCurrentPage: function(path) {
+    this.route = Router.getRoute(path);
+    this.currentPage = route.page();
+  },
+
+  setStateFromPage: function(cb, err, data) {
+    this.currentPage.getInitialPageState(
+      this.route.matches,
       cb(err, {
         data: data,
         path: this.props.path,
-        title: this.getTitleFromPage(route.page, data)
-      });
-    }.bind(this));
+        title: this.route.page.title(data)
+      })
+    );
+  },
+
+  onNavigate: function(path) {
+    this.setCurrentPage(path);
+    this.setStateFromPage();
   },
 
   updatePageData: function() {
@@ -39,29 +52,10 @@ var App = ReactAsync.createClass({
     // TODO: send updated data to model
   },
 
-  setStateFromRoute: function(route, cb) {
-    if (!route.page.path) cb(null, page.data || {});
-    var page = route.page;
-    var path = Router.replacePathWithParams(page.path, route.matches);
-
-    superagent
-      .get(this.rootUrl + path)
-      .end(function(err, res) {
-        cb(err, res ? res.body : {});
-      });
-  },
-
-  getTitleFromPage: function(page, data) {
-    return typeof page.title == 'function' ? page.title(data) : page.title || '';
-  },
-
   render: function() {
-    // Set up page data structure
-    var pageData = new Cortex(this.state.data, this.updatePageData);
-
     return (
       <HTMLLayout title={this.state.title} onClick={this.navigate}>
-        {Router.renderPage(this.state.path, { data: pageData })}
+        {Router.renderPage(this.state.path, { data: this.state.data })}
       </HTMLLayout>
     );
   }

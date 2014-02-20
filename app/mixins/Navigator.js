@@ -23,14 +23,6 @@ module.exports = {
     this._navigateCallback(path);
   },
 
-  setRootUrl: function() {
-    try {      var protocol = (this.props.protocol || window.location.protocol) + '//' }
-    catch(e) { var protocol = 'http://' };
-    var port = this.props.port ? ':' + this.props.port : '';
-    var host = this.props.host || window.location.host;
-    this.rootUrl = protocol + host + port;
-  },
-
   _onPopState: function(e) {
     var path = window.location.pathname;
 
@@ -41,8 +33,6 @@ module.exports = {
   },
 
   _navigateCallback: function(path) {
-    this.props.path = path;
-
     // Re-mount the navigator component
     this.componentDidMount();
 

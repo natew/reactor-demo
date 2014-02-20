@@ -44,12 +44,21 @@ module.exports = {
     return this.currentPage;
   },
 
-  replacePathWithParams: function(path, matches) {
+  replaceParams: function(path, matches) {
     if (path.indexOf(':') !== -1)
       for (var key in matches)
         path = path.replace(':' + key, matches[key]);
 
     return path;
+  },
+
+  rootUrl: function() {
+    try {      var protocol = (this.props.protocol || window.location.protocol) + '//' }
+    catch(e) { var protocol = 'http://' };
+    var port = this.props.port ? ':' + this.props.port : '';
+    var host = this.props.host || window.location.host;
+    var url = protocol + host + port;
+    return url;
   }
 
 };
