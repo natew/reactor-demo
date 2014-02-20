@@ -10,29 +10,24 @@ module.exports = React.createClass({
     return { activeImage: 0 };
   },
 
-  imagePath: '/images/',
-
   changeImage: function(i, e) {
     e.preventDefault();
     this.setState({ activeImage: i });
   },
 
   render: function() {
-    var images = this.props.images;
-    // if (!) return <div></div>;
-
-    var fullImage = images[this.state.activeImage].full;
+    var fullImage = this.props.images[this.state.activeImage].full;
 
     return (
       <section id="imagery">
-        <img src={this.imagePath + fullImage} />
+        <img src={this.props.path + fullImage} />
 
         <ul className="thumbs">
-          {images.map(function(image, i) {
+          {this.props.images.map(function(image, i) {
             return (
               <li key={i}>
                 <a href="#" onMouseEnter={this.changeImage.bind(this, i)}>
-                  <img src={this.imagePath + image.thumb} />
+                  <img src={this.props.path + image.thumb} />
                 </a>
               </li>
             );

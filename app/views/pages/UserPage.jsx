@@ -22,9 +22,9 @@ Page = {
     render: function() {
       return (
         <div>
-          <h2>{this.state.user.get('name').getValue()}</h2>
-          <p>{this.state.user.get('bio').getValue()}</p>
-          <UserImages images={this.state.user.get('pictures').getValue()} />
+          <h2>{this.state.user.val('name')}</h2>
+          <p>{this.state.user.val('bio')}</p>
+          <UserImages path="/images/" images={this.state.user.val('pictures')} />
         </div>
       );
     }

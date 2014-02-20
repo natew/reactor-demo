@@ -26,6 +26,10 @@ module.exports = function(_mixins, _cortexPubSub) {
     return this.value;
   };
 
+  DataWrapper.prototype.val = function(key) {
+    return this.get(key).getValue();
+  };
+
   DataWrapper.prototype.getPath = function() {
     return this.path;
   };
