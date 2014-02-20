@@ -34,8 +34,9 @@ var App = ReactAsync.createClass({
     }.bind(this));
   },
 
-  updatePageProps: function() {
+  updatePageData: function() {
     Router.currentPage.setProps({ data: this.pageCortex });
+    // TODO: send updated data to model
   },
 
   setStateFromRoute: function(route, cb) {
@@ -56,7 +57,7 @@ var App = ReactAsync.createClass({
 
   render: function() {
     // Set up page data structure
-    var pageData = new Cortex(this.state.data, this.updatePageProps);
+    var pageData = new Cortex(this.state.data, this.updatePageData);
 
     return (
       <HTMLLayout title={this.state.title} onClick={this.navigate}>
