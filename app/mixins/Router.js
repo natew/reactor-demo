@@ -31,12 +31,17 @@ module.exports = {
     return this.getRoute(path, true).matches;
   },
 
-  renderPage: function(props) {
-    var route = this.getRoute(props.path);
-    return route.page.view({
+  renderPage: function(path, props) {
+    var route = this.currentRoute = this.getRoute(path);
+    this.currentPage = route.page.view({
       params: route.matches,
       data: props.data
     });
+    return this.currentPage;
+  },
+
+  getCurrentPage: function() {
+    return this.currentPage;
   },
 
   replacePathWithParams: function(path, matches) {

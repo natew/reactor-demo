@@ -15,19 +15,18 @@ var Page = {
     renderUser: function(user, i) {
       return (
         <li key={i}>
-          <a href={"/user/" + user.id}>{user.name}</a>
+          <a href={"/user/" + user.get('id').getValue()}>{user.get('name').getValue()}</a>
         </li>
       );
     },
 
     render: function() {
-      console.log(this.props)
       return (
         <div>
           <h1>Home</h1>
           <h2>Users</h2>
           <ul id="users">
-            {this.props.data.users.map(this.renderUser)}
+            {this.props.data.get('users').map(this.renderUser)}
           </ul>
         </div>
       );

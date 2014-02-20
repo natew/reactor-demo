@@ -11,6 +11,7 @@ var routes      = require('./routes');
 var Navigator   = require('./mixins/Navigator');
 var HTMLLayout  = require('./views/layouts/HTML');
 var superagent  = require('superagent');
+var Cortex      = require('./lib/cortex/cortex');
 
 var App = ReactAsync.createClass({
 
@@ -24,12 +25,17 @@ var App = ReactAsync.createClass({
     var route = Router.getRoute(this.props.path);
 
     this.setStateFromRoute(route, function(err, data) {
+      // Return initial state
       cb(err, {
         data: data,
         path: this.props.path,
         title: this.getTitleFromPage(route.page, data)
       });
     }.bind(this));
+  },
+
+  updatePageProps: function() {
+    Router.currentPage.setProps({ data: this.pageCortex });
   },
 
   setStateFromRoute: function(route, cb) {
@@ -49,9 +55,12 @@ var App = ReactAsync.createClass({
   },
 
   render: function() {
+    // Set up page data structure
+    var pageData = new Cortex(this.state.data, this.updatePageProps);
+
     return (
       <HTMLLayout title={this.state.title} onClick={this.navigate}>
-        {Router.renderPage({ path: this.state.path, data: this.state.data })}
+        {Router.renderPage(this.state.path, { data: pageData })}
       </HTMLLayout>
     );
   }
