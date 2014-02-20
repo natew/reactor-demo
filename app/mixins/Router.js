@@ -39,4 +39,12 @@ module.exports = {
     });
   },
 
+  replacePathWithParams: function(path, matches) {
+    if (path.indexOf(':') !== -1)
+      for (var key in matches)
+        path = path.replace(':' + key, matches[key]);
+
+    return path;
+  }
+
 };

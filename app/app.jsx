@@ -35,21 +35,13 @@ var App = ReactAsync.createClass({
   setStateFromRoute: function(route, cb) {
     if (!route.page.path) cb(null, page.data || {});
     var page = route.page;
-    var path = this.getPathWithParams(page.path, route.matches);
+    var path = Router.replacePathWithParams(page.path, route.matches);
 
     superagent
       .get(this.rootUrl + path)
       .end(function(err, res) {
         cb(err, res ? res.body : {});
       });
-  },
-
-  getPathWithParams: function(path, matches) {
-    if (path.indexOf(':') !== -1)
-      for (var key in matches)
-        path = path.replace(':' + key, matches[key]);
-
-    return path;
   },
 
   getTitleFromPage: function(page, data) {
