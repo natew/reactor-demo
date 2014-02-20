@@ -15,12 +15,12 @@ module.exports = {
       route.pattern = route.pattern || pattern(route.path);
       match = route.pattern.match(path);
       if (match) {
-        return { page: route.page, match: match };
+        return { page: route.page, matches: match };
       }
     }
 
-    // return notfound pge
-    return this.routes.notFound;
+    // return notfound page
+    return { page: this.routes.notFound };
   },
 
   getPage: function(path) {
@@ -28,7 +28,15 @@ module.exports = {
   },
 
   getMatch: function(path) {
-    return this.getRoute(path, true).match;
-  }
+    return this.getRoute(path, true).matches;
+  },
+
+  renderPage: function(props) {
+    var route = this.getRoute(props.path);
+    return route.page.view({
+      params: route.matches,
+      data: props.data
+    });
+  },
 
 };

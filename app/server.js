@@ -11,9 +11,10 @@ app.engine('html', cons.hogan);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
-app.get('/api/:endpoint', function(req, res) {
-    var endpoint = require('../api/'+ req.params.endpoint);
-    res.json(endpoint);
+app.get('/api/:model/:id?', function(req, res) {
+    var model = require('../api/'+ req.params.model);
+    if (req.params.id) model = model[req.params.model][req.params.id];
+    res.json(model);
   })
   .get('/images/:file', function(req, res) {
     res.sendfile('./app/assets/images/' + req.params.file);

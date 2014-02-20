@@ -3,7 +3,7 @@ var pattern = require('url-pattern');
 module.exports = {
 
   componentWillMount: function() {
-    this.rootUrl = this.getRootUrl();
+    this.setRootUrl();
   },
 
   componentDidMount: function() {
@@ -20,15 +20,15 @@ module.exports = {
 
     var path = e.target.attributes.href.value;
     window.history.pushState({}, '', path);
-    this.callback(path);
+    this._navigateCallback(path);
   },
 
-  getRootUrl: function() {
+  setRootUrl: function() {
     try {      var protocol = (this.props.protocol || window.location.protocol) + '//' }
     catch(e) { var protocol = 'http://' };
     var port = this.props.port ? ':' + this.props.port : '';
     var host = this.props.host || window.location.host;
-    return protocol + host + port;
+    this.rootUrl = protocol + host + port;
   },
 
   _onPopState: function(e) {
@@ -36,11 +36,17 @@ module.exports = {
 
     if (this.state.path !== path) {
       this.setState({path: path});
-      this.callback(path);
+      this._navigateCallback(path);
     }
   },
 
-  callback: function(path) {
+  _navigateCallback: function(path) {
+    this.props.path = path;
+
+    // Re-mount the navigator component
+    this.componentDidMount();
+
+    // Allow hooks after navigate
     if (typeof this.onNavigate === 'function')
       this.onNavigate(path);
   }

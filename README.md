@@ -8,7 +8,7 @@ An experimental making an isomorphic app using React.
 
 And start it:
 
-    npm start & gulp
+    gulp
 
 And head to [localhost:3111](localhost:3111).
 

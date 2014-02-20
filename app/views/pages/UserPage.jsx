@@ -5,18 +5,18 @@
 var React = require('react');
 var UserImages = require('../components/UserImages');
 
-var Page = {
+Page = {
 
-  path: '/api/user',
+  path: '/api/user/:username',
 
-  getTitle: function(data) {
+  title: function(data) {
     return data.name;
   },
 
   view: React.createClass({
 
     getInitialState: function() {
-      return { user: this.props.data.users[this.props.params.username] };
+      return { user: this.props.data };
     },
 
     render: function() {
@@ -28,6 +28,7 @@ var Page = {
         </div>
       );
     }
+
   })
 
 };

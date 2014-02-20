@@ -17,7 +17,7 @@ util.log('ENV: ', util.colors.blue(consoleEnv));
 
 // Utils
 var error = function(err) {
-  util.log(chalk.red.bold(err));
+  util.log(util.colors.red.bold(err));
   return this;
 }
 
@@ -96,12 +96,12 @@ gulp.task('lr-server', function(cb) {
   server.listen(35729, cb);
 });
 
-// gulp.task('dev', ['browserify','jsxcompile','watch'], function(){
-//   nodemon({script:'index.js', options: '--harmony-generators --debug'});
+// gulp.task('nodemon', function(){
+//   nodemon({script: 'app/server.js'});
 // });
 
 gulp.task('default', [
-  // 'server',
+  // 'nodemon',
   'lr-server',
   'scripts',
   'styles',
