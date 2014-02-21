@@ -8,12 +8,12 @@ module.exports = {
 
     {
       path: '/',
-      page: HomePage
+      res: HomePage
     },
 
     {
       path: '/user/:username',
-      page: UserPage
+      res: UserPage
     }
 
   ],

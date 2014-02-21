@@ -2,10 +2,6 @@ var pattern = require('url-pattern');
 
 module.exports = {
 
-  componentWillMount: function() {
-    this.setRootUrl();
-  },
-
   componentDidMount: function() {
     window.addEventListener('popstate', this._onPopState);
   },

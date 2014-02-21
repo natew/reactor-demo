@@ -16,6 +16,7 @@ Page = {
   },
 
   getInitialPageState: function(matches, cb) {
+    console.log('Router.rootUrl() + path', Router.rootUrl() + path)
     var path = Router.replaceParams('/api/user/:username', matches);
 
     superagent

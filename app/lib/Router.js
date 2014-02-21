@@ -15,7 +15,7 @@ module.exports = {
       route.pattern = route.pattern || pattern(route.path);
       match = route.pattern.match(path);
       if (match) {
-        return { page: route.page, matches: match };
+        return { res: route.res, matches: match };
       }
     }
 

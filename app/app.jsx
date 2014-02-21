@@ -10,9 +10,10 @@ var Router      = require('./lib/Router');
 var routes      = require('./routes');
 var Navigator   = require('./views/mixins/Navigator');
 var HTMLLayout  = require('./views/layouts/HTML');
-var Cortex      = require('./lib/cortex/cortex');
+var AppState    = require('./lib/AppState');
 
 Router.setRoutes(routes);
+var AppStore = AppState.createStore('app');
 
 var App = ReactAsync.createClass({
 
@@ -20,6 +21,7 @@ var App = ReactAsync.createClass({
 
   componentWillMount: function() {
     this.setCurrentPage(this.props.path);
+    // set url in store
   },
 
   getInitialStateAsync: function(cb) {
@@ -28,17 +30,19 @@ var App = ReactAsync.createClass({
 
   setCurrentPage: function(path) {
     this.route = Router.getRoute(path);
-    this.currentPage = route.page();
+    this.currentPage = this.route.res.view();
   },
 
   setStateFromPage: function(cb, err, data) {
     this.currentPage.getInitialPageState(
       this.route.matches,
-      cb(err, {
-        data: data,
-        path: this.props.path,
-        title: this.route.page.title(data)
-      })
+      function() {
+        cb(err, {
+          data: data,
+          path: this.props.path,
+          title: this.route.res.page.title(data)
+        })
+      }
     );
   },
 
