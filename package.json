@@ -24,12 +24,12 @@
     "first-run": "npm install && npm install -g node-inspector && bower install"
   },
   "dependencies": {
-    "envify": "~0.2.0",
+    "envify": "~1.2.0",
     "browserify": "~3.14.0",
     "connect-browserify": "~1.0.0",
     "reactify": "~0.7.0",
-    "react": "~0.8.0",
-    "react-async": "~0.3.3",
+    "react": "~0.9.0",
+    "react-async": "~0.4",
     "react-async-middleware": "git://github.com/natew/react-async-middleware.git#master",
     "express": "~3.4.7",
     "node-jsx": "~0.2.1",

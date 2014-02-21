@@ -17,7 +17,7 @@ module.exports = {
 
   updatePageState: function() {
     var state = {};
-    state[this.pageDataKey] = this.pageData;
+    state[this.pageDataKey] = this.pageData.get(this.pageDataKey);
     this.setState(state);
   }
 
