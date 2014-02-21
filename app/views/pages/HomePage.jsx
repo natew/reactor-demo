@@ -28,7 +28,6 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    console.log('STTE', this.state)
     return (
       <div>
         <h1>Home</h1>

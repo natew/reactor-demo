@@ -29,11 +29,13 @@ var App = ReactAsync.createClass({
 
   setCurrentPage: function(path) {
     this.route = Router.getRoute(path);
-    console.log('this.route', this.route)
     this.currentPage = this.route.to({ parent: this });
   },
 
   getStateFromPage: function(cb) {
+    if (!this.currentPage.getInitialPageState)
+      return cb(null, {});
+
     var setter = function(err, data) {
       cb(err, {
         data: data,

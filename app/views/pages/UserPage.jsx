@@ -19,7 +19,6 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    console.log(this.state)
     return (
       <div>
         <h2>{this.state.data.val('name')}</h2>

@@ -10,7 +10,6 @@ module.exports = {
   },
 
   fetchPageData: function(path, cb) {
-    console.log(AppState.get('rootUrl') + path);
     superagent
       .get(AppState.get('rootUrl') + path)
       .end(function(err, res) {
