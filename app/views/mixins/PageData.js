@@ -1,11 +1,28 @@
-var Router = require('../../lib/Router');
-var Cortex = require('../../lib/cortex/cortex');
+var Router     = require('../../lib/Router');
+var Cortex     = require('../../lib/cortex/cortex');
+var superagent = require('superagent');
+var AppState   = require('../../lib/AppState');
 
 module.exports = {
 
-  setPageState: function(key, data) {
+  componentWillMount: function() {
+    this.setPageState(this.model, this.props.parent.state.data);
+  },
+
+  fetchPageData: function(path, cb) {
+    superagent
+      .get(AppState.get('rootUrl') + '/api/users')
+      .end(function(err, res) {
+        cb(err, res ? res.body : {});
+      });
+  },
+
+  setPageData: function(data, cb) {
+    cb(null, data);
+  },
+
+  setPageState: function(data) {
     // Set up page data structure from parent
-    this.pageDataKey = key;
     this.pageData = new Cortex(data, this.updatePageData);
     this.updatePageState();
   },
@@ -17,7 +34,7 @@ module.exports = {
 
   updatePageState: function() {
     var state = {};
-    state[this.pageDataKey] = this.pageData.get(this.pageDataKey);
+    state[this.model] = this.pageData.get(this.model);
     this.setState(state);
   }
 

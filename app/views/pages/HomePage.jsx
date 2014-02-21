@@ -2,29 +2,21 @@
  * @jsx React.DOM
  */
 
-var React      = require('react');
-var PageData   = require('../mixins/PageData');
-var AppState   = require('../../lib/AppState');
-var superagent = require('superagent');
+var React    = require('react');
+var PageData = require('../mixins/PageData');
 
 module.exports = React.createClass({
 
   mixins: [PageData],
 
-  componentWillMount: function() {
-    this.setPageState('users', this.props.parent.state.data);
-  },
+  model: 'users',
 
   title: function() {
     return 'Reactor Home';
   },
 
   getInitialPageState: function(params, cb) {
-    superagent
-      .get(AppState.get('rootUrl') + '/api/users')
-      .end(function(err, res) {
-        cb(err, res ? res.body : {});
-      });
+    this.fetchPageData('/api/users', cb);
   },
 
   renderUser: function(user, i) {

@@ -5,27 +5,19 @@
 var React      = require('react');
 var UserImages = require('../components/UserImages');
 var PageData   = require('../mixins/PageData');
-var AppState   = require('../../lib/AppState');
-var superagent = require('superagent');
 
 module.exports = React.createClass({
 
   mixins: [PageData],
 
-  componentWillMount: function() {
-    this.setPageState('user', this.props.parent.state.data);
-  },
+  model: 'user',
 
   title: function(data) {
     return data.name;
   },
 
   getInitialPageState: function(params, cb) {
-    superagent
-      .get(AppState.get('rootUrl') + '/api/user/' + params.username)
-      .end(function(err, res) {
-        cb(err, res ? res.body : {});
-      });
+    this.fetchPageData('/api/user/', cb);
   },
 
   render: function() {
