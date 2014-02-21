@@ -49,7 +49,7 @@ var App = ReactAsync.createClass({
     this.setCurrentPage(path);
     this.getStateFromPage(function(err, data) {
       if (!err) this.setState(data);
-    });
+    }.bind(this));
   },
 
   render: function() {

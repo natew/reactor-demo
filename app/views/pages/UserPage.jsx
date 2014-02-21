@@ -10,8 +10,6 @@ module.exports = React.createClass({
 
   mixins: [PageData],
 
-  model: 'user',
-
   pageTitle: function(data) {
     return data.name;
   },
@@ -24,9 +22,9 @@ module.exports = React.createClass({
     console.log(this.state)
     return (
       <div>
-        <h2>{this.state.user.val('name')}</h2>
-        <p>{this.state.user.val('bio')}</p>
-        <UserImages path="/images/" images={this.state.user.val('pictures')} />
+        <h2>{this.state.data.val('name')}</h2>
+        <p>{this.state.data.val('bio')}</p>
+        <UserImages path="/images/" images={this.state.data.val('pictures')} />
       </div>
     );
   }

@@ -34,10 +34,7 @@ module.exports = {
   },
 
   updatePageState: function() {
-    var state = {};
-    console.log('page model is', this.model)
-    state[this.model] = this.pageData.get('data');
-    this.setState(state);
+    this.setState({ data: this.pageData.get('data') });
   }
 
 };

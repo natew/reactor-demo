@@ -28,12 +28,13 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    console.log('STTE', this.state)
     return (
       <div>
         <h1>Home</h1>
         <h2>Users</h2>
         <ul id="users">
-          {this.state.users.map(this.renderUser)}
+          {this.state.data.get('users').map(this.renderUser)}
         </ul>
       </div>
     );
