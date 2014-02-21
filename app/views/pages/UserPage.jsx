@@ -3,11 +3,13 @@
  */
 
 var React      = require('react');
+var ReactAsync = require('react-async');
 var UserImages = require('../components/UserImages');
 var PageData   = require('../mixins/PageData');
+var AppState   = require('../../lib/AppState');
 var superagent = require('superagent');
 
-Page = {
+module.exports = ReactAsync.createClass({
 
   mixins: [PageData],
 
@@ -15,12 +17,13 @@ Page = {
     return data.name;
   },
 
-  getInitialPageState: function(matches, cb) {
-    console.log('Router.rootUrl() + path', Router.rootUrl() + path)
-    var path = Router.replaceParams('/api/user/:username', matches);
+  getInitialStateAsync: function(cb) {
+    cb(null, this.props.parent.state.data);
+  },
 
+  getInitialPageState: function(params, cb) {
     superagent
-      .get(Router.rootUrl() + path)
+      .get(AppState.get('rootUrl') + '/api/user/' + params.username)
       .end(function(err, res) {
         cb(err, res ? res.body : {});
       });
@@ -36,7 +39,4 @@ Page = {
     );
   }
 
-};
-
-module.exports.page = Page;
-module.exports.view = React.createClass(Page);
+});

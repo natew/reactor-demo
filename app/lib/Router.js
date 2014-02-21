@@ -15,7 +15,7 @@ module.exports = {
       route.pattern = route.pattern || pattern(route.path);
       match = route.pattern.match(path);
       if (match) {
-        return { res: route.res, matches: match };
+        return { to: route.to, params: match };
       }
     }
 
@@ -27,14 +27,14 @@ module.exports = {
     return this.getRoute(path, false).page;
   },
 
-  getMatch: function(path) {
-    return this.getRoute(path, true).matches;
+  getParams: function(path) {
+    return this.getRoute(path, true).params;
   },
 
   renderPage: function(path, props) {
     var route = this.currentRoute = this.getRoute(path);
     this.currentPage = route.page.view({
-      params: route.matches,
+      params: route.params,
       data: props.data
     });
     return this.currentPage;
@@ -44,21 +44,12 @@ module.exports = {
     return this.currentPage;
   },
 
-  replaceParams: function(path, matches) {
+  replaceParams: function(path, params) {
     if (path.indexOf(':') !== -1)
-      for (var key in matches)
-        path = path.replace(':' + key, matches[key]);
+      for (var key in params)
+        path = path.replace(':' + key, params[key]);
 
     return path;
-  },
-
-  rootUrl: function() {
-    try {      var protocol = (this.props.protocol || window.location.protocol) + '//' }
-    catch(e) { var protocol = 'http://' };
-    var port = this.props.port ? ':' + this.props.port : '';
-    var host = this.props.host || window.location.host;
-    var url = protocol + host + port;
-    return url;
   }
 
 };

@@ -19,6 +19,15 @@ module.exports = {
     this._navigateCallback(path);
   },
 
+  rootUrl: function() {
+    try {      var protocol = (this.props.protocol || window.location.protocol) + '//' }
+    catch(e) { var protocol = 'http://' };
+    var port = this.props.port ? ':' + this.props.port : '';
+    var host = this.props.host || window.location.host;
+    var url = protocol + host + port;
+    return url;
+  },
+
   _onPopState: function(e) {
     var path = window.location.pathname;
 

@@ -13,7 +13,6 @@ var HTMLLayout  = require('./views/layouts/HTML');
 var AppState    = require('./lib/AppState');
 
 Router.setRoutes(routes);
-var AppStore = AppState.createStore('app');
 
 var App = ReactAsync.createClass({
 
@@ -21,40 +20,42 @@ var App = ReactAsync.createClass({
 
   componentWillMount: function() {
     this.setCurrentPage(this.props.path);
+    AppState.set('rootUrl', this.rootUrl());
     // set url in store
   },
 
   getInitialStateAsync: function(cb) {
-    this.setStateFromPage();
+    this.getStateFromPage(cb);
   },
 
   setCurrentPage: function(path) {
     this.route = Router.getRoute(path);
-    this.currentPage = this.route.res.view();
+    this.currentPage = this.route.to({ parent: this });
   },
 
-  setStateFromPage: function(cb, err, data) {
-    this.currentPage.getInitialPageState(
-      this.route.matches,
-      function() {
-        cb(err, {
-          data: data,
-          path: this.props.path,
-          title: this.route.res.page.title(data)
-        })
-      }
-    );
+  getStateFromPage: function(cb) {
+    var setter = function(err, data) {
+      cb(err, {
+        data: data,
+        path: this.props.path,
+        title: this.currentPage.title(data)
+      })
+    }.bind(this);
+
+    this.currentPage.getInitialPageState(this.route.params, setter);
   },
 
   onNavigate: function(path) {
     this.setCurrentPage(path);
-    this.setStateFromPage();
+    this.getStateFromPage(function(err, data) {
+      if (!err) this.setState(data);
+    });
   },
 
   render: function() {
     return (
       <HTMLLayout title={this.state.title} onClick={this.navigate}>
-        {Router.renderPage(this.state.path, { data: this.state.data })}
+        {this.currentPage}
       </HTMLLayout>
     );
   }
