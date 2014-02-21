@@ -9,7 +9,9 @@ module.exports = {
     this.setPageState(this.model, this.props.parent.state.data);
   },
 
-  fetchPageData: function(path, cb) {
+  fetchPageData: function(path, model, cb) {
+    this.model = model;
+
     superagent
       .get(AppState.get('rootUrl') + '/api/users')
       .end(function(err, res) {
