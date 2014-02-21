@@ -27,18 +27,18 @@ var App = ReactAsync.createClass({
   },
 
   getStateFromPage: function(cb) {
-    if (!this.currentPage.getInitialPageState)
+    if (!this.currentPage.type.getInitialPageState)
       return cb(null, {});
 
     var setter = function(err, data) {
       cb(err, {
         data: data,
         path: this.props.path,
-        title: this.currentPage.pageTitle(data)
+        title: this.currentPage.type.pageTitle(data)
       })
     }.bind(this);
 
-    this.currentPage.getInitialPageState(this.route.params, setter);
+    this.currentPage.type.getInitialPageState(this.route.params, setter);
   },
 
   onNavigate: function(path) {

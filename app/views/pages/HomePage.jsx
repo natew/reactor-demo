@@ -9,12 +9,14 @@ module.exports = React.createClass({
 
   mixins: [PageData],
 
-  pageTitle: function() {
-    return 'Reactor Home';
-  },
+  statics: {
+    pageTitle: function() {
+      return 'Reactor Home';
+    },
 
-  getInitialPageState: function(params, cb) {
-    this.fetchPageData('/api/users', cb);
+    getInitialPageState: function(params, cb) {
+      PageData.get('/api/users', cb);
+    }
   },
 
   renderUser: function(user, i) {

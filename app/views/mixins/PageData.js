@@ -8,7 +8,7 @@ module.exports = {
     this.setPageState(this.props.parent.state.data);
   },
 
-  fetchPageData: function(path, cb) {
+  get: function(path, cb) {
     superagent
       .get(AppState.get('rootUrl') + path)
       .end(function(err, res) {
