@@ -9,8 +9,6 @@ module.exports = React.createClass({
 
   mixins: [PageData],
 
-  model: 'users',
-
   pageTitle: function() {
     return 'Reactor Home';
   },
