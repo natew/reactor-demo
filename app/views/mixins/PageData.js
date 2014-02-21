@@ -1,4 +1,3 @@
-var Router     = require('../../lib/Router');
 var Cortex     = require('../../lib/cortex/cortex');
 var superagent = require('superagent');
 var AppState   = require('../../lib/AppState');

@@ -32,13 +32,9 @@ module.exports = {
     return this.getRoute(path, true).params;
   },
 
-  renderPage: function(path, props) {
-    var route = this.currentRoute = this.getRoute(path);
-    this.currentPage = route.page.view({
-      params: route.params,
-      data: props.data
-    });
-    return this.currentPage;
+  setCurrentPage: function(path) {
+    this.route = this.getRoute(path);
+    this.currentPage = this.route.to({ parent: this });
   },
 
   getCurrentPage: function() {

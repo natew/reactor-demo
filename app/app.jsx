@@ -12,24 +12,18 @@ var Navigator   = require('./views/mixins/Navigator');
 var HTMLLayout  = require('./views/layouts/HTML');
 var AppState    = require('./lib/AppState');
 
-Router.setRoutes(routes);
-
 var App = ReactAsync.createClass({
 
-  mixins: [Navigator],
+  mixins: [Router, Navigator],
 
   componentWillMount: function() {
+    this.setRoutes(routes);
     this.setCurrentPage(this.props.path);
     AppState.set('rootUrl', this.rootUrl());
   },
 
   getInitialStateAsync: function(cb) {
     this.getStateFromPage(cb);
-  },
-
-  setCurrentPage: function(path) {
-    this.route = Router.getRoute(path);
-    this.currentPage = this.route.to({ parent: this });
   },
 
   getStateFromPage: function(cb) {

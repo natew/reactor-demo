@@ -1,5 +1,3 @@
-var pattern = require('url-pattern');
-
 module.exports = {
 
   componentDidMount: function() {
@@ -38,9 +36,6 @@ module.exports = {
   },
 
   _navigateCallback: function(path) {
-    // Re-mount the navigator component
-    this.componentDidMount();
-
     // Allow hooks after navigate
     if (typeof this.onNavigate === 'function')
       this.onNavigate(path);
