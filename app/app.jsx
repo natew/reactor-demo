@@ -29,6 +29,7 @@ var App = ReactAsync.createClass({
 
   setCurrentPage: function(path) {
     this.route = Router.getRoute(path);
+    console.log('this.route', this.route)
     this.currentPage = this.route.to({ parent: this });
   },
 
@@ -37,7 +38,7 @@ var App = ReactAsync.createClass({
       cb(err, {
         data: data,
         path: this.props.path,
-        title: this.currentPage.title(data)
+        title: this.currentPage.pageTitle(data)
       })
     }.bind(this);
 

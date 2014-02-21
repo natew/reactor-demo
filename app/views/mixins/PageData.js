@@ -6,14 +6,13 @@ var AppState   = require('../../lib/AppState');
 module.exports = {
 
   componentWillMount: function() {
-    this.setPageState(this.model, this.props.parent.state.data);
+    this.setPageState(this.props.parent.state.data);
   },
 
-  fetchPageData: function(path, model, cb) {
-    this.model = model;
-
+  fetchPageData: function(path, cb) {
+    console.log(AppState.get('rootUrl') + path);
     superagent
-      .get(AppState.get('rootUrl') + '/api/users')
+      .get(AppState.get('rootUrl') + path)
       .end(function(err, res) {
         cb(err, res ? res.body : {});
       });
@@ -25,7 +24,7 @@ module.exports = {
 
   setPageState: function(data) {
     // Set up page data structure from parent
-    this.pageData = new Cortex(data, this.updatePageData);
+    this.pageData = new Cortex({data: data}, this.updatePageData);
     this.updatePageState();
   },
 
@@ -36,7 +35,8 @@ module.exports = {
 
   updatePageState: function() {
     var state = {};
-    state[this.model] = this.pageData.get(this.model);
+    console.log('page model is', this.model)
+    state[this.model] = this.pageData.get('data');
     this.setState(state);
   }
 

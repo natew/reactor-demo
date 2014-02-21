@@ -8,6 +8,7 @@ module.exports = {
 
   // todo: add invariant warning with no routes
   getRoute: function(path) {
+    var path = path || window.location.pathname;
     var i, len = this.routes.locations.length;
 
     for (i = 0; i < len; i++) {
@@ -20,7 +21,7 @@ module.exports = {
     }
 
     // return notfound page
-    return { page: this.routes.notFound };
+    return { to: this.routes.notFound };
   },
 
   getPage: function(path) {

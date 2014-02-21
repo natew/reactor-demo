@@ -4,22 +4,19 @@
 
 var React = require('react');
 
-var Page = {
+module.exports = React.createClass({
 
-  title: '404 Page',
+  title: function() {
+    return '404 Page';
+  },
 
-  view: React.createClass({
+  render: function() {
+    return (
+      <div>
+        <h2>Page Not Found!</h2>
+        <p>404, yo</p>
+      </div>
+    );
+  }
 
-    render: function() {
-      return (
-        <div>
-          <h2>Page Not Found!</h2>
-          <p>404, yo</p>
-        </div>
-      );
-    }
-  })
-
-};
-
-module.exports = Page;
+});
