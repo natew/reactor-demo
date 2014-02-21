@@ -8,7 +8,7 @@ module.exports = {
   },
 
   updatePageData: function() {
-    Router.currentPage.setProps({ data: this.pageCortex });
+    Router.currentPage.setProps({ data: this.pageData });
     // TODO: send updated data to model
   }
 
