@@ -21,7 +21,6 @@ var App = ReactAsync.createClass({
   componentWillMount: function() {
     this.setCurrentPage(this.props.path);
     AppState.set('rootUrl', this.rootUrl());
-    // set url in store
   },
 
   getInitialStateAsync: function(cb) {

@@ -3,22 +3,21 @@
  */
 
 var React      = require('react');
-var ReactAsync = require('react-async');
 var UserImages = require('../components/UserImages');
 var PageData   = require('../mixins/PageData');
 var AppState   = require('../../lib/AppState');
 var superagent = require('superagent');
 
-module.exports = ReactAsync.createClass({
+module.exports = React.createClass({
 
   mixins: [PageData],
 
-  title: function(data) {
-    return data.name;
+  componentWillMount: function() {
+    this.setPageState('user', this.props.parent.state.data);
   },
 
-  getInitialStateAsync: function(cb) {
-    cb(null, this.props.parent.state.data);
+  title: function(data) {
+    return data.name;
   },
 
   getInitialPageState: function(params, cb) {
@@ -30,6 +29,7 @@ module.exports = ReactAsync.createClass({
   },
 
   render: function() {
+    console.log(this.state)
     return (
       <div>
         <h2>{this.state.user.val('name')}</h2>
