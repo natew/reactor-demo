@@ -36,6 +36,8 @@ module.exports = {
   },
 
   _navigateCallback: function(path) {
+    this.setProps({path: path});
+
     // Allow hooks after navigate
     if (typeof this.onNavigate === 'function')
       this.onNavigate(path);

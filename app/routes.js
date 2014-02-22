@@ -4,20 +4,10 @@ var NotFoundPage  = require('./views/pages/NotFoundPage');
 
 module.exports = {
 
-  locations: [
+  '/': HomePage,
 
-    {
-      path: '/',
-      to: HomePage
-    },
-
-    {
-      path: '/user/:username',
-      to: UserPage
-    }
-
-  ],
+  '/user/:username': UserPage,
 
   notFound: NotFoundPage
 
-};
+}

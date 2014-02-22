@@ -2,17 +2,41 @@ var pattern = require('url-pattern');
 
 module.exports = {
 
+  componentWillMount: function() {
+    this.shouldUpdate = true;
+    this.setRoutes(this.routes);
+    this.setCurrentPage(this.props.path);
+  },
+
+  componentWillReceiveProps: function(props) {
+    if (props.path === this.props.path) return;
+    this.shouldUpdate = false;
+    this.setCurrentPage(props.path);
+
+    // Allow a callback to do things before changing pages
+    if (typeof this.routerPageChange == 'function')
+      this.routerPageChange();
+    else
+      this.shouldUpdate = true;
+  },
+
+  shouldComponentUpdate: function() {
+    return this.shouldUpdate;
+  },
+
   setRoutes: function(routes) {
-    this.routes = routes;
+    this._routes = Object.keys(this.routes).map(function(path) {
+      return { path: path, to: this.routes[path] };
+    }.bind(this));
   },
 
   // todo: add invariant warning with no routes
   getRoute: function(path) {
     var path = path || window.location.pathname;
-    var i, len = this.routes.locations.length;
+    var i, len = this._routes.length;
 
     for (i = 0; i < len; i++) {
-      var route = this.routes.locations[i];
+      var route = this._routes[i];
       route.pattern = route.pattern || pattern(route.path);
       match = route.pattern.match(path);
       if (match) {

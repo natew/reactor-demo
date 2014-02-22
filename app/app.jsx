@@ -16,10 +16,17 @@ var App = ReactAsync.createClass({
 
   mixins: [Router, Navigator],
 
+  routes: routes,
+
   componentWillMount: function() {
-    this.setRoutes(routes);
-    this.setCurrentPage(this.props.path);
     AppState.set('rootUrl', this.rootUrl());
+  },
+
+  routerPageChange: function() {
+    this.getStateFromPage(function(err, data) {
+      if (!err) this.setState(data);
+      this.shouldUpdate = true;
+    }.bind(this));
   },
 
   getInitialStateAsync: function(cb) {
@@ -39,13 +46,6 @@ var App = ReactAsync.createClass({
     }.bind(this);
 
     this.currentPage.type.getInitialPageState(this.route.params, setter);
-  },
-
-  onNavigate: function(path) {
-    this.setCurrentPage(path);
-    this.getStateFromPage(function(err, data) {
-      if (!err) this.setState(data);
-    }.bind(this));
   },
 
   render: function() {
