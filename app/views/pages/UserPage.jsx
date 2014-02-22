@@ -4,7 +4,7 @@
 
 var React      = require('react');
 var UserImages = require('../components/UserImages');
-var PageData   = require('../mixins/PageData');
+var PageData   = require('../../mixins/PageData');
 
 module.exports = React.createClass({
 

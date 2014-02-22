@@ -1,6 +1,6 @@
-var Cortex     = require('../../lib/cortex/cortex');
+var Cortex     = require('../lib/cortex/cortex');
 var superagent = require('superagent');
-var AppState   = require('../../lib/AppState');
+var Global     = require('../lib/AppState');
 
 module.exports = {
 
@@ -10,7 +10,7 @@ module.exports = {
 
   get: function(path, cb) {
     superagent
-      .get(AppState.get('rootUrl') + path)
+      .get(Global.rootUrl + path)
       .end(function(err, res) {
         cb(err, res ? res.body : {});
       });

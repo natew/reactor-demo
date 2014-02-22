@@ -6,11 +6,11 @@ var React       = require('react');
 var ReactAsync  = require('react-async');
 var ReactMount  = require('react/lib/ReactMount');
 var Batch       = require('react-raf-batching').inject();
-var Router      = require('./lib/Router');
 var routes      = require('./routes');
-var Navigator   = require('./views/mixins/Navigator');
+var Navigator   = require('./mixins/Navigator');
+var Router      = require('./mixins/Router');
 var HTMLLayout  = require('./views/layouts/HTML');
-var AppState    = require('./lib/AppState');
+var Global      = require('./lib/AppState');
 
 var App = ReactAsync.createClass({
 
@@ -19,7 +19,7 @@ var App = ReactAsync.createClass({
   routes: routes,
 
   componentWillMount: function() {
-    AppState.set('rootUrl', this.rootUrl());
+    Global.rootUrl = this.rootUrl();
   },
 
   routerPageChange: function() {

@@ -3,7 +3,7 @@
  */
 
 var React    = require('react');
-var PageData = require('../mixins/PageData');
+var PageData = require('../../mixins/PageData');
 
 module.exports = React.createClass({
 
