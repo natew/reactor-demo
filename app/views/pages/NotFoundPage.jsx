@@ -6,8 +6,10 @@ var React = require('react');
 
 module.exports = React.createClass({
 
-  title: function() {
-    return '404 Page';
+  statics: {
+    title: function() {
+      return '404 Page';
+    }
   },
 
   render: function() {
