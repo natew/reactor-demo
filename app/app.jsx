@@ -22,15 +22,15 @@ var App = ReactAsync.createClass({
     Global.rootUrl = this.rootUrl();
   },
 
+  getInitialStateAsync: function(cb) {
+    this.getStateFromPage(cb);
+  },
+
   routerPageChange: function() {
     this.getStateFromPage(function(err, data) {
       if (!err) this.setState(data);
       this.shouldUpdate = true;
     }.bind(this));
-  },
-
-  getInitialStateAsync: function(cb) {
-    this.getStateFromPage(cb);
   },
 
   getStateFromPage: function(cb) {
