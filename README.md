@@ -20,7 +20,9 @@ And head to [localhost:3111](localhost:3111).
 
 ## Todo
 
-- Tests
+- 500 pages
+- Post changes back to controller
+- Testing
 - Model
 - Forms
 - ...
