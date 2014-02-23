@@ -18,11 +18,7 @@ module.exports = React.createClass({
     },
 
     getInitialPageState: function(params, cb) {
-      superagent
-        .get(Global.rootUrl + '/api/user/' + params.username)
-        .end(function(err, res) {
-          cb(err, res ? res.body : {});
-        });
+      PageData.get(Global.rootUrl + '/api/user/' + params.username, cb);
     }
   },
 

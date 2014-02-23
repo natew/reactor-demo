@@ -1,8 +1,5 @@
 var Cortex      = require('cortexjs');
-var DataWrapper = require('cortexjs/src/data_wrapper');
 var superagent  = require('superagent');
-
-DataWrapper.prototype.val = DataWrapper.prototype.getValue;
 
 module.exports = {
 
@@ -27,6 +24,12 @@ module.exports = {
 
   updatePageState: function() {
     this.setState({ data: this.pageData.data });
+  },
+
+  get: function(url, cb) {
+    superagent.get(url).end(function(err, res) {
+      cb(err, res ? res.body : {});
+    });
   }
 
 };
