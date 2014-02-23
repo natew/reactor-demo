@@ -4,7 +4,6 @@
 
 var React      = require('react');
 var PageData   = require('../../mixins/PageData');
-var superagent = require('superagent');
 var Global     = require('../../lib/AppState');
 
 module.exports = React.createClass({
