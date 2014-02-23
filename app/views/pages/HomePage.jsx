@@ -28,7 +28,7 @@ module.exports = React.createClass({
   renderUser: function(user, i) {
     return (
       <li key={i}>
-        <a href={"/user/" + user.val('id')}>{user.val('name')}</a>
+        <a href={"/user/" + user.id.getValue()}>{user.name.getValue()}</a>
       </li>
     );
   },
@@ -39,7 +39,7 @@ module.exports = React.createClass({
         <h1>Home</h1>
         <h2>Users</h2>
         <ul id="users">
-          {this.state.data.get('users').map(this.renderUser)}
+          {this.state.data.users.map(this.renderUser)}
         </ul>
       </div>
     );

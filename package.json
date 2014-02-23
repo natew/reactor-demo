@@ -40,7 +40,8 @@
     "consolidate": "~0.10.0",
     "es5-shim": "~2.3.0",
     "url-pattern": "~0.3.1",
-    "react-raf-batching": "0.0.1"
+    "react-raf-batching": "0.0.1",
+    "cortexjs": "~0.4.3"
   },
   "devDependencies": {
     "bower": "1.2",

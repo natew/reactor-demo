@@ -29,9 +29,9 @@ module.exports = React.createClass({
   render: function() {
     return (
       <div>
-        <h2>{this.state.data.val('name')}</h2>
-        <p>{this.state.data.val('bio')}</p>
-        <UserImages path="/images/" images={this.state.data.val('pictures')} />
+        <h2>{this.state.data.name.getValue()}</h2>
+        <p>{this.state.data.bio.getValue()}</p>
+        <UserImages path="/images/" images={this.state.data.pictures} />
       </div>
     );
   }
