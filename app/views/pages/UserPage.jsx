@@ -3,8 +3,10 @@
  */
 
 var React      = require('react');
-var UserImages = require('../components/UserImages');
+var UserImages = require('../components/user/Images');
 var PageData   = require('../../mixins/PageData');
+var superagent = require('superagent');
+var Global     = require('../../lib/AppState');
 
 module.exports = React.createClass({
 
@@ -16,7 +18,11 @@ module.exports = React.createClass({
     },
 
     getInitialPageState: function(params, cb) {
-      PageData.get('/api/user/' + params.username, cb);
+      superagent
+        .get(Global.rootUrl + '/api/user/' + params.username)
+        .end(function(err, res) {
+          cb(err, res ? res.body : {});
+        });
     }
   },
 

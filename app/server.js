@@ -11,10 +11,10 @@ app.engine('html', cons.hogan);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 
-app.get('/api/:model/:id?', function(req, res) {
-    var model = require('../api/'+ req.params.model);
-    if (req.params.id) model = model[req.params.model][req.params.id];
-    res.json(model);
+app.get('/api/:controller/:id?', function(req, res) {
+    var controller = require('../api/'+ req.params.controller);
+    if (req.params.id) controller = controller[req.params.controller][req.params.id];
+    res.json(controller);
   })
   .get('/images/:file', function(req, res) {
     res.sendfile('./app/assets/images/' + req.params.file);
@@ -36,13 +36,15 @@ app.use(bundle, browserify.serve({
     debug: true,
     watch: true
   }))
+  // react async middleware
   .use(middleware(App, {
-    // pass params to app.js component
+    // pass url to app.jsx
     props: { host: host, port: port },
+    // continue to next .use
     sendResponse: false
   }))
   .use(function(req, res) {
-    // if not serving js render with layout
+    // if not serving .js render with layout
     if (req.url !== bundle) {
       res.render('index', { body: res.body });
     }

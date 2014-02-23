@@ -1,19 +1,10 @@
 var Cortex     = require('../lib/cortex/cortex');
 var superagent = require('superagent');
-var Global     = require('../lib/AppState');
 
 module.exports = {
 
   componentWillMount: function() {
     this.setPageState(this.props.parent.state.data);
-  },
-
-  get: function(path, cb) {
-    superagent
-      .get(Global.rootUrl + path)
-      .end(function(err, res) {
-        cb(err, res ? res.body : {});
-      });
   },
 
   setPageData: function(data, cb) {
