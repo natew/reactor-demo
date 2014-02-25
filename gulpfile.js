@@ -14,7 +14,6 @@ var prod = util.env.production;
 var consoleEnv = prod ? 'Production' : 'Development';
 util.log('ENV: ', util.colors.blue(consoleEnv));
 
-
 // Utils
 var error = function(err) {
   util.log(util.colors.red.bold(err));
