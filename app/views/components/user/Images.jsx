@@ -16,7 +16,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    var fullImage = this.props.images[this.state.activeImage].full.getValue();
+    var fullImage = this.props.images[this.state.activeImage].full.val();
 
     return (
       <section id="imagery">
@@ -27,7 +27,7 @@ module.exports = React.createClass({
             return (
               <li key={i}>
                 <a href="#" onMouseEnter={this.changeImage.bind(this, i)}>
-                  <img src={this.props.path + image.thumb.getValue()} />
+                  <img src={this.props.path + image.thumb.val()} />
                 </a>
               </li>
             );

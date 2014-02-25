@@ -23,7 +23,7 @@ module.exports = React.createClass({
   renderUser: function(user, i) {
     return (
       <li key={i}>
-        <a href={"/user/" + user.id.getValue()}>{user.name.getValue()}</a>
+        <a href={"/user/" + user.id.val()}>{user.name.val()}</a>
       </li>
     );
   },
