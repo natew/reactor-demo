@@ -29,7 +29,6 @@
     "connect-browserify": "~1.0.0",
     "reactify": "~0.7.0",
     "react": "~0.9.0",
-    "react-async": "~0.6",
     "express": "~3.4.7",
     "node-jsx": "~0.2.1",
     "node-dev": "~2.1.6",
@@ -40,7 +39,8 @@
     "es5-shim": "~2.3.0",
     "url-pattern": "~0.3.1",
     "react-raf-batching": "0.0.1",
-    "cortexjs": "~0.4.4"
+    "cortexjs": "~0.4.4",
+    "react-async": "git://github.com/andreypopp/react-async.git#v0.6.0"
   },
   "devDependencies": {
     "fibers": "~1.0.1",

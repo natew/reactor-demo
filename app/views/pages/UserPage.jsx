@@ -13,7 +13,7 @@ module.exports = React.createClass({
 
   statics: {
     head: function(data) {
-      return <title>data.name</title>;
+      return data.name;
     },
 
     getInitialPageState: function(params, cb) {

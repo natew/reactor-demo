@@ -7,7 +7,6 @@ var Router = {
   },
 
   componentWillReceiveProps: function(props) {
-    console.log('receiving props', props)
     if (!this.props.path || props.path === this.props.path) return;
     this.setCurrentRoute(props.path);
     this.shouldUpdate = false;
@@ -16,7 +15,7 @@ var Router = {
     if (typeof this.routerPageChange == 'function')
       this.routerPageChange(function() {
         this.shouldUpdate = true;
-        this.setState();
+        this.forceUpdate();
       }.bind(this));
     else
       this.shouldUpdate = true;

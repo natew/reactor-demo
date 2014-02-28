@@ -22,7 +22,7 @@ var error = function(err) {
 
 // Places things are
 var paths = {
-  js: 'app/views/**/*.js',
+  js: 'app/**/*.js',
   jsx: ['app/**/*.jsx', 'app/views/**/*.jsx'],
   styles: ['bower_components/**/*.css', 'app/assets/styles/*.scss'],
   build: 'build/modules'
@@ -42,12 +42,12 @@ gulp.task('compile-jsx', function() {
 });
 
 gulp.task('scripts', ['compile-js', 'compile-jsx'], function() {
-  return gulp.src(paths.build + '/client.js')
+  return gulp.src(paths.build + '/app.js')
     .pipe(plumber())
     .pipe(browserify({
       insertGlobals: false,
       debug: !prod,
-      // require: paths.build + '/client.js',
+      // require: './app/app.jsx',
       expose: './app'
     })).on('error', error)
     .pipe(concat('app.js'))

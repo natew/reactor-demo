@@ -7,11 +7,13 @@ var cons        = require('consolidate');
 var ReactAsync  = require('react-async');
 var App         = require('./app/app');
 
-var app         = express();
-var bundle      = '/assets/js/app.js';
-var port        = 3111;
-var host        = 'localhost';
-var development = process.env.NODE_ENV !== 'production';
+var app = express();
+var props = {
+  host: 'localhost',
+  port: 3111,
+  development: process.env.NODE_ENV !== 'production',
+  bundle: '/assets/js/app.js'
+};
 
 app.engine('html', cons.hogan);
 app.set('view engine', 'html');
@@ -19,11 +21,11 @@ app.set('views', path.join(__dirname, 'app', 'views'));
 
 // Server
 var renderApp = function(req, res, next) {
-  var path = url.parse(req.url).pathname;
-  var app = App({host: host, path: path, port: port});
+  props.path = url.parse(req.url).pathname;
+  var app = App(props);
   ReactAsync.renderComponentToStringWithAsyncState(app, function(err, markup, data) {
     if (err) return next(err);
-    markup = ReactAsync.injectIntoMarkup(markup, data, [bundle])
+    markup = ReactAsync.injectIntoMarkup(markup, data, [props.bundle])
     res.render('index', { html: markup });
   });
 }
@@ -36,8 +38,8 @@ var api = function(req, res) {
   res.json(controller);
 };
 
-if (development) {
-  app.get(bundle, browserify.serve({
+if (props.development) {
+  app.get(props.bundle, browserify.serve({
     entry: './app/app.jsx',
     extensions: ['.jsx'],
     debug: true,
@@ -51,4 +53,4 @@ app
   .use('/images', express.static(path.join(__dirname, 'app/assets/images')))
   .use(express.favicon())
   .use(renderApp)
-  .listen(port);
+  .listen(props.port);

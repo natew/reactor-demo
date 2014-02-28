@@ -12,7 +12,7 @@ module.exports = React.createClass({
 
   statics: {
     head: function() {
-      return <title>Reactor Home</title>;
+      return 'Reactor Home';
     },
 
     getInitialPageState: function(params, cb) {
@@ -29,7 +29,6 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    console.log('render')
     return (
       <div>
         <h1>Home</h1>
