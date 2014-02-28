@@ -11,8 +11,8 @@ module.exports = React.createClass({
   mixins: [PageData],
 
   statics: {
-    pageTitle: function() {
-      return 'Reactor Home';
+    head: function() {
+      return <title>Reactor Home</title>;
     },
 
     getInitialPageState: function(params, cb) {
@@ -29,6 +29,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    console.log('render')
     return (
       <div>
         <h1>Home</h1>

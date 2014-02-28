@@ -5,13 +5,28 @@ var express    = require('express');
 var browserify = require('connect-browserify');
 var nodejsx    = require('node-jsx').install({ extension: '.jsx' });
 var cons       = require('consolidate');
-var middleware = require('react-async-middleware');
-var Client     = require('./app');
+var ReactAsync = require('react-async');
+var App        = require('./app');
+var url        = require('url');
 
 var app = express();
 var bundle = '/js/bundle.js';
 var port = 3111;
 var host = 'localhost';
+
+app.engine('html', cons.hogan);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+
+function renderApp(req, res, next) {
+  var path = url.parse(req.url).pathname;
+  var app = App({host: host, path: path, port: port});
+  ReactAsync.renderComponentToStringWithAsyncState(app, function(err, markup, data) {
+    if (err) return next(err);
+    markup = ReactAsync.injectIntoMarkup(markup, data, [bundle])
+    res.render('index', { html: markup });
+  });
+}
 
 // API
 app.get('/api/:controller/:id?', function(req, res) {
@@ -29,7 +44,6 @@ app.get('/css/:file', function(req, res) {
 })
 app.get('/favicon.ico', function(req, res) { res.send(''); })
 
-
 // Client
 app.use(bundle, browserify.serve({
   entry: './app/app.jsx',
@@ -38,21 +52,5 @@ app.use(bundle, browserify.serve({
   watch: true
 }))
 
-// Server
-
-// Templating
-app.engine('html', cons.hogan);
-app.set('view engine', 'html');
-app.set('views', __dirname + '/views');
-
-// Server middleware
-app.use(middleware(Client, {
-  props: { host: host, port: port },
-  sendResponse: false
-}))
-
-app.use(function(req, res) {
-  if (req.url !== bundle) res.render('index', { body: res.body });
-})
-
+app.use(renderApp);
 app.listen(port);

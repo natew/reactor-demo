@@ -1,17 +1,14 @@
 var pattern = require('url-pattern');
 
-module.exports = {
+var Router = {
 
   componentWillMount: function() {
     this.shouldUpdate = true;
-    this.setRoutes(this.routes);
-    this.setCurrentPage(this.props.path);
   },
 
   componentWillReceiveProps: function(props) {
-    if (props.path === this.props.path) return;
+    if (!this.props.path || props.path === this.props.path) return;
     this.shouldUpdate = false;
-    this.setCurrentPage(props.path);
 
     // Allow a callback to do things before changing pages
     if (typeof this.routerPageChange == 'function')
@@ -25,8 +22,8 @@ module.exports = {
   },
 
   setRoutes: function(routes) {
-    this._routes = Object.keys(this.routes).map(function(path) {
-      return { path: path, to: this.routes[path] };
+    this._routes = Object.keys(routes).map(function(path) {
+      return { path: path, to: routes[path] };
     }.bind(this));
   },
 
@@ -40,25 +37,24 @@ module.exports = {
       route.pattern = route.pattern || pattern(route.path);
       match = route.pattern.match(path);
       if (match) {
-        return { to: route.to, params: match };
+        return { page: route.to, params: match };
       }
     }
 
     // return notfound page
-    return { to: this.routes.notFound };
+    return { page: this.routes.notFound };
+  },
+
+  renderPage: function(opts) {
+    return Router.getRoute(opts.path).page(opts);
   },
 
   getPage: function(path) {
-    return this.getRoute(path, false).page;
+    return Router.getRoute(path).page;
   },
 
   getParams: function(path) {
     return this.getRoute(path, true).params;
-  },
-
-  setCurrentPage: function(path) {
-    this.route = this.getRoute(path);
-    this.currentPage = this.route.to({ parent: this });
   },
 
   getCurrentPage: function() {
@@ -74,3 +70,5 @@ module.exports = {
   }
 
 };
+
+module.exports = Router;

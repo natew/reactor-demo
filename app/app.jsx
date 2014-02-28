@@ -3,66 +3,81 @@
  */
 
 var React       = require('react');
+var Transition  = require('react/lib/ReactWithAddons').addons.CSSTransitionGroup;
 var ReactAsync  = require('react-async');
-var ReactMount  = require('react/lib/ReactMount');
-var Batch       = require('react-raf-batching').inject();
 var routes      = require('./routes');
 var Navigator   = require('./mixins/Navigator');
 var Router      = require('./mixins/Router');
 var HTMLLayout  = require('./views/layouts/HTML');
 var Global      = require('./lib/AppState');
 
-var App = ReactAsync.createClass({
+Router.setRoutes(routes);
 
-  mixins: [Router, Navigator],
+// Sync updates to refresh rate
+// require('react-raf-batching').inject();
 
-  routes: routes,
+// Allow server initial render
+require('react/lib/ReactMount').allowFullPageRender = true;
 
-  componentWillMount: function() {
-    Global.rootUrl = this.rootUrl();
-  },
+var App = React.createClass({
+
+  mixins: [
+    Router,
+    Navigator,
+    ReactAsync.Mixin
+  ],
 
   getInitialStateAsync: function(cb) {
     this.getStateFromPage(cb);
   },
 
   routerPageChange: function() {
+    console.log('routerpagechange')
     this.getStateFromPage(function(err, data) {
-      if (!err) this.setState(data);
-      this.shouldUpdate = true;
+      console.log('got', err, data)
+      if (!err) {
+        this.setState(data);
+        this.shouldUpdate = true;
+      }
     }.bind(this));
   },
 
   getStateFromPage: function(cb) {
-    if (!this.currentPage.type.getInitialPageState)
+    Global.rootUrl = this.rootUrl();
+    var route = Router.getRoute(this.props.path);
+    var page = route.page;
+
+    if (!page.getInitialPageState)
       return cb(null, {});
 
-    var setter = function(err, data) {
+    // Get state from page, set data and head content
+    page.getInitialPageState(route.params, function(err, data) {
       cb(err, {
-        data: data,
-        path: this.props.path,
-        title: this.currentPage.type.pageTitle(data)
+        pageData: data,
+        head: page.head(data)
       })
-    }.bind(this);
-
-    this.currentPage.type.getInitialPageState(this.route.params, setter);
+    }.bind(this));
   },
 
   render: function() {
-    return (
-      <HTMLLayout title={this.state.title} onClick={this.navigate}>
-        {this.currentPage}
+    console.log('page', Router.renderPage({ path: this.props.path, className: "flick", parent: this }))
+    console.log('state', this.state)
+    return this.transferPropsTo(
+      <HTMLLayout onClick={this.navigate}>
+        <Transition transitionName="flick">
+          {Router.renderPage({ path: this.props.path, className: "flick", parent: this })}
+        </Transition>
       </HTMLLayout>
     );
   }
 
 });
 
-ReactMount.allowFullPageRender = true;
 module.exports = App;
 
+// Browser initial render
 if (typeof window !== 'undefined') {
   window.onload = function() {
-    ReactAsync.renderComponent(App(), document);
+    React.renderComponent(App(), document);
   }
 }

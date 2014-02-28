@@ -4,7 +4,7 @@ var superagent  = require('superagent');
 module.exports = {
 
   componentWillMount: function() {
-    this.setPageState(this.props.parent.state.data);
+    this.setPageState(this.props.parent.state.pageData);
   },
 
   setPageData: function(data, cb) {

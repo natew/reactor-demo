@@ -12,8 +12,8 @@ module.exports = React.createClass({
   mixins: [PageData],
 
   statics: {
-    pageTitle: function(data) {
-      return data.name;
+    head: function(data) {
+      return <title>data.name</title>;
     },
 
     getInitialPageState: function(params, cb) {
