@@ -56,11 +56,6 @@ module.exports = {
     return this.getRoute(path, true).params;
   },
 
-  setCurrentPage: function(path) {
-    this.route = this.getRoute(path);
-    this.currentPage = this.route.to({ parent: this });
-  },
-
   getCurrentPage: function() {
     return this.currentPage;
   },

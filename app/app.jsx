@@ -3,14 +3,19 @@
  */
 
 var React       = require('react');
+var Transition  = require('react/lib/ReactWithAddons');
 var ReactAsync  = require('react-async');
-var ReactMount  = require('react/lib/ReactMount');
-var Batch       = require('react-raf-batching').inject();
 var routes      = require('./routes');
 var Navigator   = require('./mixins/Navigator');
 var Router      = require('./mixins/Router');
 var HTMLLayout  = require('./views/layouts/HTML');
 var Global      = require('./lib/AppState');
+
+// Sync updates to refresh rate
+require('react-raf-batching').inject();
+
+// Allow server initial render
+require('react/lib/ReactMount').allowFullPageRender = true;
 
 var App = ReactAsync.createClass({
 
@@ -33,34 +38,40 @@ var App = ReactAsync.createClass({
     }.bind(this));
   },
 
+  currentPage: function(path) {
+    this.route = this.getRoute(path);
+    this.currentPage = this.route.to;
+  },
+
   getStateFromPage: function(cb) {
     if (!this.currentPage.type.getInitialPageState)
       return cb(null, {});
 
-    var setter = function(err, data) {
+    // Get state from page, set data and head content
+    this.currentPage.type.getInitialPageState(this.route.params, function(err, data) {
       cb(err, {
         data: data,
         path: this.props.path,
-        title: this.currentPage.type.pageTitle(data)
+        head: this.currentPage.type.getHead(data)
       })
-    }.bind(this);
-
-    this.currentPage.type.getInitialPageState(this.route.params, setter);
+    }.bind(this));
   },
 
   render: function() {
     return (
-      <HTMLLayout title={this.state.title} onClick={this.navigate}>
-        {this.currentPage}
+      <HTMLLayout head={this.state.head} onClick={this.navigate}>
+        <Transition transitionName="flick">
+          {this.currentPage({ parent: this }}
+        </Transition>
       </HTMLLayout>
     );
   }
 
 });
 
-ReactMount.allowFullPageRender = true;
 module.exports = App;
 
+// Browser initial render
 if (typeof window !== 'undefined') {
   window.onload = function() {
     ReactAsync.renderComponent(App(), document);
