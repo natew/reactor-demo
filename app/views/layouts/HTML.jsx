@@ -14,8 +14,8 @@ module.exports = React.createClass({
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
           <meta name="description" content="" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          {this.props.head}
-          <link rel="stylesheet" href="/css/app.css" type="text/css" media="all" />
+          {this.props.pageHead}
+          <link rel="stylesheet" href="/assets/css/app.css" type="text/css" media="all" />
         </head>
         <body onClick={this.props.onClick}>
           <a href="/">Home</a>

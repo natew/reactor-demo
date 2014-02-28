@@ -5,6 +5,7 @@
 var React       = require('react');
 var Transition  = require('react/lib/ReactWithAddons').addons.CSSTransitionGroup;
 var ReactAsync  = require('react-async');
+var ReactMount  = require('react/lib/ReactMount');
 var routes      = require('./routes');
 var Navigator   = require('./mixins/Navigator');
 var Router      = require('./mixins/Router');
@@ -17,7 +18,7 @@ Router.setRoutes(routes);
 // require('react-raf-batching').inject();
 
 // Allow server initial render
-require('react/lib/ReactMount').allowFullPageRender = true;
+ReactMount.allowFullPageRender = true;
 
 var App = React.createClass({
 
@@ -28,23 +29,20 @@ var App = React.createClass({
   ],
 
   getInitialStateAsync: function(cb) {
+    this.setCurrentRoute(this.props.path);
     this.getStateFromPage(cb);
   },
 
-  routerPageChange: function() {
-    console.log('routerpagechange')
+  routerPageChange: function(cb) {
     this.getStateFromPage(function(err, data) {
-      console.log('got', err, data)
-      if (!err) {
-        this.setState(data);
-        this.shouldUpdate = true;
-      }
+      if (!err) this.setState(data);
+      cb();
     }.bind(this));
   },
 
   getStateFromPage: function(cb) {
     Global.rootUrl = this.rootUrl();
-    var route = Router.getRoute(this.props.path);
+    var route = this.currentRoute;
     var page = route.page;
 
     if (!page.getInitialPageState)
@@ -54,19 +52,18 @@ var App = React.createClass({
     page.getInitialPageState(route.params, function(err, data) {
       cb(err, {
         pageData: data,
-        head: page.head(data)
+        pageHead: page.head(data)
       })
     }.bind(this));
   },
 
   render: function() {
-    console.log('page', Router.renderPage({ path: this.props.path, className: "flick", parent: this }))
-    console.log('state', this.state)
+    var Page = Router.renderPage;
+
+    console.log('head', this.state.pageHead)
     return this.transferPropsTo(
-      <HTMLLayout onClick={this.navigate}>
-        <Transition transitionName="flick">
-          {Router.renderPage({ path: this.props.path, className: "flick", parent: this })}
-        </Transition>
+      <HTMLLayout onClick={this.navigate} pageHead={this.state.pageHead}>
+        <Page path={this.props.path} className="page" parent={this} />
       </HTMLLayout>
     );
   }

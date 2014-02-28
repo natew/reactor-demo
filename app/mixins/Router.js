@@ -7,12 +7,17 @@ var Router = {
   },
 
   componentWillReceiveProps: function(props) {
+    console.log('receiving props', props)
     if (!this.props.path || props.path === this.props.path) return;
+    this.setCurrentRoute(props.path);
     this.shouldUpdate = false;
 
     // Allow a callback to do things before changing pages
     if (typeof this.routerPageChange == 'function')
-      this.routerPageChange();
+      this.routerPageChange(function() {
+        this.shouldUpdate = true;
+        this.setState();
+      }.bind(this));
     else
       this.shouldUpdate = true;
   },
@@ -45,8 +50,8 @@ var Router = {
     return { page: this.routes.notFound };
   },
 
-  renderPage: function(opts) {
-    return Router.getRoute(opts.path).page(opts);
+  renderPage: function(props) {
+    return Router.getRoute(props.path).page(props);
   },
 
   getPage: function(path) {
@@ -57,8 +62,12 @@ var Router = {
     return this.getRoute(path, true).params;
   },
 
-  getCurrentPage: function() {
-    return this.currentPage;
+  setCurrentRoute: function(path) {
+    this.currentRoute = this.getRoute(path);
+  },
+
+  getCurrentRoute: function() {
+    return this.currentRoute;
   },
 
   replaceParams: function(path, params) {
