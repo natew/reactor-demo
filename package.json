@@ -40,7 +40,8 @@
     "url-pattern": "~0.3.1",
     "react-raf-batching": "0.0.1",
     "cortexjs": "~0.4.4",
-    "react-async": "git://github.com/andreypopp/react-async.git#v0.6.0"
+    "react-async": "^0.6",
+    "gulp-webpack": "0.0.1"
   },
   "devDependencies": {
     "fibers": "~1.0.1",

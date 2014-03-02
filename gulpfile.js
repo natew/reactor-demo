@@ -1,12 +1,12 @@
 var gulp   = require('gulp');
-var gulpif = require('gulp-if');
 var lr     = require('tiny-lr');
 var server = lr();
 
 // Require all gulp- packages
 require('matchdep').filterDev('gulp-*').forEach(function(module) {
-  var name = module.substr(5);
-  if (name != 'if') global[name] = require(module);
+  var name = module.replace('gulp-', '');
+  if (name == 'if') global['gulpif'] = require(module);
+  global[name] = require(module);
 });
 
 // Environment
@@ -95,9 +95,18 @@ gulp.task('lr-server', function(cb) {
   server.listen(35729, cb);
 });
 
-// gulp.task('nodemon', function(){
-//   nodemon({script: 'app/server.js'});
-// });
+gulp.task("webpack", function(callback) {
+  // run webpack
+  webpack({
+    // configuration
+  }, function(err, stats) {
+    if(err) throw new gutil.PluginError("webpack", err);
+    gutil.log("[webpack]", stats.toString({
+      // output options
+    }));
+    callback();
+  });
+});
 
 gulp.task('default', [
   // 'nodemon',

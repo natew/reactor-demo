@@ -3,6 +3,8 @@ var superagent  = require('superagent');
 
 module.exports = {
 
+  cache: {},
+
   componentWillMount: function() {
     this.setPageState(this.props.parent.state.pageData);
   },
@@ -27,8 +29,14 @@ module.exports = {
   },
 
   get: function(url, cb) {
+    var cache = this.cache;
+    if (cache[url]) cb(cache[url]);
     superagent.get(url).end(function(err, res) {
-      cb(err, res ? res.body : {});
+      if (!err && res) {
+        cache[url] = res;
+        cb(null, res.body);
+      }
+      else cb(err, {});
     });
   }
 

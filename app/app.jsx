@@ -3,32 +3,30 @@
  */
 
 var React         = require('react');
-var Transition    = require('react/lib/ReactWithAddons').addons.CSSTransitionGroup;
 var ReactAsync    = require('react-async');
 var ReactMount    = require('react/lib/ReactMount');
 var routes        = require('./routes');
-var Navigator     = require('./mixins/Navigator');
-var Router        = require('./mixins/Router');
-var HTMLLayout    = require('./views/layouts/HTML');
-var Global        = require('./lib/AppState');
-var ReactRafBatch = require('react-raf-batching');
+var pushState     = require('./mixins/pushState');
+var Router        = require('./mixins/router');
+var Page          = Router.renderPage;
+var Layout        = require('./components/layout');
+var State         = require('./state');
 
 Router.setRoutes(routes);
-
-// Allow server initial render
 ReactMount.allowFullPageRender = true;
 
 var App = React.createClass({
 
   mixins: [
     Router,
-    Navigator,
+    pushState,
     ReactAsync.Mixin
   ],
 
   componentWillMount: function() {
-    // Sync updates to refresh rate (in production)
-    if (!this.props.development) ReactRafBatch.inject();
+    // Sync updates to refresh rate
+    if (!this.props.development)
+      require('react-raf-batching').inject();
   },
 
   getInitialStateAsync: function(cb) {
@@ -44,7 +42,7 @@ var App = React.createClass({
   },
 
   getStateFromPage: function(cb) {
-    Global.rootUrl = Global.rootUrl || this.rootUrl();
+    State.rootUrl = State.rootUrl || this.rootUrl();
     var route = this.currentRoute;
     var page = route.page;
 
@@ -60,12 +58,10 @@ var App = React.createClass({
   },
 
   render: function() {
-    var Page = Router.renderPage;
-
     return this.transferPropsTo(
-      <HTMLLayout onClick={this.navigate} title={this.state.title}>
+      <Layout onClick={this.navigate} title={this.state.title}>
         <Page path={this.props.path} className="page" parent={this} />
-      </HTMLLayout>
+      </Layout>
     );
   }
 
@@ -74,8 +70,5 @@ var App = React.createClass({
 module.exports = App;
 
 // Browser initial render
-if (typeof window !== 'undefined') {
-  window.onload = function() {
-    React.renderComponent(App(), document);
-  }
-}
+if (typeof window !== 'undefined')
+  window.onload = React.renderComponent.bind(App(), document);

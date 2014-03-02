@@ -3,13 +3,13 @@
  */
 
 var React      = require('react');
-var UserImages = require('../components/user/Images');
-var PageData   = require('../../mixins/PageData');
-var Global     = require('../../lib/AppState');
+var jsPane     = require('../components/jsPane');
+var Page       = require('../mixins/page');
+var State      = require('../state');
 
 module.exports = React.createClass({
 
-  mixins: [PageData],
+  mixins: [Page],
 
   statics: {
     head: function(data) {
@@ -17,7 +17,7 @@ module.exports = React.createClass({
     },
 
     getInitialPageState: function(params, cb) {
-      PageData.get(Global.rootUrl + '/api/user/' + params.username, cb);
+      Page.get(State.rootUrl + '/api/user/' + params.username, cb);
     }
   },
 

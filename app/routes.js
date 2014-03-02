@@ -1,13 +1,14 @@
-var HomePage      = require('./views/pages/HomePage');
-var UserPage      = require('./views/pages/UserPage');
-var NotFoundPage  = require('./views/pages/NotFoundPage');
+
+function page(name) {
+  return './pages/' + name;
+}
 
 module.exports = {
 
-  '/': HomePage,
+  '/': require(page('home')),
 
-  '/user/:username': UserPage,
+  '/tutorial/:name': require(page('tutorial')),
 
-  notFound: NotFoundPage
+  500: require(page('error'))
 
 }

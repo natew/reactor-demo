@@ -17,7 +17,7 @@ var props = {
 
 app.engine('html', cons.hogan);
 app.set('view engine', 'html');
-app.set('views', path.join(__dirname, 'app', 'views'));
+app.set('views', './app/assets');
 
 // Server
 var renderApp = function(req, res, next) {
@@ -32,7 +32,8 @@ var renderApp = function(req, res, next) {
 
 // API
 var api = function(req, res) {
-  var controller = require('./api/' + req.params.controller);
+  try { var controller = require('./api/' + req.params.controller); }
+  catch(e) { res.send(500, e) }
   var params = req.params;
   if (params.id) controller = controller[params.controller][params.id];
   res.json(controller);
