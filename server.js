@@ -35,7 +35,8 @@ var api = function(req, res) {
   try { var controller = require('./api/' + req.params.controller); }
   catch(e) { res.send(500, e) }
   var params = req.params;
-  if (params.id) controller = controller[params.controller][params.id];
+  // if (params.id) controller = controller[params.controller][params.id];
+  console.log('controller', controller)
   res.json(controller);
 };
 

@@ -13,11 +13,14 @@ module.exports = React.createClass({
 
   statics: {
     head: function(data) {
-      return data.name;
+      console.log(data);
+      return data.title;
     },
 
     getInitialPageState: function(params, cb) {
-      Page.get(State.rootUrl + '/api/user/' + params.username, cb);
+      var url = State.rootUrl + '/api/tutorials/' + params.name;
+      if (params.step) url += '/' + params.step + '/' + params.num;
+      Page.get(url, cb);
     }
   },
 
