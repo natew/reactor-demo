@@ -25,7 +25,7 @@ var App = React.createClass({
 
   componentWillMount: function() {
     // Sync updates to refresh rate
-    if (this.props.env == 'production')
+    if (this.props.env === 'production')
       require('react-raf-batching').inject();
   },
 
@@ -37,7 +37,7 @@ var App = React.createClass({
   routerPageChange: function(cb) {
     this.getStateFromPage(function(err, data) {
       if (!err) this.setState(data);
-      cb();
+      cb({error: err});
     }.bind(this));
   },
 
