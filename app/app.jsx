@@ -67,5 +67,8 @@ var App = React.createClass({
 module.exports = App;
 
 // Browser initial render
-if (typeof window !== 'undefined')
-  window.onload = React.renderComponent.bind(App(), document);
+if (typeof window !== 'undefined') {
+  window.onload = function() {
+    React.renderComponent(App(), document);
+  }
+}
