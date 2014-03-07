@@ -25,7 +25,7 @@ module.exports = {
   },
 
   updatePageState: function() {
-    this.setState({ data: this.pageData.data });
+    this.setState(this.pageData.data);
   },
 
   get: function(url, cb) {
@@ -34,9 +34,9 @@ module.exports = {
     superagent.get(url).end(function(err, res) {
       if (!err && res) {
         cache[url] = res;
-        cb(null, res.body);
+        cb(res.body);
       }
-      else cb(err, {});
+      else cb({error: err});
     });
   }
 

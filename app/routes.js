@@ -7,7 +7,7 @@ module.exports = {
 
   '/': require(page('home')),
 
-  '/tutorials/:name/:step?/:num?': require(page('tutorial')),
+  '/tutorials/:name/:id': require(page('tutorial')),
 
   500: require(page('error'))
 

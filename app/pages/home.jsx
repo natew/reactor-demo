@@ -21,10 +21,10 @@ module.exports = React.createClass({
     }
   },
 
-  tutorial: function(tutorial, i) {
+  jsTutorial: function(tutorial, i) {
     return (
       <li key={i}>
-        <a href={"/tutorial/" + tutorial.id.val()}>{tutorial.name.val()}</a>
+        <a href={"/tutorials/js/" + i}>{tutorial.title.val()}</a>
       </li>
     );
   },
@@ -35,7 +35,7 @@ module.exports = React.createClass({
         <h1>Home</h1>
         <h2>tutorials</h2>
         <ul id="tutorials">
-          {this.state.data.tutorials.map(this.tutorial)}
+          {this.state.tutorials.js.map(this.jsTutorial)}
         </ul>
       </div>
     );

@@ -33,10 +33,12 @@ var renderApp = function(req, res, next) {
 // API
 var api = function(req, res) {
   try { var controller = require('./api/' + req.params.controller); }
-  catch(e) { res.send(500, e) }
+  catch(e) {
+    console.log(e);
+    res.send(500, e);
+  }
   var params = req.params;
-  // if (params.id) controller = controller[params.controller][params.id];
-  console.log('controller', controller)
+  if (params.name) controller = controller[params.controller][params.name];
   res.json(controller);
 };
 
@@ -50,7 +52,7 @@ if (props.development) {
 }
 
 app
-  .get('/api/:controller/:id?', api)
+  .get('/api/:controller/:name?/:id?', api)
   .use('/assets', express.static(path.join(__dirname, 'build')))
   .use('/images', express.static(path.join(__dirname, 'app/assets/images')))
   .use(express.favicon())

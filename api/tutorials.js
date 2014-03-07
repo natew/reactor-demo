@@ -2,8 +2,9 @@ exports.tutorials = {
 
   js: [
     {
-      title: 'Introduction to Javascript'
-      step: [
+      title: 'Introduction to Javascript',
+      description: 'Lorem ipsum dim sum.',
+      steps: [
         {
           text: 'Hello, welcome to the Javascript tutorial! This is what a tutorial looks like.',
           html: '<p>\n  Hello World\n</p>',

@@ -49,11 +49,8 @@ var App = React.createClass({
     if (!page.getInitialPageState) return cb(null, {});
 
     // Get state from page, set data and head content
-    page.getInitialPageState(route.params, function(err, data) {
-      cb(err, {
-        pageData: data,
-        title: page.head(data)
-      })
+    page.getInitialPageState(route.params, function(data) {
+      cb(null, { pageData: data, title: page.head(data) });
     }.bind(this));
   },
 

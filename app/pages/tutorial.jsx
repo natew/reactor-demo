@@ -13,23 +13,25 @@ module.exports = React.createClass({
 
   statics: {
     head: function(data) {
-      console.log(data);
       return data.title;
     },
 
     getInitialPageState: function(params, cb) {
       var url = State.rootUrl + '/api/tutorials/' + params.name;
-      if (params.step) url += '/' + params.step + '/' + params.num;
-      Page.get(url, cb);
+      if (params.id) url += '/' + params.id;
+      Page.get(url, function(data) {
+        cb({ tutorial: data, step: params.id });
+      });
     }
   },
 
   render: function() {
+    var tutorial = this.state.tutorial[this.state.step.val()];
+
     return (
       <div>
-        <h2>{this.state.data.name.val()}</h2>
-        <p>{this.state.data.bio.val()}</p>
-        <UserImages path="/images/" images={this.state.data.pictures} />
+        <h2>{tutorial.title.val()}</h2>
+        <p>{tutorial.description.val()}</p>
       </div>
     );
   }
