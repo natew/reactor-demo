@@ -5,28 +5,23 @@
 var React         = require('react');
 var ReactAsync    = require('react-async');
 var ReactMount    = require('react/lib/ReactMount');
-var routes        = require('./routes');
-var pushState     = require('./mixins/pushState');
+var Routes        = require('./routes');
+var PushState     = require('./mixins/pushState');
 var Router        = require('./mixins/router');
 var Page          = Router.renderPage;
 var Layout        = require('./components/layout');
 var State         = require('./state');
 
-Router.setRoutes(routes);
+Router.setRoutes(Routes);
 ReactMount.allowFullPageRender = true;
 
 var App = React.createClass({
 
-  mixins: [
-    Router,
-    pushState,
-    ReactAsync.Mixin
-  ],
+  mixins: [ Router, PushState, ReactAsync.Mixin ],
 
   componentWillMount: function() {
-    // Sync updates to refresh rate
     if (this.props.env === 'production')
-      require('react-raf-batching').inject();
+      require('react-raf-batching').inject(); // faster in prod
   },
 
   getInitialStateAsync: function(cb) {
@@ -36,22 +31,19 @@ var App = React.createClass({
 
   routerPageChange: function(cb) {
     this.getStateFromPage(function(err, data) {
-      if (!err) this.setState(data);
-      cb({error: err});
+      this.setState(err ? {error: err} : data);
+      cb();
     }.bind(this));
   },
 
   getStateFromPage: function(cb) {
     State.rootUrl = State.rootUrl || this.rootUrl();
-    var route = this.currentRoute;
-    var page = route.page;
+    var page = this.currentRoute.page;
 
-    if (!page.getInitialPageState) return cb(null, {});
-
-    // Get state from page, set data and head content
-    page.getInitialPageState(route.params, function(data) {
+    if (!page.getInitialPageState) cb(null, {});
+    else page.getInitialPageState(this.currentRoute.params, function(data) {
       cb(null, { pageData: data, title: page.head(data) });
-    }.bind(this));
+    });
   },
 
   render: function() {
