@@ -41,7 +41,8 @@
     "react-raf-batching": "0.0.1",
     "cortexjs": "~0.4.4",
     "react-async": "^0.6",
-    "gulp-webpack": "0.0.1"
+    "webpack-dev-middleware": "~1.0.4",
+    "jsx-loader": "~0.9.0"
   },
   "devDependencies": {
     "fibers": "~1.0.1",
@@ -68,6 +69,7 @@
     "nodemon": "~1.0.14",
     "gulp-bower": "0.0.2",
     "gulp-clean": "~0.2.4",
-    "gulp-nodemon": "~0.1.2"
+    "gulp-nodemon": "~0.1.2",
+    "webpack": "~1.1.0-beta3"
   }
 }

@@ -1,14 +1,9 @@
-
-function page(name) {
-  return './pages/' + name;
-}
-
 module.exports = {
 
-  '/': require(page('home')),
+  '/': require('./pages/home'),
 
-  '/tutorials/:name/:id': require(page('tutorial')),
+  '/tutorials/:name/:id': require('./pages/tutorial'),
 
-  500: require(page('error'))
+  500: require('./pages/error')
 
 }

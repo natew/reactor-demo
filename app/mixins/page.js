@@ -31,13 +31,17 @@ module.exports = {
   get: function(url, cb) {
     var cache = this.cache;
     if (cache[url]) cb(cache[url]);
-    superagent.get(url).end(function(err, res) {
-      if (!err && res) {
-        cache[url] = res;
-        cb(res.body);
-      }
-      else cb({error: err});
-    });
+    else {
+      superagent
+      .get(url)
+      .end(function(err, res) {
+        if (!err && res) {
+          cache[url] = res.body;
+          cb(res.body);
+        }
+        else cb({error: err});
+      });
+    }
   }
 
 };

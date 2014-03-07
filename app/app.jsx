@@ -25,7 +25,7 @@ var App = React.createClass({
 
   componentWillMount: function() {
     // Sync updates to refresh rate
-    if (!this.props.development)
+    if (this.props.env == 'production')
       require('react-raf-batching').inject();
   },
 
