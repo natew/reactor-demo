@@ -4,6 +4,6 @@ module.exports = {
 
   '/tutorials/:name/:id': require('./pages/tutorial'),
 
-  500: require('./pages/error')
+  '404': require('./pages/404')
 
 }

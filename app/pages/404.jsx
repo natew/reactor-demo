@@ -7,8 +7,8 @@
  module.exports = React.createClass({
 
    statics: {
-     title: function() {
-       return '404 Page';
+     head: function() {
+       return '404';
      }
    },
 

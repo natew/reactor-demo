@@ -26,6 +26,7 @@ var Router = {
   },
 
   setRoutes: function(routes) {
+    this._routesHash = routes;
     this._routes = Object.keys(routes).map(function(path) {
       return { path: path, to: routes[path] };
     }.bind(this));
@@ -45,8 +46,8 @@ var Router = {
       }
     }
 
-    // return notfound page
-    return { page: this.routes.notFound };
+    // return 404 page
+    return { page: this._routesHash['404'] };
   },
 
   renderPage: function(props) {
