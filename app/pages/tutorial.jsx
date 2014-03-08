@@ -45,7 +45,8 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    console.log('got', this.props.data)
+    Page.setProps(this.props.parent);
+
     this.scroller.setDimensions(
       this.props.data.width,
       this.props.data.height,

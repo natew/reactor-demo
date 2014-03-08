@@ -14,12 +14,6 @@ var prod = util.env.production;
 var consoleEnv = prod ? 'Production' : 'Development';
 util.log('ENV: ', util.colors.blue(consoleEnv));
 
-// Utils
-var error = function(err) {
-  util.log(util.colors.red.bold(err));
-  return this;
-}
-
 // Places things are
 var paths = {
   js: 'app/**/*.js',
@@ -37,7 +31,6 @@ gulp.task('compile-jsx', function() {
   return gulp.src(paths.jsx)
     .pipe(plumber())
     .pipe(react({ addPragma: true }))
-      .on('error', error)
     .pipe(gulp.dest(paths.build))
 });
 
@@ -49,7 +42,7 @@ gulp.task('scripts', ['compile-js', 'compile-jsx'], function() {
       debug: !prod,
       // require: './app/app.jsx',
       expose: './app'
-    })).on('error', error)
+    }))
     .pipe(concat('app.js'))
     .pipe(gulpif(prod, uglify({
       mangle: { except: ['require', 'export', '$super'] } })))
@@ -74,7 +67,6 @@ gulp.task('compile-sass', function() {
     .pipe(plumber())
     .pipe(flatten())
     .pipe(sass({outputStyle: prod ? 'compressed' : 'expanded'}))
-      .on('error', error)
     .pipe(autoprefixer("last 1 version", "> 1%", "ie 8", "ie 7"))
     .pipe(gulp.dest('build/css/2_app'));
 });

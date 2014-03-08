@@ -7,7 +7,7 @@ var Router = {
   },
 
   componentWillReceiveProps: function(props) {
-    if (!this.props.path || props.path === this.props.path) return;
+    if (!props.path || props.path === this.props.path) return;
     this.setCurrentRoute(props.path);
     this.shouldUpdate = false;
 
