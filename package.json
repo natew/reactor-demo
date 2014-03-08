@@ -42,7 +42,8 @@
     "cortexjs": "~0.4.4",
     "react-async": "^0.6",
     "webpack-dev-middleware": "~1.0.4",
-    "jsx-loader": "~0.9.0"
+    "jsx-loader": "~0.9.0",
+    "react-touch": "0.0.4"
   },
   "devDependencies": {
     "fibers": "~1.0.1",

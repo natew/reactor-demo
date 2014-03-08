@@ -6,6 +6,7 @@ var React      = require('react');
 var jsPane     = require('../components/jsPane');
 var Page       = require('../mixins/page');
 var State      = require('../state');
+var TouchArea  = require('react-touch/lib/primitives/TouchableArea');
 
 module.exports = React.createClass({
 
@@ -13,20 +14,54 @@ module.exports = React.createClass({
 
   statics: {
     head: function(data) {
-      return data.title;
+      console.log(data)
+      return data.tutorial.title;
     },
 
-    getInitialPageState: function(params, cb) {
-      var url = State.rootUrl + '/api/tutorials/' + params.name;
-      if (params.id) url += '/' + params.id;
+    getPageProps: function(params, setProps) {
+      var url = '/api/tutorials/' + params.name
+        + (params.id ? '/' + params.id : '');
+
       Page.get(url, function(data) {
-        cb({ tutorial: data, step: params.id });
+        setProps({
+          tutorial: data[params.id],
+          step: params.id,
+          width: 300,
+          height: 500
+        });
       });
     }
   },
 
+  getInitialState: function() {
+    return { step: this.props.step, left: 0 };
+  },
+
+  componentWillMount: function() {
+    if (State.isBrowser) {
+      this.scroller = new Scroller(this.handleScroll, {
+        snapping: true
+      });
+    }
+  },
+
+  componentDidMount: function() {
+    console.log('got', this.props.data)
+    this.scroller.setDimensions(
+      this.props.data.width,
+      this.props.data.height,
+      this.props.data.width * this.props.data.tutorial.images.length,
+      this.props.data.height
+    );
+    this.scroller.setSnapSize(this.props.data.width, this.props.data.height);
+  },
+
+  handleScroll: function() {
+
+  },
+
   render: function() {
-    var tutorial = this.state.tutorial[this.state.step.val()];
+    var tutorial = this.props.data.tutorial;
 
     return (
       <div>

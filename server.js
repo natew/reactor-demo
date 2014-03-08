@@ -50,6 +50,7 @@ if (props.env == 'development') {
 app
   .get('/api/:controller/:name?/:id?', api)
   .use('/assets', express.static(path.join(__dirname, 'build')))
+  .use('/bower', express.static(path.join(__dirname, 'bower_components')))
   .use('/images', express.static(path.join(__dirname, 'app/assets/images')))
   .use(express.favicon())
   .use(renderApp)

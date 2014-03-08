@@ -4,7 +4,6 @@
 
 var React = require('react');
 var Page = require('../mixins/page');
-var State = require('../state');
 var Transition = require('react/lib/ReactWithAddons').addons.CSSTransitionGroup;
 
 module.exports = React.createClass({
@@ -16,8 +15,8 @@ module.exports = React.createClass({
       return 'Reactor Home';
     },
 
-    getInitialPageState: function(params, cb) {
-      Page.get(State.rootUrl + '/api/tutorials', cb);
+    getPageProps: function(params, setProps) {
+      Page.get('/api/tutorials', setProps);
     }
   },
 
@@ -35,7 +34,7 @@ module.exports = React.createClass({
         <h1>Home</h1>
         <h2>tutorials</h2>
         <ul id="tutorials">
-          {this.state.tutorials.js.map(this.jsTutorial)}
+          {this.props.data.tutorials.js.map(this.jsTutorial)}
         </ul>
       </div>
     );
