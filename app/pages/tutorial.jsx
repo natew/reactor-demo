@@ -14,7 +14,6 @@ module.exports = React.createClass({
 
   statics: {
     head: function(data) {
-      console.log(data)
       return data.tutorial.title;
     },
 
