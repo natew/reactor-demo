@@ -13,12 +13,13 @@ var Layout     = require('./components/layout');
 var State      = require('./state');
 var Cortex     = require('cortexjs');
 
-Router.setRoutes(Routes);
 ReactMount.allowFullPageRender = true;
 
 var App = React.createClass({
 
-  mixins: [ Router, PushState, ReactAsync.Mixin ],
+  mixins: [ Router.Mixin, PushState, ReactAsync.Mixin ],
+
+  routes: Routes,
 
   componentWillMount: function() {
     if (this.props.env === 'production')

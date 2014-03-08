@@ -1,7 +1,6 @@
 var pattern = require('url-pattern');
 
-var Router = {
-
+var RouterMixin = {
   componentWillMount: function() {
     this.shouldUpdate = true;
   },
@@ -25,7 +24,19 @@ var Router = {
     return this.shouldUpdate;
   },
 
+
+  setCurrentRoute: function(path) {
+    Router.setRoutes(this.routes);
+    this.currentRoute = Router.getRoute(path);
+  }
+};
+
+var Router = {
+
+  Mixin: RouterMixin,
+
   setRoutes: function(routes) {
+    if (!routes || this._routes) return;
     this._routesHash = routes;
     this._routes = Object.keys(routes).map(function(path) {
       return { path: path, to: routes[path] };
@@ -60,10 +71,6 @@ var Router = {
 
   getParams: function(path) {
     return this.getRoute(path, true).params;
-  },
-
-  setCurrentRoute: function(path) {
-    this.currentRoute = this.getRoute(path);
   },
 
   getCurrentRoute: function() {
