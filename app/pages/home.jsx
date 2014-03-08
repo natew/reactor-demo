@@ -3,27 +3,26 @@
  */
 
 var React = require('react');
+var ReactAsync = require('react-async');
 var Page = require('../mixins/page');
 var Transition = require('react/lib/ReactWithAddons').addons.CSSTransitionGroup;
+var ReactAsync = require('react-async');
 
 module.exports = React.createClass({
 
-  mixins: [Page],
+  mixins: [ ReactAsync.Mixin ],
 
-  statics: {
-    head: function() {
-      return 'Reactor Home';
-    },
-
-    getPageProps: function(params, setProps) {
-      Page.get('/api/tutorials', setProps);
-    }
+  getInitialStateAsync: function(cb) {
+    Page.get('/api/tutorials', function(err, data) {
+      this.props.setTitle('Test Title');
+      cb(err, data);
+    }.bind(this));
   },
 
   jsTutorial: function(tutorial, i) {
     return (
       <li key={i}>
-        <a href={"/tutorials/js/" + i}>{tutorial.title.val()}</a>
+        <a href={"/tutorials/js/" + i}>{tutorial.title}</a>
       </li>
     );
   },
@@ -34,7 +33,7 @@ module.exports = React.createClass({
         <h1>Home</h1>
         <h2>tutorials</h2>
         <ul id="tutorials">
-          {this.props.data.tutorials.js.map(this.jsTutorial)}
+          {this.state.tutorials.js.map(this.jsTutorial)}
         </ul>
       </div>
     );

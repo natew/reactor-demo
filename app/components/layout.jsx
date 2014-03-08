@@ -20,7 +20,7 @@ module.exports = React.createClass({
           <script type="text/javascript" src="/bower/scroller/src/EasyScroller.js"></script>
           <script type="text/javascript" src="/bower/scroller/src/Scroller.js"></script>
         </head>
-        <body onClick={this.props.onClick}>
+        <body>
           <a href="/">Home</a>
           {this.props.children}
         </body>

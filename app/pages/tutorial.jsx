@@ -3,6 +3,7 @@
  */
 
 var React      = require('react');
+var ReactAsync = require('react-async');
 var jsPane     = require('../components/jsPane');
 var Page       = require('../mixins/page');
 var State      = require('../state');
@@ -10,26 +11,21 @@ var TouchArea  = require('react-touch/lib/primitives/TouchableArea');
 
 module.exports = React.createClass({
 
-  mixins: [Page],
+  mixins: [ ReactAsync.Mixin ],
 
-  statics: {
-    head: function(data) {
-      return data.tutorial.title;
-    },
+  getInitialStateAsync: function(cb) {
+    var params = this.props;
+    var url = '/api/tutorials/' + params.name
+      + (params.id ? '/' + params.id : '');
 
-    getPageProps: function(params, setProps) {
-      var url = '/api/tutorials/' + params.name
-        + (params.id ? '/' + params.id : '');
-
-      Page.get(url, function(data) {
-        setProps({
-          tutorial: data[params.id],
-          step: params.id,
-          width: 300,
-          height: 500
-        });
+    Page.get(url, function(err, data) {
+      cb(err, {
+        tutorial: data[params.id],
+        step: params.id,
+        width: 300,
+        height: 500
       });
-    }
+    });
   },
 
   getInitialState: function() {
@@ -45,15 +41,15 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    Page.setProps(this.props.parent);
+    // Page.setProps(this.props.parent);
 
-    this.scroller.setDimensions(
-      this.props.data.width,
-      this.props.data.height,
-      this.props.data.width * this.props.data.tutorial.images.length,
-      this.props.data.height
-    );
-    this.scroller.setSnapSize(this.props.data.width, this.props.data.height);
+    // this.scroller.setDimensions(
+    //   this.props.data.width,
+    //   this.props.data.height,
+    //   this.props.data.width * this.props.data.tutorial.images.length,
+    //   this.props.data.height
+    // );
+    // this.scroller.setSnapSize(this.props.data.width, this.props.data.height);
   },
 
   handleScroll: function() {

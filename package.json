@@ -43,7 +43,8 @@
     "react-async": "^0.6",
     "webpack-dev-middleware": "~1.0.4",
     "jsx-loader": "~0.9.0",
-    "react-touch": "0.0.4"
+    "react-touch": "0.0.4",
+    "react-router-component": "~0.9.1"
   },
   "devDependencies": {
     "fibers": "~1.0.1",
