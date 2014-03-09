@@ -1,13 +1,16 @@
 var pattern = require('url-pattern');
+var invariant = require('react/lib/invariant');
 
-var RouterMixin = {
+// if (!this.routes) Router.setRoutes(this.routes);
+
+var Router = {
   componentWillMount: function() {
     this.shouldUpdate = true;
   },
 
   componentWillReceiveProps: function(props) {
-    if (!props.path || props.path === this.props.path) return;
-    this.setCurrentRoute(props.path);
+    if (!props.path) return;
+    this.setRoute(props.path);
     this.shouldUpdate = false;
 
     // Allow a callback to do things before changing pages
@@ -24,27 +27,31 @@ var RouterMixin = {
     return this.shouldUpdate;
   },
 
-
-  setCurrentRoute: function(path) {
-    Router.setRoutes(this.routes);
-    this.currentRoute = Router.getRoute(path);
-  }
-};
-
-var Router = {
-
-  Mixin: RouterMixin,
+  setRoute: function(path) {
+    console.log('set route', path, this.props.path)
+    if (this.route && path === this.props.path)
+      return this.route;
+    this.route = Router.getRoute(path);
+    return this.route;
+  },
 
   setRoutes: function(routes) {
-    if (!routes || this._routes) return;
+    if (this._routes) return; // already set
     this._routesHash = routes;
     this._routes = Object.keys(routes).map(function(path) {
       return { path: path, to: routes[path] };
-    }.bind(this));
+    });
   },
 
-  // todo: add invariant warning with no routes
   getRoute: function(path) {
+    if (!this._routes) this.setRoutes();
+
+    invariant(
+      this._routes,
+      'Please run setRoutes() with a routes hash \
+      before calling getRoute()'
+    );
+
     var path = path || window.location.pathname;
     var i, len = this._routes.length;
 
@@ -66,15 +73,11 @@ var Router = {
   },
 
   getPage: function(path) {
-    return Router.getRoute(path).page;
+    return this.getRoute(path).page;
   },
 
   getParams: function(path) {
     return this.getRoute(path, true).params;
-  },
-
-  getCurrentRoute: function() {
-    return this.currentRoute;
   },
 
   replaceParams: function(path, params) {

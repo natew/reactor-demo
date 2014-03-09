@@ -13,13 +13,13 @@ var Layout     = require('./components/layout');
 var State      = require('./state');
 var Cortex     = require('cortexjs');
 
+Router.setRoutes(Routes);
+
 ReactMount.allowFullPageRender = true;
 
 var App = React.createClass({
 
-  mixins: [ Router.Mixin, PushState, ReactAsync.Mixin ],
-
-  routes: Routes,
+  mixins: [ Router, PushState, ReactAsync.Mixin ],
 
   componentWillMount: function() {
     if (this.props.env === 'production')
@@ -27,7 +27,6 @@ var App = React.createClass({
   },
 
   getInitialStateAsync: function(cb) {
-    this.setCurrentRoute(this.props.path);
     this.getStateFromPage(cb);
   },
 
@@ -40,10 +39,9 @@ var App = React.createClass({
 
   getStateFromPage: function(cb) {
     State.rootUrl = State.rootUrl || this.rootUrl();
-    var page = this.currentRoute.page;
-
+    var page = this.setRoute(this.props.path).page;
     if (!page.getPageProps) cb(null, {});
-    else page.getPageProps(this.currentRoute.params, function(data) {
+    else page.getPageProps(this.route.params, function(data) {
       cb(null, { pageData: data, title: page.head(data) });
     });
   },
