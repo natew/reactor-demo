@@ -1,8 +1,6 @@
 var pattern = require('url-pattern');
 var invariant = require('react/lib/invariant');
 
-// if (!this.routes) Router.setRoutes(this.routes);
-
 var Router = {
   componentWillMount: function() {
     this.shouldUpdate = true;
@@ -28,7 +26,6 @@ var Router = {
   },
 
   setRoute: function(path) {
-    console.log('set route', path, this.props.path)
     if (this.route && path === this.props.path)
       return this.route;
     this.route = Router.getRoute(path);
@@ -66,10 +63,6 @@ var Router = {
 
     // return 404 page
     return { page: this._routesHash['404'] };
-  },
-
-  renderPage: function(props) {
-    return Router.getRoute(props.path).page(props);
   },
 
   getPage: function(path) {
