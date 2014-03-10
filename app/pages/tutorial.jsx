@@ -10,8 +10,6 @@ var TouchArea  = require('react-touch/lib/primitives/TouchableArea');
 
 module.exports = React.createClass({
 
-  mixins: [Page],
-
   statics: {
     title: function(data) {
       return data.tutorial.title;

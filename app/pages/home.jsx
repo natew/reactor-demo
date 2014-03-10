@@ -3,12 +3,10 @@
  */
 
 var React = require('react');
-var Page = require('../mixins/page');
-var Transition = require('react/lib/ReactWithAddons').addons.CSSTransitionGroup;
+var Page  = require('../mixins/page');
+// var Transition = require('react/lib/ReactWithAddons').addons.CSSTransitionGroup;
 
 module.exports = React.createClass({
-
-  mixins: [Page],
 
   statics: {
     title: function() {
