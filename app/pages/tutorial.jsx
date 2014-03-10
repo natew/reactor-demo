@@ -13,11 +13,11 @@ module.exports = React.createClass({
   mixins: [Page],
 
   statics: {
-    head: function(data) {
+    title: function(data) {
       return data.tutorial.title;
     },
 
-    getPageProps: function(params, setProps) {
+    getData: function(params, setProps) {
       var url = '/api/tutorials/' + params.name
         + (params.id ? '/' + params.id : '');
 
@@ -29,6 +29,10 @@ module.exports = React.createClass({
           height: 500
         });
       });
+    },
+
+    updateData: function(data) {
+      // POST updated data to model
     }
   },
 

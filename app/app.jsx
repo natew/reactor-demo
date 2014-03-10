@@ -43,19 +43,15 @@ var App = React.createClass({
   getStateFromPage: function(cb) {
     State.rootUrl = State.rootUrl || this.rootUrl();
     var page = this.route.page;
-    if (!page.getPageProps) cb(null, {});
-    else page.getPageProps(this.route.params, function(data) {
-      cb(null, { pageData: data, title: page.head(data) });
+    if (!page.getData) cb(null, {});
+    else page.getData(this.route.params, function(data) {
+      cb(null, { pageData: data, title: page.title(data) });
     });
   },
 
-  updatePageData: function(data) {
-    // POST back to controller
-  },
-
   render: function() {
-    var data = new Cortex(this.state.pageData, this.updatePageData);
     var Page = this.route.page;
+    var data = new Cortex(this.state.pageData, Page.updateData);
 
     return this.transferPropsTo(
       <Layout onClick={this.navigate} title={this.state.title}>

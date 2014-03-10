@@ -11,11 +11,11 @@ module.exports = React.createClass({
   mixins: [Page],
 
   statics: {
-    head: function() {
+    title: function() {
       return 'Reactor Home';
     },
 
-    getPageProps: function(params, setProps) {
+    getData: function(params, setProps) {
       Page.get('/api/tutorials', setProps);
     }
   },
