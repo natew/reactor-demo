@@ -15,12 +15,9 @@ module.exports = React.createClass({
       return data.tutorial.title;
     },
 
-    getData: function(params, setProps) {
-      var url = '/api/tutorials/' + params.name
-        + (params.id ? '/' + params.id : '');
-
-      Page.get(url, function(data) {
-        setProps({
+    getData: function(params, cb) {
+      Page.get('/api/tutorials/:name/:id', params, function(data) {
+        cb({
           tutorial: data[params.id],
           step: params.id,
           width: 300,

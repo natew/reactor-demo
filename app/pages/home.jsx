@@ -13,9 +13,7 @@ module.exports = React.createClass({
       return 'Reactor Home';
     },
 
-    getData: function(params, setProps) {
-      Page.get('/api/tutorials', setProps);
-    }
+    getData: Page.get.bind(Page, '/api/tutorials')
   },
 
   jsTutorial: function(tutorial, i) {
