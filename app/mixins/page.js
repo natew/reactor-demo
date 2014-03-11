@@ -6,11 +6,9 @@ module.exports = {
   cache: {},
 
   get: function(url, params, cb) {
-    console.log(arguments)
     // params argument is optional
     if (typeof params == 'function') cb = params;
     else url = this.replaceParams(url, params);
-    console.log('url is', url)
 
     var cache = this.cache;
     if (cache[url]) cb(cache[url]);
