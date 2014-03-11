@@ -1,27 +1,31 @@
-var Superagent  = require('superagent');
-var State       = require('../state');
+var Superagent = require('superagent');
 
 module.exports = {
 
-  cache: {},
+  init: function(opts) {
+    // todo: invariant
+    this.rootUrl = opts.rootUrl;
+    this.cache = {};
+  },
 
   get: function(url, params, cb) {
-    // params argument is optional
-    if (typeof params == 'function') cb = params;
-    else url = this.replaceParams(url, params);
+    if (typeof params == 'function')
+      cb = params;
+    else
+      url = this.replaceParams(url, params);
 
-    var cache = this.cache;
-    if (cache[url]) cb(cache[url]);
+    if (this.cache[url])
+      cb(this.cache[url]);
     else {
       Superagent
-      .get(State.rootUrl + url)
+      .get(this.rootUrl + url)
       .end(function(err, res) {
         if (!err && res) {
-          cache[url] = res.body;
+          this.cache[url] = res.body;
           cb(res.body);
         }
         else cb({error: err});
-      });
+      }.bind(this));
     }
   },
 

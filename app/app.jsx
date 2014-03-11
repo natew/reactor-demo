@@ -9,6 +9,7 @@ var Routes     = require('./routes');
 var PushState  = require('./mixins/pushState');
 var Router     = require('./mixins/router');
 var Layout     = require('./components/layout');
+var Page       = require('./mixins/page');
 var State      = require('./state');
 var Cortex     = require('cortexjs');
 
@@ -40,8 +41,14 @@ var App = React.createClass({
     }.bind(this));
   },
 
+  setRootUrl: function() {
+    if (State.rootUrl) return;
+    State.rootUrl = this.rootUrl();
+    Page.init({ rootUrl: State.rootUrl });
+  },
+
   getStateFromPage: function(cb) {
-    State.rootUrl = State.rootUrl || this.rootUrl();
+    this.setRootUrl();
     var page = this.route.page;
     if (!page.getData) cb(null, {});
     else page.getData(this.route.params, function(data) {
