@@ -4,16 +4,12 @@
 
 var React = require('react');
 var Page  = require('../mixins/page');
-// var Transition = require('react/lib/ReactWithAddons').addons.CSSTransitionGroup;
 
 module.exports = React.createClass({
 
   statics: {
-    title: function() {
-      return 'Reactor Home';
-    },
-
-    getData: Page.get.bind(Page, '/api/tutorials')
+    title: 'Reactor Home',
+    state: Page.get('/api/tutorials')
   },
 
   jsTutorial: function(tutorial, i) {

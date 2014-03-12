@@ -15,16 +15,14 @@ module.exports = React.createClass({
       return data.tutorial.title;
     },
 
-    getData: function(params, cb) {
-      Page.get('/api/tutorials/:name/:id', params, function(data) {
-        cb({
-          tutorial: data[params.id],
-          step: params.id,
-          width: 300,
-          height: 500
-        });
-      });
-    },
+    state: Page.get('/api/tutorials/:name/:id', function(data, params) {
+      return {
+        tutorial: data[params.id],
+        step: params.id,
+        width: 300,
+        height: 500
+      };
+    }),
 
     updateData: function(data) {
       // POST updated data to model

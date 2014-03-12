@@ -50,19 +50,23 @@ var App = React.createClass({
   getStateFromPage: function(cb) {
     this.setRootUrl();
     var page = this.route.page;
-    if (!page.getData) cb(null, {});
-    else page.getData(this.route.params, function(data) {
-      cb(null, { pageData: data, title: page.title(data) });
+    if (!page.state) cb(null, {});
+    else page.state(this.route.params, function(data) {
+      var t = page.title;
+      cb(null, {
+        pageData: data,
+        title: typeof t == 'function' ? t(data) : t
+      });
     });
   },
 
   render: function() {
-    var Page = this.route.page;
-    var data = new Cortex(this.state.pageData, Page.updateData);
+    var ActivePage = this.route.page;
+    var pageData = new Cortex(this.state.pageData, ActivePage.updateData);
 
     return this.transferPropsTo(
       <Layout onClick={this.navigate} title={this.state.title}>
-        <Page data={data} className="page" />
+        <ActivePage data={pageData} className="page" />
       </Layout>
     );
   }

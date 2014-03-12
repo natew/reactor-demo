@@ -1,6 +1,6 @@
 var Superagent = require('superagent');
 
-module.exports = {
+var Page = {
 
   init: function(opts) {
     // todo: invariant
@@ -8,25 +8,31 @@ module.exports = {
     this.cache = {};
   },
 
-  get: function(url, params, cb) {
-    if (typeof params == 'function')
-      cb = params;
-    else
-      url = this.replaceParams(url, params);
+  get: function(path, pageCb) {
+    return function(params, cb) {
+      if (typeof params == 'object')
+        path = Page.replaceParams(path, params);
 
-    if (this.cache[url])
-      cb(this.cache[url]);
-    else {
-      Superagent
-      .get(this.rootUrl + url)
-      .end(function(err, res) {
-        if (!err && res) {
-          this.cache[url] = res.body;
-          cb(res.body);
-        }
-        else cb({error: err});
-      }.bind(this));
+      if (Page.cache[path])
+        cb(Page.cache[path]);
+      else {
+        Superagent
+        .get(Page.rootUrl + path)
+        .end(function(err, res) {
+          if (!err && res) {
+            var result = res.body;
+            if (pageCb) result = pageCb(result, params);
+            Page.cache[path] = result;
+            cb(result);
+          }
+          else cb({error: err});
+        });
+      }
     }
+  },
+
+  getBound: function(url, params, cb) {
+    return Page.get.bind(Page, url, params, cb);
   },
 
   replaceParams: function(url, params) {
@@ -43,3 +49,5 @@ module.exports = {
   }
 
 };
+
+module.exports = Page;
