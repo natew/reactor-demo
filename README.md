@@ -41,4 +41,4 @@ And head to [localhost:3111](localhost:3111).
 - [Dealing with async code in react](https://caurea.org/2014/02/04/dealing-with-asynchronous-code-in-react-components.html)
 - [Computation](https://github.com/wereHamster/computation) async data fetching integration with React - [authors writeup](https://caurea.org/2014/02/04/dealing-with-asynchronous-code-in-react-components.html)
 - [Avers.js](https://github.com/wereHamster/avers) attempts to be a better M for React
-- [Cortex](https://github.com/mquan/cortex) Another js model solution
+- [Cortex](https://github.com/mquan/cortex) Another react data solution
