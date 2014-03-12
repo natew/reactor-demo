@@ -21,10 +21,11 @@ And head to [localhost:3111](localhost:3111).
 
 ## Todo
 
-- 500 pages
+- Expore moving to immutable-object
 - State handler to post back to API
-- Testing
 - Better example components
+- 500 pages
+- Testing
 - Forms
 - ...
 
