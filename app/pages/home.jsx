@@ -9,7 +9,7 @@ module.exports = React.createClass({
 
   statics: {
     title: 'Reactor Home',
-    state: Page.get('/api/tutorials')
+    props: Page.get('/api/tutorials')
   },
 
   jsTutorial: function(tutorial, i) {

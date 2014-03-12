@@ -15,7 +15,7 @@ module.exports = React.createClass({
       return data.tutorial.title;
     },
 
-    state: Page.get('/api/tutorials/:name/:id', function(data, params) {
+    props: Page.get('/api/tutorials/:name/:id', function(data, params) {
       return {
         tutorial: data[params.id],
         step: params.id,

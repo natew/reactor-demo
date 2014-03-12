@@ -50,8 +50,8 @@ var App = React.createClass({
   getStateFromPage: function(cb) {
     this.setRootUrl();
     var page = this.route.page;
-    if (!page.state) cb(null, {});
-    else page.state(this.route.params, function(data) {
+    if (!page.props) cb(null, {});
+    else page.props(this.route.params, function(data) {
       var t = page.title;
       cb(null, {
         pageData: data,

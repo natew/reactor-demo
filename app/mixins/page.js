@@ -31,10 +31,6 @@ var Page = {
     }
   },
 
-  getBound: function(url, params, cb) {
-    return Page.get.bind(Page, url, params, cb);
-  },
-
   replaceParams: function(url, params) {
     var paramKeys = Object.keys(params);
 
