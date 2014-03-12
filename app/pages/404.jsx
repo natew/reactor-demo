@@ -1,15 +1,9 @@
-/**
- * @jsx React.DOM
- */
+var React = require('../lib/page');
 
- var React = require('react');
+module.exports = React.createPage({
 
- module.exports = React.createClass({
-
-   statics: {
-     head: function() {
-       return '404';
-     }
+   title: function() {
+     return '404';
    },
 
    render: function() {

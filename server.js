@@ -1,31 +1,41 @@
 var path        = require('path');
 var url         = require('url');
 var express     = require('express');
-var nodejsx     = require('node-jsx').install({ extension: '.jsx' });
 var browserify  = require('connect-browserify');
 var ReactAsync  = require('react-async');
-var App         = require('./app/app');
+var Server      = express();
 
-var app = express();
+require('node-jsx').install({
+  extension: '.jsx',
+  additionalTransform: function(src) {
+    return '/** @jsx React.DOM */' +  src;
+  }
+});
+
+var App       = require('./app/app');
+
+var HOST      = process.env.NODE_HOST || 'localhost';
+var ENV       = process.env.NODE_ENV || 'development';
+var PORT      = process.env.NODE_PORT || 3111;
+var ASSET_DIR = '/assets';
+
 var props = {
-  host: 'localhost',
-  port: 3111,
-  env: process.env.NODE_ENV || 'development',
-  bundle: '/assets/js/app.js'
+  host: HOST, port: PORT, env: ENV,
+  bundle: ASSET_DIR + '/js/app.js'
 };
 
-// Server
-var renderApp = function(req, res, next) {
+var render = function(req, res, next) {
   props.path = url.parse(req.url).pathname;
-  var app = App(props);
-  ReactAsync.renderComponentToStringWithAsyncState(app, function(err, markup, data) {
-    if (err) return next(err);
-    markup = ReactAsync.injectIntoMarkup(markup, data, [props.bundle])
-    res.send('<!doctype>' + markup);
-  });
+  ReactAsync.renderComponentToStringWithAsyncState(
+    App(props),
+    function(err, markup, data) {
+      if (err) return next(err);
+      markup = ReactAsync.injectIntoMarkup(markup, data, [props.bundle])
+      res.send('<!doctype>' + markup);
+    }
+  );
 }
 
-// API
 var api = function(req, res) {
   try { var controller = require('./api/' + req.params.controller); }
   catch(e) {
@@ -37,9 +47,9 @@ var api = function(req, res) {
   res.json(controller);
 };
 
-// Bundle
+// Serve JS bundle in dev
 if (props.env == 'development') {
-  app.get(props.bundle, browserify.serve({
+  Server.get(props.bundle, browserify.serve({
     entry: './app/app.jsx',
     extensions: ['.jsx'],
     debug: true,
@@ -47,11 +57,11 @@ if (props.env == 'development') {
   }))
 }
 
-app
+Server
   .get('/api/:controller/:name?/:id?', api)
-  .use('/assets', express.static(path.join(__dirname, 'build')))
+  .use(ASSET_DIR, express.static(path.join(__dirname, 'build')))
   .use('/bower', express.static(path.join(__dirname, 'bower_components')))
   .use('/images', express.static(path.join(__dirname, 'app/assets/images')))
   .use(express.favicon())
-  .use(renderApp)
+  .use(render)
   .listen(props.port);

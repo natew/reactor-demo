@@ -1,13 +1,23 @@
-var gulp   = require('gulp');
-var lr     = require('tiny-lr');
-var server = lr();
-
-// Require all gulp- packages
-require('matchdep').filterDev('gulp-*').forEach(function(module) {
-  var name = module.replace('gulp-', '');
-  if (name == 'if') global['gulpif'] = require(module);
-  global[name] = require(module);
-});
+var gulp         = require('gulp');
+var util         = require('gulp-util');
+var browserify   = require('gulp-browserify');
+var uglify       = require('gulp-uglify');
+var gulpif       = require('gulp-if');
+var sass         = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
+var watch        = require('gulp-watch');
+var jshint       = require('gulp-jshint');
+var notify       = require('gulp-notify');
+var livereload   = require('gulp-livereload');
+var plumber      = require('gulp-plumber');
+var react        = require('gulp-react');
+var concat       = require('gulp-concat');
+var flatten      = require('gulp-flatten');
+var bower        = require('gulp-bower');
+var clean        = require('gulp-clean');
+var nodemon      = require('gulp-nodemon');
+var lr           = require('tiny-lr');
+var server       = lr();
 
 // Environment
 var prod = util.env.production;
@@ -30,7 +40,7 @@ gulp.task('compile-js', function() {
 gulp.task('compile-jsx', function() {
   return gulp.src(paths.jsx)
     .pipe(plumber())
-    .pipe(react({ addPragma: true }))
+    .pipe(react())
     .pipe(gulp.dest(paths.build))
 });
 
@@ -40,7 +50,6 @@ gulp.task('scripts', ['compile-js', 'compile-jsx'], function() {
     .pipe(browserify({
       insertGlobals: false,
       debug: !prod,
-      // require: './app/app.jsx',
       expose: './app'
     }))
     .pipe(concat('app.js'))
@@ -48,7 +57,6 @@ gulp.task('scripts', ['compile-js', 'compile-jsx'], function() {
       mangle: { except: ['require', 'export', '$super'] } })))
     .pipe(gulp.dest('build/js'))
     .pipe(livereload(server));
-    // .pipe(notify({ message: 'scripts task complete' }));
 });
 
 gulp.task('clean-styles', function () {

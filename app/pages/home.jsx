@@ -1,16 +1,10 @@
-/**
- * @jsx React.DOM
- */
+var React = require('../lib/page');
 
-var React = require('react');
-var Page  = require('../mixins/page');
+module.exports = React.createPage({
 
-module.exports = React.createClass({
+  fetch: '/api/tutorials',
 
-  statics: {
-    title: 'Reactor Home',
-    props: Page.get('/api/tutorials')
-  },
+  title: 'Reactor Home',
 
   jsTutorial: function(tutorial, i) {
     return (

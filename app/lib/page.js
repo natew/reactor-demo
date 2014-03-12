@@ -1,16 +1,33 @@
+var React      = require('react');
 var Superagent = require('superagent');
+var State      = require('../state');
 
-var Page = {
+ReactPage = {
+  createPage: function(spec) {
+    var reactSpec = {
+      statics: {
+        title: spec.title,
+        props: ReactPage.get(spec.fetch, spec.getInitialProps),
+        update: spec.update || function() {}
+      }
+    };
+
+    for (var key in spec)
+      if (spec.hasOwnProperty(key))
+        reactSpec[key] = spec[key];
+
+    return React.createClass(reactSpec);
+  },
 
   cache: {},
 
   get: function(path, pageCb) {
     return function(root, params, cb) {
       if (typeof params == 'object')
-        path = Page.replaceParams(path, params);
+        path = this.replaceParams(path, params);
 
-      if (Page.cache[path])
-        cb(Page.cache[path]);
+      if (this.cache[path])
+        cb(this.cache[path]);
       else {
         Superagent
         .get(root + path)
@@ -18,13 +35,15 @@ var Page = {
           if (!err && res) {
             var result = res.body;
             if (pageCb) result = pageCb(result, params);
-            Page.cache[path] = result;
+            this.cache[path] = result;
             cb(result);
           }
-          else cb({error: err});
-        });
+          else {
+            cb({error: err});
+          }
+        }.bind(this));
       }
-    }
+    }.bind(this);
   },
 
   replaceParams: function(url, params) {
@@ -51,7 +70,9 @@ var Page = {
       });
     });
   }
-
 };
 
-module.exports = Page;
+React.createPage = ReactPage.createPage;
+React.setStateFromPage = ReactPage.setStateFromPage;
+React.isBrowser = (typeof window !== 'undefined');
+module.exports = React;

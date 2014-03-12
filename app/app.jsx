@@ -1,16 +1,10 @@
-/**
- * @jsx React.DOM
- */
-
-var React      = require('react');
+var React      = require('./lib/page');
 var ReactAsync = require('react-async');
 var ReactMount = require('react/lib/ReactMount');
 var Routes     = require('./routes');
-var PushState  = require('./mixins/pushState');
-var Router     = require('./mixins/router');
+var PushState  = require('./lib/mixins/pushState');
+var Router     = require('./lib/mixins/router');
 var Layout     = require('./components/layout');
-var Page       = require('./mixins/page');
-var State      = require('./state');
 var Cortex     = require('cortexjs');
 
 Router.setRoutes(Routes);
@@ -41,7 +35,7 @@ var App = React.createClass({
   },
 
   getStateFromPage: function(cb) {
-    Page.setStateFromPage(this.rootUrl(), this.route, cb);
+    React.setStateFromPage(this.rootUrl(), this.route, cb);
   },
 
   render: function() {
@@ -61,7 +55,7 @@ module.exports = App;
 
 // Browser initial render
 if (typeof window !== 'undefined') {
-  State.isBrowser = true;
+  window.React = React;
   window.onload = function() {
     React.renderComponent(App(), document);
   }

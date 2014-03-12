@@ -2,31 +2,28 @@
  * @jsx React.DOM
  */
 
-var React      = require('react');
+var React      = require('../lib/page');
 var jsPane     = require('../components/jsPane');
-var Page       = require('../mixins/page');
-var State      = require('../state');
 var TouchArea  = require('react-touch/lib/primitives/TouchableArea');
 
-module.exports = React.createClass({
+module.exports = React.createPage({
 
-  statics: {
-    title: function(data) {
-      return data.tutorial.title;
-    },
+  fetch: '/api/tutorials/:name/:id',
 
-    props: Page.get('/api/tutorials/:name/:id', function(data, params) {
-      return {
-        tutorial: data[params.id],
-        step: params.id,
-        width: 300,
-        height: 500
-      };
-    }),
-
-    updateData: function(data) {
-      // POST updated data to model
+  getInitialProps: function(data, params) {
+    return {
+      tutorial: data[params.id],
+      step: params.id,
+      width: 300,
+      height: 500
     }
+  },
+
+  title: function(data) {
+    return data.tutorial.title;
+  },
+
+  update: function(data) {
   },
 
   getInitialState: function() {
@@ -34,7 +31,7 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    if (State.isBrowser) {
+    if (React.isBrowser) {
       this.scroller = new Scroller(this.handleScroll, {
         snapping: true
       });
@@ -42,7 +39,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    Page.setProps(this.props.parent);
+    // Page.setProps(this.props.parent);
 
     this.scroller.setDimensions(
       this.props.data.width,
