@@ -2,7 +2,7 @@
   "author": "Nate Wienert",
   "name": "reactor",
   "description": "A React Isomorphic App",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "",
   "repository": {
     "type": "git",
@@ -36,7 +36,7 @@
     "jsx-loader": "~0.9.0",
     "react-touch": "0.0.4",
     "react-stylesheet": "~0.1.1",
-    "reactor-core": "0.0.2"
+    "reactor-core": "0.0.3"
   },
   "devDependencies": {
     "fibers": "~1.0.1",
