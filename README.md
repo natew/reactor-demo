@@ -8,22 +8,23 @@ Experiment making an isomorphic app using React.
 
 And start it:
 
-    gulp
+    npm start
 
 And head to [localhost:3111](localhost:3111).
 
 ## What it does
 
-- Render from server or client
-- Supports `<title>` (and eventually `<meta>` tags)
+- Renders app from server, continues app on client
+- Routing
+- Pages fetching from API and receiving state
 - pushState navigation
 
 ## Todo
 
 - 500 pages
-- Post changes back to controller
+- State handler to post back to API
 - Testing
-- Model
+- Better example components
 - Forms
 - ...
 

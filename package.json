@@ -21,7 +21,7 @@
   "scripts": {
     "start": "node-dev --no-deps server.js",
     "watch": "gulp",
-    "first-run": "npm install && npm install -g node-inspector && bower install"
+    "first-run": "npm install && npm install -g node-inspector && bower install && gulp styles"
   },
   "dependencies": {
     "envify": "~1.2.0",
