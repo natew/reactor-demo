@@ -19,7 +19,7 @@
     ]
   },
   "scripts": {
-    "start": "node-dev --no-deps server.js",
+    "start": "ulimit -n 10000; node-dev --no-deps server.js",
     "watch": "gulp",
     "first-run": "npm install && bower install && gulp styles"
   },
