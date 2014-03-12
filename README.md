@@ -25,6 +25,7 @@ And head to [localhost:3111](localhost:3111).
 - State handler to post back to API
 - Better example components
 - 500 pages
+- Link component
 - Testing
 - Forms
 - ...
