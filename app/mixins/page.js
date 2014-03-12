@@ -41,7 +41,6 @@ var Page = {
   },
 
   setStateFromPage: function(root, route, cb) {
-    console.log('setStateFromPage', root)
     var page = route.page;
     if (!page.props) cb(null, {});
     else page.props(root, route.params, function(data) {
