@@ -17,6 +17,15 @@ ReactMount.allowFullPageRender = true;
 
 var Reactor = {
 
+  browserStart: function(App) {
+    if (typeof window !== 'undefined') {
+      window.React = React;
+      window.onload = function() {
+        React.renderComponent(App(), document);
+      }
+    }
+  },
+
   createClass: function(spec) {
     Router.setRoutes(spec.routes);
 

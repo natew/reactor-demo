@@ -17,12 +17,5 @@ var App = Reactor.createClass({
 
 });
 
-// Browser initial render
-if (typeof window !== 'undefined') {
-  window.React = React;
-  window.onload = function() {
-    React.renderComponent(App(), document);
-  }
-}
-
+Reactor.browserStart(App)
 module.exports = App;
