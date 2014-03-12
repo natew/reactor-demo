@@ -17,5 +17,5 @@ var App = Reactor.createClass({
 
 });
 
-Reactor.browserStart(App)
+Reactor.browserStart(App);
 module.exports = App;

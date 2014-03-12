@@ -12,17 +12,17 @@ var Router     = require('./mixins/router');
 var PushState  = require('./mixins/pushState');
 var Superagent = require('superagent');
 var Cortex     = require('cortexjs');
+var isBrowser  = (typeof window !== 'undefined');
 
 ReactMount.allowFullPageRender = true;
 
 var Reactor = {
 
   browserStart: function(App) {
-    if (typeof window !== 'undefined') {
-      window.React = React;
-      window.onload = function() {
-        React.renderComponent(App(), document);
-      }
+    if (!isBrowser) return;
+    window.React = React;
+    window.onload = function() {
+      React.renderComponent(App(), document);
     }
   },
 
@@ -84,7 +84,7 @@ var Reactor = {
     react.createPageClass = ReactorCore.createPage;
     react.createAppClass = ReactorCore.createPage;
     react.getStateFromPage = ReactorCore.getStateFromPage;
-    react.isBrowser = (typeof window !== 'undefined');
+    react.isBrowser = isBrowser;
     return Reactor;
   }
 
