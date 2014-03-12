@@ -1,6 +1,6 @@
 # Reactor
 
-An experimental making an isomorphic app using React.
+Experiment making an isomorphic app using React.
 
 ## Installation
 
