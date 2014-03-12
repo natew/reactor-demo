@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var React      = require('../lib/page');
 var jsPane     = require('../components/jsPane');
 var TouchArea  = require('react-touch/lib/primitives/TouchableArea');
