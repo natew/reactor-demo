@@ -65,3 +65,6 @@ Server
   .use(express.favicon())
   .use(render)
   .listen(props.port);
+
+console.log('ENV:', ENV);
+console.log('Server started at http://' + HOST + ':' + PORT);
