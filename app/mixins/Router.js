@@ -3,6 +3,7 @@ var invariant = require('react/lib/invariant');
 
 var Router = {
   componentWillMount: function() {
+    this.setRoute(this.props.path);
     this.shouldUpdate = true;
   },
 
@@ -79,8 +80,23 @@ var Router = {
         path = path.replace(':' + key, params[key]);
 
     return path;
-  }
+  },
 
+  rootUrl: function() {
+    if (this._rootUrl) return this._rootUrl;
+
+    try {
+      var protocol = (this.props.protocol || window.location.protocol) + '//';
+    }
+    catch(e) {
+      var protocol = 'http://';
+    }
+
+    var port = this.props.port ? ':' + this.props.port : '';
+    var host = this.props.host || window.location.host;
+    this._rootUrl = protocol + host + port;
+    return this._rootUrl;
+  }
 };
 
 module.exports = Router;

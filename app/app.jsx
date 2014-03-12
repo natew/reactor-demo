@@ -25,7 +25,6 @@ var App = React.createClass({
   ],
 
   componentWillMount: function() {
-    this.setRoute(this.props.path);
     if (this.props.env === 'production')
       require('react-raf-batching').inject(); // faster in prod
   },
@@ -41,23 +40,8 @@ var App = React.createClass({
     }.bind(this));
   },
 
-  setRootUrl: function() {
-    if (State.rootUrl) return;
-    State.rootUrl = this.rootUrl();
-    Page.init({ rootUrl: State.rootUrl });
-  },
-
   getStateFromPage: function(cb) {
-    this.setRootUrl();
-    var page = this.route.page;
-    if (!page.props) cb(null, {});
-    else page.props(this.route.params, function(data) {
-      var t = page.title;
-      cb(null, {
-        pageData: data,
-        title: typeof t == 'function' ? t(data) : t
-      });
-    });
+    Page.setStateFromPage(this.rootUrl(), this.route, cb);
   },
 
   render: function() {

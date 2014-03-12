@@ -2,14 +2,10 @@ var Superagent = require('superagent');
 
 var Page = {
 
-  init: function(opts) {
-    // todo: invariant
-    this.rootUrl = opts.rootUrl;
-    this.cache = {};
-  },
+  cache: {},
 
   get: function(path, pageCb) {
-    return function(params, cb) {
+    return function(root, params, cb) {
       if (typeof params == 'object')
         path = Page.replaceParams(path, params);
 
@@ -17,7 +13,7 @@ var Page = {
         cb(Page.cache[path]);
       else {
         Superagent
-        .get(Page.rootUrl + path)
+        .get(root + path)
         .end(function(err, res) {
           if (!err && res) {
             var result = res.body;
@@ -42,6 +38,19 @@ var Page = {
       url = url.replace(/(\/:[^\/]+)+/, '');
 
     return url;
+  },
+
+  setStateFromPage: function(root, route, cb) {
+    console.log('setStateFromPage', root)
+    var page = route.page;
+    if (!page.props) cb(null, {});
+    else page.props(root, route.params, function(data) {
+      var t = page.title;
+      cb(null, {
+        pageData: data,
+        title: typeof t == 'function' ? t(data) : t
+      });
+    });
   }
 
 };
