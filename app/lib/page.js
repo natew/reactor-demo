@@ -1,6 +1,5 @@
 var React      = require('react');
 var Superagent = require('superagent');
-var State      = require('../state');
 
 ReactPage = {
   createPage: function(spec) {
