@@ -15,7 +15,6 @@ var concat       = require('gulp-concat');
 var flatten      = require('gulp-flatten');
 var bower        = require('gulp-bower');
 var clean        = require('gulp-clean');
-var nodemon      = require('gulp-nodemon');
 var lr           = require('tiny-lr');
 var server       = lr();
 
@@ -109,7 +108,6 @@ gulp.task("webpack", function(callback) {
 });
 
 gulp.task('default', [
-  // 'nodemon',
   'lr-server',
   'scripts',
   'styles',

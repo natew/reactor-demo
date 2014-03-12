@@ -2,7 +2,7 @@
   "author": "Nate Wienert",
   "name": "reactor",
   "description": "A React Isomorphic App",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "homepage": "",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   "scripts": {
     "start": "node-dev --no-deps server.js",
     "watch": "gulp",
-    "first-run": "npm install && npm install -g node-inspector && bower install && gulp styles"
+    "first-run": "npm install && bower install && gulp styles"
   },
   "dependencies": {
     "envify": "~1.2.0",
@@ -30,15 +30,16 @@
     "react": "~0.9.0",
     "express": "~3.4.7",
     "node-jsx": "~0.2.1",
-    "node-dev": "~2.1.6",
     "react-async": "~0.6.0",
-    "webpack-dev-middleware": "~1.0.4",
     "jsx-loader": "~0.9.0",
     "react-touch": "0.0.4",
     "react-stylesheet": "~0.1.1",
-    "reactor-core": "0.0.3"
+    "reactor-core": "0.0.4",
+    "cortexjs": "~0.4.5",
+    "reactify": "~0.10.0"
   },
   "devDependencies": {
+    "node-dev": "~2.1.6",
     "fibers": "~1.0.1",
     "bower": "1.2",
     "mocha": "0.14.0",
@@ -53,17 +54,12 @@
     "gulp-autoprefixer": "0.0.6",
     "gulp-watch": "~0.5.0",
     "gulp-jshint": "~1.3.4",
-    "gulp-notify": "~0.4.0",
     "gulp-livereload": "~0.3.1",
     "gulp-plumber": "~0.5.6",
     "gulp-concat": "~2.1.7",
     "gulp-flatten": "0.0.2",
     "tiny-lr": "0.0.5",
-    "matchdep": "~0.3.0",
-    "nodemon": "~1.0.14",
     "gulp-bower": "0.0.2",
-    "gulp-clean": "~0.2.4",
-    "gulp-nodemon": "~0.1.2",
-    "webpack": "~1.1.0-beta3"
+    "gulp-clean": "~0.2.4"
   }
 }
