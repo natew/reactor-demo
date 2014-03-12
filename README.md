@@ -2,6 +2,8 @@
 
 Experiment making an isomorphic app using React.
 
+Uses [reactor-core](https://github.com/natew/reactor-core) to help simplify putting together the core pieces (async components, pages, routing, pushState).
+
 ## Installation
 
     npm run first-run
@@ -15,9 +17,10 @@ And head to [localhost:3111](localhost:3111).
 ## What it does
 
 - Renders app from server, continues app on client
-- Routing
-- Pages fetching from API and receiving state
-- pushState navigation
+- Routing, Async Page components, pushState
+- Super simple API demo
+- Cortex to handle data
+- Gulp to manage assets
 
 ## Todo
 
