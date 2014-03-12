@@ -1,8 +1,8 @@
-var React      = require('../lib/page');
+var React      = require('react');
 var jsPane     = require('../components/jsPane');
 var TouchArea  = require('react-touch/lib/primitives/TouchableArea');
 
-module.exports = React.createPage({
+module.exports = React.createPageClass({
 
   fetch: '/api/tutorials/:name/:id',
 

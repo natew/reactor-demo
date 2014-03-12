@@ -1,6 +1,6 @@
-var React = require('../lib/page');
+var React = require('react');
 
-module.exports = React.createPage({
+module.exports = React.createPageClass({
 
   fetch: '/api/tutorials',
 
