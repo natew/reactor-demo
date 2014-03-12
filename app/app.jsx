@@ -1,5 +1,5 @@
 var React      = require('react');
-var Reactor    = require('./lib/reactor').inject(React);
+var Reactor    = require('reactor-core').inject(React);
 var Routes     = require('./routes');
 var Layout     = require('./components/layout');
 
