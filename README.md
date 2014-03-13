@@ -1,8 +1,8 @@
 # Reactor
 
-Experiment making an isomorphic app using React.
+Demo isomorphic app using [reactor-core](https://github.com/natew/reactor-core) and [React](https://github.com/facebook/react).
 
-Uses [reactor-core](https://github.com/natew/reactor-core) to help simplify putting together the core pieces (async components, pages, routing, pushState).
+Shows how reactor-core helps simplify putting together the core pieces (async components, pages, routing, pushState). Adds in webpack, bower, and a simple api server to demo some of reacts abilities.
 
 ## Installation
 
