@@ -19,7 +19,7 @@
     ]
   },
   "scripts": {
-    "start": "ulimit -n 10000; node-dev --no-deps server.js",
+    "start": "node-dev --no-deps server.js",
     "watch": "gulp",
     "first-run": "npm install && bower install && gulp styles"
   },
@@ -36,11 +36,11 @@
     "react-stylesheet": "~0.1.1",
     "reactor-core": "0.0.4",
     "cortexjs": "~0.4.5",
-    "reactify": "~0.10.0"
+    "reactify": "~0.10.0",
+    "fibers": "~1.0.1"
   },
   "devDependencies": {
     "node-dev": "~2.1.6",
-    "fibers": "~1.0.1",
     "bower": "1.2",
     "mocha": "0.14.0",
     "expect.js": "0.1.2",
