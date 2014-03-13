@@ -1,4 +1,4 @@
-# Reactor
+# Reactor Demo App
 
 Demo isomorphic app using [reactor-core](https://github.com/natew/reactor-core) and [React](https://github.com/facebook/react).
 
