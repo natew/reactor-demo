@@ -3,5 +3,4 @@ bower_components
 node_modules
 public
 build
-*.sublime-workspace
 npm-debug.log
