@@ -1,7 +1,6 @@
 module.exports = {
   entry: './app/app.jsx',
   output: {
-    publicPath: '/assets/',
     path: __dirname + '/build/js/',
     filename: 'app.js'
   },

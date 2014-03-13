@@ -1,6 +1,7 @@
+/** @jsx React.DOM */
 var React      = require('react');
 var jsPane     = require('../components/jsPane');
-var TouchArea  = require('react-touch/lib/primitives/TouchableArea');
+// var TouchArea  = require('react-touch/lib/primitives/TouchableArea');
 
 module.exports = React.createPageClass({
 

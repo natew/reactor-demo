@@ -1,8 +1,15 @@
+/** @jsx React.DOM */
 var React      = require('react');
 var Reactor    = require('reactor-core').inject(React);
 var Routes     = require('./routes');
 var Layout     = require('./components/layout');
 var Cortex     = require('cortexjs');
+
+// class Monster {
+//   constructor(x, y) {
+//     this.x = x;
+//   }
+// }
 
 var App = Reactor.createClass({
 

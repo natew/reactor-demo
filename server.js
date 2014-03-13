@@ -1,23 +1,26 @@
-var path        = require('path');
-var url         = require('url');
-var express     = require('express');
-var browserify  = require('connect-browserify');
-var ReactAsync  = require('react-async');
-var Server      = express();
+var nodeJSX       = require('node-jsx');
+    nodeJSX.install({ extension: '.jsx', additionalTransform: addPragma });
+var path          = require('path');
+var url           = require('url');
+var express       = require('express');
+var browserify    = require('connect-browserify');
+var ReactAsync    = require('react-async');
+var Server        = express();
+var webpack       = require('webpack');
+var wpMiddleware  = require('webpack-dev-middleware');
+var wpConfig      = require('./webpack.config');
+var App           = require('./app/app');
 
-require('node-jsx').install({
-  extension: '.jsx',
-  additionalTransform: function(src) {
-    return '/** @jsx React.DOM */' +  src;
-  }
-});
-
-var App       = require('./app/app');
+function addPragma(src) {
+  return '/** @jsx React.DOM */' +  src;
+}
 
 var HOST      = process.env.NODE_HOST || 'localhost';
 var ENV       = process.env.NODE_ENV || 'development';
 var PORT      = process.env.NODE_PORT || 3111;
 var ASSET_DIR = '/assets';
+
+console.log('ENV:', ENV);
 
 var props = {
   host: HOST, port: PORT, env: ENV,
@@ -49,22 +52,16 @@ var api = function(req, res) {
 
 // Serve JS bundle in dev
 if (props.env == 'development') {
-  Server.get(props.bundle, browserify.serve({
-    entry: './app/app.jsx',
-    extensions: ['.jsx'],
-    debug: true,
-    watch: true
-  }))
+  Server.use(wpMiddleware(webpack(wpConfig), { publicPath: ASSET_DIR+'/js' }));
 }
 
 Server
-  .get('/api/:controller/:name?/:id?', api)
   .use(ASSET_DIR, express.static(path.join(__dirname, 'build')))
+  .get('/api/:controller/:name?/:id?', api)
   .use('/bower', express.static(path.join(__dirname, 'bower_components')))
-  .use('/images', express.static(path.join(__dirname, 'app/assets/images')))
+  .use('/images', express.static(path.join(__dirname, 'app'+ASSET_DIR+'/images')))
   .use(express.favicon())
   .use(render)
   .listen(props.port);
 
-console.log('ENV:', ENV);
 console.log('Server started at http://' + HOST + ':' + PORT);
