@@ -1,12 +1,12 @@
-var nodeJSX           = require('node-jsx').install({ extension: '.jsx' });
-var path              = require('path');
-var express           = require('express');
-var Server            = express();
-var webpack           = require('webpack');
-var wpMiddleware      = require('webpack-dev-middleware');
-var wpConfig          = require('./webpack.config');
-var reactorMiddleware = require('reactor-core/lib/middleware');
-var App               = require('./app/app');
+var nodeJSX       = require('node-jsx').install({ extension: '.jsx' });
+var path          = require('path');
+var express       = require('express');
+var Server        = express();
+var webpack       = require('webpack');
+var wpMiddleware  = require('webpack-dev-middleware');
+var wpConfig      = require('./webpack.config');
+var rcMiddleware  = require('reactor-core/lib/middleware');
+var App           = require('./app/app');
 
 var HOST      = process.env.NODE_HOST || 'localhost';
 var ENV       = process.env.NODE_ENV || 'development';
@@ -33,7 +33,7 @@ Server
   .use('/bower', express.static(path.join(__dirname, 'bower_components')))
   .use('/images', express.static(path.join(__dirname, 'app'+ASSET_DIR+'/images')))
   .use(express.favicon())
-  .use(reactorMiddleware({
+  .use(rcMiddleware({
     app: App,
     props: {
       host: HOST,
