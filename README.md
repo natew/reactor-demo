@@ -24,7 +24,7 @@ If you get an error regarding EMFILE, this is because browserify is trying to wa
 - Routing, Async Page components, pushState
 - Super simple API demo
 - Cortex to handle data
-- Gulp to manage assets
+- Webpack to manage assets
 
 ## Todo
 
