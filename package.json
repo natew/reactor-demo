@@ -15,9 +15,9 @@
   "browser": "./app/client.js",
   "scripts": {
     "start": "node-dev --no-deps server.js",
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "first-run": "npm install && bower install && gulp styles"
+    "build": "webpack & gulp",
+    "watch": "gulp watch && webpack --watch",
+    "first-run": "npm install && bower install && gulp"
   },
   "dependencies": {
     "envify": "~1.2.0",
@@ -33,12 +33,24 @@
     "reactify": "~0.10.0",
     "fibers": "~1.0.1",
     "webpack": "~1.1.0-beta8",
-    "webpack-dev-middleware": "~1.0.5"
+    "webpack-dev-middleware": "~1.0.5",
+    "sass-loader": "0.0.2"
   },
   "devDependencies": {
     "node-dev": "~2.1.6",
     "bower": "1.2",
     "mocha": "0.14.0",
-    "expect.js": "0.1.2"
+    "expect.js": "0.1.2",
+    "gulp-livereload": "~1.2.0",
+    "gulp-concat": "~2.1.7",
+    "gulp-plumber": "~0.5.6",
+    "gulp-flatten": "0.0.2",
+    "gulp-clean": "~0.2.4",
+    "tiny-lr": "0.0.5",
+    "gulp-autoprefixer": "0.0.6",
+    "gulp": "~3.5.6",
+    "gulp-watch": "~0.5.2",
+    "gulp-sass": "~0.7.1",
+    "gulp-bower": "0.0.3"
   }
 }

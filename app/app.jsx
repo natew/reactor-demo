@@ -5,17 +5,12 @@ var Routes     = require('./routes');
 var Layout     = require('./components/layout');
 var Cortex     = require('cortexjs');
 
-// class Monster {
-//   constructor(x, y) {
-//     this.x = x;
-//   }
-// }
-
 var App = Reactor.createClass({
 
   routes: Routes,
 
   updatePageData: function(data) {
+    console.log('got new stuff', data);
     // TODO: POST changed back to API
   },
 

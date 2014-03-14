@@ -1,19 +1,24 @@
 var nodeJSX       = require('node-jsx').install({ extension: '.jsx' });
 var path          = require('path');
 var express       = require('express');
-var Server        = express();
+var rcMiddleware  = require('reactor-core/lib/middleware');
 var webpack       = require('webpack');
 var wpMiddleware  = require('webpack-dev-middleware');
 var wpConfig      = require('./webpack.config');
-var rcMiddleware  = require('reactor-core/lib/middleware');
 var App           = require('./app/app');
+var Server        = express();
 
 var HOST      = process.env.NODE_HOST || 'localhost';
 var ENV       = process.env.NODE_ENV || 'development';
 var PORT      = process.env.NODE_PORT || 3111;
 var ASSET_DIR = '/assets';
 
-console.log('ENV:', ENV);
+var reactorOpts = {
+  props: {
+    host: HOST, port: PORT, env: ENV,
+    bundle: ASSET_DIR + '/js/app.js'
+  }
+};
 
 var api = function(req, res) {
   try { var controller = require('./api/' + req.params.controller); }
@@ -25,23 +30,18 @@ var api = function(req, res) {
 
 // Serve JS bundle in dev
 if (ENV == 'development')
-  Server.use(wpMiddleware(webpack(wpConfig), { publicPath: ASSET_DIR+'/js' }));
+  Server.use(wpMiddleware(webpack(wpConfig), {
+    publicPath: ASSET_DIR + '/js',
+    quiet: true
+  }));
 
 Server
-  .use(ASSET_DIR, express.static(path.join(__dirname, 'build')))
   .get('/api/:controller/:name?/:id?', api)
+  .use(ASSET_DIR, express.static(path.join(__dirname, 'build')))
   .use('/bower', express.static(path.join(__dirname, 'bower_components')))
-  .use('/images', express.static(path.join(__dirname, 'app'+ASSET_DIR+'/images')))
+  .use('/images', express.static(path.join(__dirname, 'app', ASSET_DIR, '/images')))
   .use(express.favicon())
-  .use(rcMiddleware({
-    app: App,
-    props: {
-      host: HOST,
-      port: PORT,
-      env: ENV,
-      bundle: ASSET_DIR + '/js/app.js'
-    }
-  }))
+  .use(rcMiddleware(App, reactorOpts))
   .listen(PORT);
 
-console.log('Server started at http://' + HOST + ':' + PORT);
+console.log('ENV:', ENV, '\nServer started at http://' + HOST + ':' + PORT);
