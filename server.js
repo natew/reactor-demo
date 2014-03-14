@@ -13,13 +13,6 @@ var ENV       = process.env.NODE_ENV || 'development';
 var PORT      = process.env.NODE_PORT || 3111;
 var ASSET_DIR = '/assets';
 
-var reactorOpts = {
-  props: {
-    host: HOST, port: PORT, env: ENV,
-    bundle: ASSET_DIR + '/js/app.js'
-  }
-};
-
 var api = function(req, res) {
   try { var controller = require('./api/' + req.params.controller); }
   catch(e) { console.log('error', e); res.send(500, e); }
@@ -41,7 +34,12 @@ Server
   .use('/bower', express.static(path.join(__dirname, 'bower_components')))
   .use('/images', express.static(path.join(__dirname, 'app', ASSET_DIR, '/images')))
   .use(express.favicon())
-  .use(rcMiddleware(App, reactorOpts))
+  .use(rcMiddleware(App, {
+    props: {
+      host: HOST, port: PORT, env: ENV,
+      bundle: ASSET_DIR + '/js/app.js'
+    }
+  }))
   .listen(PORT);
 
 console.log('ENV:', ENV, '\nServer started at http://' + HOST + ':' + PORT);

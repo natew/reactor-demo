@@ -21,9 +21,9 @@ module.exports = React.createPageClass({
 
   addItem: function() {
     var js = this.state.tutorials.js;
-    js.push(js[js.length-1]);
-    this.setState({ tutorials: { js: js } });
+    js.push(js.last());
     this.props.data.tutorials.js.set(js);
+    this.setState({ tutorials: this.state.tutorials });
   },
 
   render: function() {

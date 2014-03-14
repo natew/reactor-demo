@@ -2,6 +2,8 @@
 
 Demo isomorphic app using [reactor-core](https://github.com/natew/reactor-core) and [React](https://github.com/facebook/react).
 
+**Warning**: This is mostly a playground, I'm breaking things often!
+
 Shows how reactor-core helps simplify putting together the core pieces (async components, pages, routing, pushState). Adds in webpack, bower, and a simple api server to demo some of reacts abilities.
 
 ## Installation
@@ -50,7 +52,7 @@ If you get an error regarding EMFILE, this is because browserify is trying to wa
 - [Avers.js](https://github.com/wereHamster/avers) attempts to be a better M for React
 - [Cortex](https://github.com/mquan/cortex) Another react data solution
 
-### License
+## License
 
 The MIT License (MIT)
 

@@ -3,7 +3,7 @@ var React      = require('react');
 var Reactor    = require('reactor-core').inject(React);
 var Routes     = require('./routes');
 var Layout     = require('./components/layout');
-var Cortex     = require('cortexjs');
+var Sugar      = require('./vendor/sugar.js');
 
 var App = Reactor.createClass({
 
@@ -14,12 +14,10 @@ var App = Reactor.createClass({
     // TODO: POST changed back to API
   },
 
-  render: function(Page) {
-    var cortexData = new Cortex(this.state.pageData, this.updatePageData);
-
+  render: function(Page, data) {
     return this.transferPropsTo(
       <Layout onClick={this.navigate} title={this.state.title}>
-        <Page data={cortexData} className="page" />
+        <Page data={data} className="page" />
       </Layout>
     );
   }
