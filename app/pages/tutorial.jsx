@@ -5,6 +5,8 @@ var jsPane     = require('../components/jsPane');
 
 module.exports = React.createPageClass({
 
+  route: '/tutorials/:name/:id',
+
   fetch: '/api/tutorials/:name/:id',
 
   getInitialProps: function(data, params) {

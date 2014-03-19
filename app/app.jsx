@@ -1,13 +1,18 @@
 /** @jsx React.DOM */
-var React      = require('react');
-var Reactor    = require('reactor-core').inject(React);
-var Routes     = require('./routes');
-var Layout     = require('./components/layout');
-var Sugar      = require('./vendor/sugar.js');
+var React    = require('react');
+var Reactor  = require('reactor-core').inject(React);
+var Routes   = require('./routes');
+var Layout   = require('./components/layout');
+var Sugar    = require('./vendor/sugar.js');
+var Pages    = require('./pages/' + /^\.\/.*\.js$/ + '.js');
 
 var App = Reactor.createClass({
 
-  routes: Routes,
+  pages: Pages,
+
+  statics: {
+    gss_worker: "/bower/gss/dist/worker.js"
+  },
 
   updatePageData: function(data) {
     console.log('got new stuff', data);

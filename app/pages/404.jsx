@@ -3,17 +3,17 @@ var React = require('react');
 
 module.exports = React.createPageClass({
 
-   title: function() {
-     return '404';
-   },
+  title: function() {
+    return '404';
+  },
 
-   render: function() {
-     return (
-       <div>
-         <h2>Page Not Found!</h2>
-         <p>404, yo</p>
-       </div>
-     );
-   }
+  render: function() {
+    return (
+      <div>
+        <h2>Page Not Found!</h2>
+        <p>404, yo</p>
+      </div>
+    );
+  }
 
  });

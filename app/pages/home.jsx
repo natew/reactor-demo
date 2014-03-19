@@ -3,6 +3,8 @@ var React = require('react');
 
 module.exports = React.createPageClass({
 
+  route: '/',
+
   fetch: '/api/tutorials',
 
   title: 'Reactor Home',
