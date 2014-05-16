@@ -1,12 +1,12 @@
-var nodeJSX       = require('node-jsx').install({ extension: '.jsx' });
-var path          = require('path');
-var express       = require('express');
-var rcMiddleware  = require('reactor-core/lib/middleware');
-var webpack       = require('webpack');
-var wpMiddleware  = require('webpack-dev-middleware');
-var wpConfig      = require('./webpack.config');
-var App           = require('./app/app');
-var Server        = express();
+var nodeJSX               = require('node-jsx').install({ extension: '.jsx' });
+var path                  = require('path');
+var express               = require('express');
+var reactorCoreMiddleware = require('reactor-core/lib/middleware');
+var webpack               = require('webpack');
+var wpMiddleware          = require('webpack-dev-middleware');
+var wpConfig              = require('./webpack.config');
+var App                   = require('./app/app');
+var Server                = express();
 
 var HOST      = process.env.NODE_HOST || 'localhost';
 var ENV       = process.env.NODE_ENV || 'development';
@@ -34,7 +34,10 @@ Server
   .use('/bower', express.static(path.join(__dirname, 'bower_components')))
   .use('/images', express.static(path.join(__dirname, 'app', ASSET_DIR, '/images')))
   .use(express.favicon())
-  .use(rcMiddleware(App, {
+  .use(reactorCoreMiddleware(App, {
+    wrapper: function(markup) {
+      return '<!doctype>' + markup;
+    },
     props: {
       host: HOST, port: PORT, env: ENV,
       bundle: ASSET_DIR + '/js/app.js'
