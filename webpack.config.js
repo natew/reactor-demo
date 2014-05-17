@@ -4,8 +4,10 @@ module.exports = {
   ],
   output: {
     path: __dirname + '/build/js/',
-    filename: 'app.js'
+    filename: 'app.js',
+    sourceMapFilename: '[file].map'
   },
+  devtool: ['source-map'],
   module: {
     loaders: [
       { test: /\.jsx$/,  loader: "jsx-loader" }
